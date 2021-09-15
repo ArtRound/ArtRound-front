@@ -1,0 +1,83 @@
+/* html {
+  overflow: hidden;
+} */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  border: none;
+  background-color: transparent;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  height: 8vh;
+  margin-left: 12px;
+}
+nav > span {
+  margin: 0 16px;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 30%;
+  margin: 0 auto;
+}
+.photo-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 14px;
+  border: 1.5px solid #2662bb;
+  border-radius: 50%;
+}
+.photo-circle p {
+  font-size: 70px;
+}
+.name {
+  font-size: 25px;
+  font-weight: bold;
+}
+.email {
+  font-size: 18px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 48px 0;
+}
+.buttons > * {
+  width: 90%;
+  height: 90px;
+  margin-top: 27px;
+  border: 1px solid #6193c3;
+  border-radius: 22px;
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 25px;
+}
+.info-btn {
+  margin-top: 0;
+}
+
+.small-buttons {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 8px;
+}
+
+.small-buttons > * {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.63);
+}

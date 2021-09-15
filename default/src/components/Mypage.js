@@ -1,20 +1,32 @@
 import React from "react";
+import "./Mypage.css";
 
 const MyPage = () => {
   return (
     <>
-      <div className="profile-box">
-        <div className="photo-circle"></div>
-        <p className="name">반유진</p>
-        <p className="email">dbwls387@naver.com</p>
-      </div>
-      <div className="buttons">{/* 
-            Components
-        */}</div>
-      <div className="small-btn">
-        <button className="logout">로그아웃</button>
-        <span> / </span>
-        <button className="withdrawal">회원탈퇴</button>
+      <nav>
+        <button className="back-btn">⬅</button>
+        <span>마이페이지</span>
+      </nav>
+
+      <div className="container">
+        <div className="profile-box">
+          <div className="photo-circle">
+            <p>📷</p>
+          </div>
+          <p className="name">반유진</p>
+          <p className="email">dbwls387@naver.com</p>
+        </div>
+        <div className="buttons">
+          <button className="info-btn">회원정보</button>
+          <button className="fav-btn">즐겨찾기 목록</button>
+          <button className="visited-btn">방문한 미술관/박물관</button>
+        </div>
+        <div className="small-buttons">
+          <button className="logout">로그아웃</button>
+          <span> / </span>
+          <button className="withdrawal">회원탈퇴</button>
+        </div>
       </div>
     </>
   );
