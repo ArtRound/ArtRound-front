@@ -6,7 +6,7 @@ const ServiceCenter = () => {
     <>
       <nav>
         <button className="back-btn">⬅</button>
-        <span>마이페이지</span>
+        <span>고객센터</span>
       </nav>
       <div className="container">
         <div className="buttons">
