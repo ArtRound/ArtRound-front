@@ -1,7 +1,7 @@
 import React from "react";
 import "./Mypage.css";
 
-const MyPage = () => {
+const MyPage = ({ history }) => {
   return (
     <>
       <nav>
@@ -18,9 +18,30 @@ const MyPage = () => {
           <p className="email">dbwls387@naver.com</p>
         </div>
         <div className="buttons">
-          <button className="info-btn">회원정보</button>
-          <button className="fav-btn">즐겨찾기 목록</button>
-          <button className="visited-btn">방문한 미술관/박물관</button>
+          <button
+            onClick={() => {
+              history.push("/info");
+            }}
+            className="info-btn"
+          >
+            회원정보
+          </button>
+          <button
+            onClick={() => {
+              history.push("/favorite");
+            }}
+            className="fav-btn"
+          >
+            즐겨찾기 목록
+          </button>
+          <button
+            onClick={() => {
+              history.push("/visited");
+            }}
+            className="visited-btn"
+          >
+            방문한 미술관/박물관
+          </button>
         </div>
         <div className="small-buttons">
           <button className="logout">로그아웃</button>
