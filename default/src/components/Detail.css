@@ -1,0 +1,131 @@
+.exhibition {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+}
+/* 스크롤 막기 */
+.exhibition .cont { 
+  position: relative;
+  top: 0;
+}
+
+.ex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  height: 92vh;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.ex-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.top-bar{
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  height: 8vh;
+}
+
+.exhibition-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.title-img{
+  height: 100%;
+  width: 100%;
+}
+
+.div-btn{
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-wish{
+  width: 25%;
+  height: 10vh;
+}
+
+
+.fa-heart{
+  margin-bottom: 7px;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fa-share-square{
+  margin-bottom: 7px;
+  color: rgb(59, 59, 59);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fa-flag{
+  margin-bottom: 7px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fa-car{
+  margin-bottom: 7px;
+  color: #79a5c3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-container {
+  padding: 10px;
+  width: 100%;
+  border-top: 1px solid grey ;
+}
+.info{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  margin: 3px 0 12px 0;
+  
+}
+
+.detail-table{
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.detail-table td {
+  font-weight: normal;
+  vertical-align : top;  
+  border-bottom: 8px solid #fff;
+}
+.detail-table th {
+  border-right: 5px solid #fff;
+  vertical-align : top;
+  text-align: left;
+  width: 30%;
+}
+
+.review-btn {
+  width: 100%;
+  height: 45px;
+  border: 1px solid rgba(50, 50, 50, 0.36);
+  background-color: #7cbaf7;
+  font-size: 16px;
+  line-height: 25px;
+  border-radius: 22px;
+  margin-top: 15px;
+}
