@@ -6,16 +6,22 @@ import { Link } from 'react-router-dom';
 const Detail = () => {
 
   const [wish, setWish] = useState(false);
+  const [visited, setVisited] = useState(false);
 
 
-  let wishIcon = "far fa-heart fa-2x";
-  function changeIcon() {
+  function wishList() {
     if (wish === true) {
-      wishIcon = "fas fa-heart fa-2x";
+      // 즐겨찾기 목록에 넣기
     } else {
-      wishIcon = "far fa-heart fa-2x";
+
     }
-    console.log(wishIcon);
+  }
+  function visitedList() {
+    if (visited === true) {
+      // 방문 목록에 넣기
+    } else {
+
+    }
   }
 
   return (
@@ -28,18 +34,19 @@ const Detail = () => {
       <div className="ex-container">
         <img className="title-img" src={title_img} alt="exhibition" />
 
-        <div className="div-btn">
-          <button className="btn-wish" onClick={() => setWish(!wish)}><i class={wishIcon}></i> {/* 기본 */}즐겨찾기</button>
-          {changeIcon()}
 
+
+        <div className="div-btn">
+          {/* 즐겨찾기 버튼 누르기 전과 후 */}
+          {!wish && <button className="btn-wish" onClick={() => setWish(!wish)}><i class="far fa-heart fa-2x"></i>즐겨찾기</button>}
+          {wish && <button className="btn-wish" onClick={() => setWish(!wish)}><i class="fas fa-heart fa-2x"></i>즐겨찾기</button>}
 
 
           <button className="btn-wish"><i class="fas fa-share-square fa-2x"></i>공유하기</button>
 
-
-          <button className="btn-wish"><i class="far fa-flag fa-2x"></i>방문</button>
-
-          {/* <i class="fas fa-flag"></i> 방문깃발 */}
+          {/* 방문 버튼 누르기 전과 후 */}
+          {!visited && <button className="btn-wish" onClick={() => setVisited(!visited)}><i class="far fa-flag fa-2x"></i>방문</button>}
+          {visited && <button className="btn-wish" onClick={() => setVisited(!visited)}><i class="fas fa-flag fa-2x"></i>방문</button>}
 
           <button className="btn-wish"><i class="fas fa-car fa-2x"></i>교통</button>
 
