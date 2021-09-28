@@ -82,7 +82,7 @@
 }
 .fa-car{
   margin-bottom: 7px;
-  color: #79a5c3;
+  color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,4 +129,5 @@
   line-height: 25px;
   border-radius: 22px;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
