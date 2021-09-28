@@ -89,7 +89,7 @@
 }
 
 .detail-container {
-  padding: 10px;
+  padding: 10px 20px;
   width: 100%;
   border-top: 1px solid grey ;
 }
@@ -102,6 +102,7 @@
 }
 
 .detail-table{
+  font-size: 14px;
   width: 100%;
   table-layout: fixed;
   word-wrap: break-word;
