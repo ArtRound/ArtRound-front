@@ -1,0 +1,16 @@
+
+.footer{
+    position : absolute;
+    bottom : 0;
+    width :100vw;
+    height :50px;
+    background-color: white;
+    display : flex;
+    justify-content :space-around;
+    align-items :center;
+}
+
+.footer-icon{
+    color: black;
+    cursor: pointer;
+}

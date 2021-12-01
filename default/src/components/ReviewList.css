@@ -1,0 +1,72 @@
+.nav{
+    font-size: 18px;
+    padding: 10px;
+    background-color: white;
+}
+.nav-icon{
+    padding: 0 4px;
+}
+.review-title{
+    margin-top: 30px;
+    font-size: 43px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+hr{
+    margin: 33px 17px 19px 17px;
+}
+.list-wrap{
+    margin-left: 32px;
+    margin-right: 42px;
+}
+.high, .low, .new{
+    text-decoration: none;
+    color: black;
+}
+.category{
+    margin-right: 12px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.heart{
+    margin-bottom: 16px;
+    font-size: 22px;
+    color: red;
+}
+.list-title{
+    margin-right: 7px;
+    font-size: 16px;
+}
+.list-date{
+    font-size: 12px;
+}
+.list-content{
+    font-size: 14px;
+}
+.category>a{
+    padding-right: 13px;
+}
+.list-like>span, .font-like{
+    padding-right: 5px;
+    cursor: pointer;
+}
+.btn-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit-btn{
+    width: 296px;
+    height: 40px;
+    border-radius: 22px;
+    background-color: #7CBAF7;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 77px;
+    margin-bottom: 30px;
+}
