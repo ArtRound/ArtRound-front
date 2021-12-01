@@ -8,7 +8,6 @@ const Detail = () => {
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
 
-
   function wishList() {
     if (wish === true) {
       // 즐겨찾기 목록에 넣기
@@ -33,8 +32,6 @@ const Detail = () => {
 
       <div className="ex-container">
         <img className="title-img" src={title_img} alt="exhibition" />
-
-
 
         <div className="div-btn">
           {/* 즐겨찾기 버튼 누르기 전과 후 */}
