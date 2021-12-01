@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './GoogleMap.css';
 import { GoogleMap, InfoBox, LoadScript, Marker, InfoWindow, MarkerClusterer  } from '@react-google-maps/api';
-import greenMarker from '../Image/marker-image/green_MarkerU.png';
-import pinkMarker from '../Image/marker-image/pink_MarkerA.png'
+import greenMarker from '../img/marker-image/green_MarkerU';
+import pinkMarker from '../img/marker-image/pink_MarkerA.png'
 import Data from './Data';
 import FooterInfo from './FooterInfo';
 import Icon from './Icon';
