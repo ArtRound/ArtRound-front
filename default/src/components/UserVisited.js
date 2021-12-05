@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UserVisited.css";
 import title_img from "../img/exhibition_sample_img.png";
 
-const UserVisited = () => {
+const UserVisited = ({ history }) => {
   const [ing, setIng] = useState(true);
 
   function display_state() {
@@ -15,7 +15,12 @@ const UserVisited = () => {
 
   return <div>
     <nav>
-      <button className="back-btn">⬅</button>
+      <button
+        onClick={() => {
+          history.push("/");
+        }}
+        className="back-btn"
+      >⬅</button>
       <span>방문한 미술관/전시회</span>
     </nav>
 
