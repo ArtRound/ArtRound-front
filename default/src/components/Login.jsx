@@ -1,6 +1,7 @@
 import React from "react";
 
 import GoogleButton from "./GoogleButton";
+import KakaoButton from "./KakaoButton";
 
 import "./Login.css";
 
@@ -14,7 +15,7 @@ const Login = () => {
       </div>
 
       <GoogleButton />
-      <button className="kakao-login-btn" />
+      <KakaoButton />
     </div>
   );
 };
