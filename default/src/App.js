@@ -15,6 +15,8 @@ import Noticepost from "./components/noticePost";
 import Map from "../src/components/Map"
 import Introduce from "./components/Introduce"
 import AnswerPost from "./components/AnswerPost"
+import ReviewList from './components/ReviewList';
+import Review from './components/Review';
 
 const App = () => {
   return (
@@ -33,6 +35,8 @@ const App = () => {
         <Route path="/introduce" component={Introduce} />
         <Route path="/map" component={Map} />
         <Route path="/answerpost" component={AnswerPost} />
+        <Route  path='/review' component={ReviewList} />
+        <Route  path='/submit' component={Review} />
       </BrowserRouter>
     </div>
   );
