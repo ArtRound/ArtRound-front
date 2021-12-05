@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import './noticePost.css';
 
 const noticePost = ({ history }) => {
-  function textInput() {
-    var getTitle = document.getElementById("title").value;
+  function answerInput() {
     var getContent = document.getElementById("content").value;
-    axios.post("http://127.0.0.1:8000/main/question/", {
-      title: getTitle,
+    axios.post("http://127.0.0.1:8000/main/answer/", {
       content: getContent,
     })
       .then(function (response) {
@@ -35,10 +33,10 @@ const noticePost = ({ history }) => {
 
       <div className="Frame" >
         <form>
-          <textarea id="content" className="inputContent" placeholder='내용을 입력헤주세요.' />
+          <textarea id="content" className="inputContent" placeholder='내용을 입력해주세요.' />
         </form>
 
-        <Link to="/contactus"> <button type="button" className="post" onClick={textInput}>
+        <Link to="/contactus"> <button type="button" className="post" onClick={answerInput}>
           답변 등록하기
         </button> </Link>
       </div>  {/* Frame */}

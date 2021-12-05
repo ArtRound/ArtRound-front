@@ -1,0 +1,17 @@
+.realAnswerFrame{
+  color: black;
+  font-weight: normal;
+  font-size: 15px;
+}
+.AnswerbtnDelete{
+  margin-top: 20px;
+  width: 70px;
+  height: 30px;
+  outline: 0;
+  border: 0;
+  background: rgba(189, 220, 250, 0.79);
+  font-size: 13px;
+  color: black;
+  align-items: center;
+  text-align: center;
+}

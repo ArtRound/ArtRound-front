@@ -37,7 +37,7 @@ const noticePost = ({ history }) => {
         <form>
           <input type='text' className="inputTitle" id="title" placeholder='제목을 입력해주세요.' />
 
-          <textarea id="content" className="inputContent" placeholder='내용을 입력헤주세요.' />
+          <textarea id="content" className="inputContent" placeholder='내용을 입력해주세요.' />
         </form>
 
         <Link to="/notice"> <button type="button" className="post" onClick={textInput}>

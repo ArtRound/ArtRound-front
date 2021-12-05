@@ -3,8 +3,10 @@ import { Accordion } from 'react-bootstrap';
 import checkIcon from '../img/notice/check_icon.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import AnswerAxios from './AnswerAxios';
 
 const AnswerContainer = ({ text, setText }) => {
+
   return (
     <div id="cont2" className="answer">
       <div className="answerFrame" >
@@ -37,6 +39,8 @@ const AnswerContainer = ({ text, setText }) => {
 
                   <button className="btnDelete"> <Link to="/answerpost">답변하기</Link> </button>
 
+                  <hr />
+
                   <div className="answer">
                     <img src={checkIcon} alt="check" className="checkIcon" />
                     답변
@@ -44,7 +48,7 @@ const AnswerContainer = ({ text, setText }) => {
 
                   <div className="answer">
                     {/* 답변 */}
-
+                    <AnswerAxios />
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
