@@ -1,0 +1,192 @@
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+hr {
+  color: #bbbbbb !important;
+  border-bottom: 3px !important;
+  opacity: 1 !important;
+}
+
+.noboot-btn {  
+  font-family: initial !important;
+}
+
+/* 문의내역 확인 */
+.answerBody{
+  border-top: 1px solid #e4e4e4;
+  background-color: white;
+}
+.answer{
+  color: #53AAFF;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.checkIcon{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+.questionContent{
+  color: rgb(73, 73, 73);
+  font-weight: regular;
+}
+.questionState{
+  font-size: 14px;
+}
+
+.titleGroup{
+  margin-left: 30px;
+}
+
+.qnaTitle{
+  color:rgb(73, 73, 73);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.questionDate{
+  padding-top: 8px;
+  font-size: 12px;
+  color: #5F5F5F;
+}
+.answerHr{
+  margin: 0;
+}
+.answerFrame{
+  margin: 13px 16px;
+  padding: 10px;
+  max-width: 100%;
+  height: 625px;
+  bottom: 0;
+  border: 1px solid #6193c4;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.answerFrame::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* 문의하기 */
+.smalltitle {
+  font-size: 21px;
+  font-weight: bold;
+}
+.smallcontent {
+  padding-top: 10px;
+  font-size: 13px;
+  color: #595959;
+}
+
+.inputemail,
+.inputQnaTitle {
+  width: 100%;
+  height: 40px;
+  margin-top: 13px;
+  border: 1px solid #222222;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-family: Solway;
+  font-size: 14px;
+  align-items: center;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.inputQnaContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Solway;
+  font-size: 14px;
+  line-height: 19px;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  width: 100%;
+  height: 190px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.inputQnaContent::-webkit-scrollbar {
+  display: none;
+}
+
+.contactFrame{
+  padding-top: 12px;
+  font-size: 0;
+  height: 695px;
+}
+
+.questionFrame{
+  padding: 8px 20px;
+}
+
+
+.qnaBtn{  /* 탭 메뉴 기본 버튼 */
+  color: black;
+  border: 0;
+  display: inline-block;
+  width: 50%;
+  padding: 0 0 10px 0;
+  background: white;
+  text-align: center;
+  font-size: 17px;
+  cursor: pointer;
+  border-bottom: 1.5px groove #9e9e9e;
+  margin-bottom: 8px;
+  font-weight: regular;
+}
+
+.clickBtn { /* 탭 메뉴 클릭시 버튼 */
+  color: #264574;
+  border: 0;
+  display: inline-block;
+  width: 50%;
+  padding: 0 0 10px 0;
+  background: white;
+  text-align: center;
+  font-size: 17px;
+  cursor: pointer;
+  border-bottom: 3px groove #4075C3;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.qnaType {
+  width: 100%;
+  height: 40px;
+  margin-top: 13px !important;
+  border: 1px solid #000000;
+  background: url("../img/notice/arrow.png") no-repeat 95% 50%;
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-family: Solway !important;
+  font-size: 14px !important;
+  padding-left: 15px;
+  color: rgba(0, 0, 0, 0.54);
+  
+}
+.qnaType:-ms-expand {
+  /* IE 10, 11의 네이티브 화살표 숨기기 */
+  display: none;
+}

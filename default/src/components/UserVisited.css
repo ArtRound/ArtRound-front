@@ -1,0 +1,71 @@
+.user-visited {
+
+}
+
+.art-around {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  margin: 10px;
+  
+  font-weight: bold;
+  font-size: 35px;
+}
+.user-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+
+  margin: 30px;
+  font-size: 18px;
+}
+
+.list-visited{
+  padding: 20px;
+}
+.visited-img {
+  display: block;
+  margin: auto;
+  
+  height: 150px;
+  width: 100%;
+
+  border-radius: 25px;
+}
+.visited-name {
+  margin: 20px 8px 12px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.visited-detail {
+  margin: 4px 0 0 10px;
+  font-size: 14px;
+  color: rgb(112, 112, 112);
+}
+
+.display-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+
+  margin-top: 20px;
+  margin-right: 10px;
+  color: grey;
+  font-size: 13px;
+}
+.display-ing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+
+  margin-top: 20px;
+  margin-right: 10px;
+  color: #7CBAF7;
+  font-size: 13px;
+}
+.end {
+  margin-left: 10px;
+  margin-bottom: 2px;
+}

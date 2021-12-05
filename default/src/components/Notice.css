@@ -1,0 +1,168 @@
+@media screen and (max-width: 800px) {
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .noticeFrame {
+    margin: 10px;
+    max-width: 100%;
+    height: 695px;
+    bottom: 0;
+    border: 1px solid #6193c4;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px rgba(170, 132, 132, 0.25);
+    border-radius: 22px;
+    padding: 15px 15px;
+
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  .noticeFrame::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .postBtn {
+    float: right;
+    margin-right: 20px;
+    width: 65px;
+    height: 30px;
+    outline: 0;
+    border: 0;
+    background: rgba(189, 220, 250, 0.79);
+    font-size: 13px;
+    color: black;
+    align-items: center;
+    text-align: center;
+  }
+  .btnDelete {
+    margin-top: 20px;
+    width: 65px;
+    height: 30px;
+    outline: 0;
+    border: 0;
+    background: rgba(189, 220, 250, 0.79);
+    font-size: 13px;
+    color: black;
+    align-items: center;
+    text-align: center;
+  }
+  .backBtn {
+    margin-left: 20px;
+    background: 0%;
+    border: 0;
+    font-size: 18px;
+  }
+
+  /***********************/
+  .accordion-item {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .accordion-body {
+    font-size: 14px;
+    margin-top: 10px;
+    background-color: rgba(224, 224, 224, 0.493);
+  }
+  .accordion-button {
+    font-size: 15px !important;
+    padding: 12px !important;
+  }
+  .accordion-button:not(.collapsed){
+    color: black !important;
+    background-color: white !important;
+    box-shadow: 0 0 0 0 !important;
+  }
+  .accordion-item{
+    border: 0px !important;
+  }
+  
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.noticeFrame {
+  margin: 13px;
+  max-width: 100%;
+  height: 695px;
+  bottom: 0;
+  border: 1px solid #6193c4;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+  margin-top: 28px;
+  padding: 25px 15px;
+
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.noticeFrame::-webkit-scrollbar {
+  display: none;
+}
+
+.postBtn {
+  float: right;
+  margin-right: 20px;
+  width: 65px;
+  height: 30px;
+  outline: 0;
+  border: 0;
+  background: rgba(189, 220, 250, 0.79);
+  font-size: 13px;
+  color: black;
+  align-items: center;
+  text-align: center;
+}
+.btnDelete {
+  margin-top: 20px;
+  width: 65px;
+  height: 30px;
+  outline: 0;
+  border: 0;
+  background: rgba(189, 220, 250, 0.79);
+  font-size: 13px;
+  color: black;
+  align-items: center;
+  text-align: center;
+}
+.backBtn {
+  margin-left: 20px;
+  background: 0%;
+  border: 0;
+  font-size: 18px;
+}
+
+/***********************/
+.accordion-item {
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.accordion-body {
+  font-size: 14px;
+  margin-top: 10px;
+  background-color: rgba(224, 224, 224, 0.493);
+}
+.accordion-button {
+  font-size: 15px !important;
+}
+.accordion-button:not(.collapsed){
+  color: black !important;
+  background-color: white !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.accordion-item{
+  border: 0px !important;
+}
+

@@ -1,0 +1,30 @@
+body{
+  margin: 0;
+}
+.nav{
+  font-size: 18px;
+  padding: 10px;
+  background-color: white;
+}
+.nav-icon{
+  padding: 0 4px;
+}
+
+.current-position-btn{
+  position: absolute;
+  z-index: 2;
+  right:20px;
+  bottom: 60px;
+  background-color: white;
+  padding: 5px;
+
+  display:flex;
+  justify-content : center;
+  align-items:center;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -20,11 +20,11 @@ const MyPage = ({ history }) => {
         <div className="buttons">
           <button
             onClick={() => {
-              history.push("/info");
+              history.push("/service");
             }}
             className="info-btn"
           >
-            회원정보
+            고객센터
           </button>
           <button
             onClick={() => {
