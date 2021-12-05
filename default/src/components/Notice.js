@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { Accordion } from 'react-bootstrap';
 import './Notice.css';
 
-
-
 const Notice = ({ history }) => {
   const [text, setText] = useState([]);
 
@@ -38,6 +36,8 @@ const Notice = ({ history }) => {
           className="noboot-btn"
         >⬅</button>
         <span>공지사항</span>
+
+        {/* 글쓰기 버튼 관리자에게만 보이기 */}
         <button className="postBtn"><Link to="/noticepost"> 글쓰기 </Link></button>
       </nav>
 
@@ -67,7 +67,7 @@ const Notice = ({ history }) => {
             <hr />
 
             {/* <span>{e.updated_at}<br/></span>
-                  <span>{e.title}<br/></span>
+                  <span>{e.title}<br/></span>/
                   <span>{e.content}</span> */}
           </div>
         ))}

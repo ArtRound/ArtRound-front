@@ -11,6 +11,8 @@ import ContactUs from "./components/ContactUs";
 import Tos from "./components/ToS";
 import Noticepost from "./components/noticePost";
 import Map from "../src/components/Map"
+import Introduce from "./components/Introduce"
+import AnswerPost from "./components/AnswerPost"
 
 const App = () => {
   return (
@@ -26,8 +28,9 @@ const App = () => {
         <Route path="/contactus" component={ContactUs} />
         <Route path="/tos" component={Tos} />
         <Route path="/noticepost" component={Noticepost} />
-
+        <Route path="/introduce" component={Introduce} />
         <Route path="/map" component={Map} />
+        <Route path="/answerpost" component={AnswerPost} />
       </BrowserRouter>
     </div>
   );

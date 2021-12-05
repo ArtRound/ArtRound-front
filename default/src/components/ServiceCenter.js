@@ -15,7 +15,12 @@ const ServiceCenter = ({ history }) => {
       </nav>
       <div className="container">
         <div className="buttons">
-          <button>서비스 소개</button>
+          <button
+            onClick={() => {
+              history.push("/introduce");
+            }}
+            className="introduce-btn"
+          >서비스 소개</button>
           <button
             onClick={() => {
               history.push("/notice");
@@ -37,7 +42,6 @@ const ServiceCenter = ({ history }) => {
             className="tos-btn"
           >이용약관</button>
 
-          <button>개인정보 취급방침</button>
         </div>
       </div>
     </>

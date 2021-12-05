@@ -14,7 +14,21 @@ hr {
   font-family: initial !important;
 }
 
+
 /* 문의내역 확인 */
+.btnDelete {
+  margin-top: 20px;
+  margin-right: 15px;
+  width: 70px;
+  height: 30px;
+  outline: 0;
+  border: 0;
+  background: rgba(189, 220, 250, 0.79);
+  font-size: 13px;
+  color: black;
+  align-items: center;
+  text-align: center;
+}
 .answerBody{
   border-top: 1px solid #e4e4e4;
   background-color: white;

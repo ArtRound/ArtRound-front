@@ -22,7 +22,7 @@ const ContactUs = ({ history }) => {
     console.log(getTitle);
     console.log(getContent);
 
-    axios.post("http://127.0.0.1:8000/question/", {
+    axios.post("http://127.0.0.1:8000/main/question/", {
       useremail: getUseremail,
       type: getType,
       title: getTitle,
@@ -38,7 +38,7 @@ const ContactUs = ({ history }) => {
   }
 
   function getAnswer() {
-    axios.get("http://127.0.0.1:8000/question/")
+    axios.get("http://127.0.0.1:8000/main/question/")
       .then((response) => {
         setText([...response.data]);
         console.log(response.data);
@@ -92,7 +92,7 @@ const ContactUs = ({ history }) => {
         }>문의내역 확인</button>
 
         {questionToggle && <QuestionContainer textInput={questionInput} />}
-        {answerToggle && <AnswerContainer text={text} />}
+        {answerToggle && <AnswerContainer text={text} setText={setText} />}
       </div> {/* Contact Frame */}
     </div >
   );
