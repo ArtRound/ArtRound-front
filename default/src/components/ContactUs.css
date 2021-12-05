@@ -174,7 +174,7 @@ hr {
   height: 40px;
   margin-top: 13px !important;
   border: 1px solid #000000;
-  background: url("arrow.png") no-repeat 95% 50%;
+  background: url("../img/notice/arrow.png") no-repeat 95% 50%;
   -webkit-appearance: none; /* 네이티브 외형 감추기 */
   -moz-appearance: none;
   appearance: none;

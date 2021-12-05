@@ -1,6 +1,6 @@
 import React from 'react';
 import { Accordion } from 'react-bootstrap';
-import checkIcon from './check_icon.png';
+import checkIcon from '../img/notice/check_icon.png';
 
 const AnswerContainer = (props) => {
   return (
