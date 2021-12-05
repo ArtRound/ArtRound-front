@@ -1,29 +1,27 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom"; //React-Router import
-import MyPage from "./components/Mypage";
-import UserInfo from "./components/UserInfo";
-import UserFavorite from "./components/UserFavorite";
-import UserVisited from "./components/UserVisited";
-import ServiceCenter from "./components/ServiceCenter";
-import Detail from "./components/Detail";
-import Login from "./components/Login";
+import MyPage from "./pages/Mypage";
+import UserFavorite from "./pages/UserFavorite";
+import UserVisited from "./pages/UserVisited";
+import ServiceCenter from "./pages/ServiceCenter";
+import Detail from "./pages/Detail";
+import Login from "./pages/Login";
 import "./App.css";
-import Notice from "./components/Notice";
-import ContactUs from "./components/ContactUs";
-import Tos from "./components/ToS";
-import Noticepost from "./components/noticePost";
-import Map from "../src/components/Map"
-import Introduce from "./components/Introduce"
-import AnswerPost from "./components/AnswerPost"
-import ReviewList from './components/ReviewList';
-import Review from './components/Review';
+import Notice from "./pages/Notice";
+import ContactUs from "./pages/ContactUs";
+import Tos from "./pages/ToS";
+import Noticepost from "./pages/noticePost";
+import Map from "./pages/Map"
+import Introduce from "./pages/Introduce"
+import AnswerPost from "./pages/AnswerPost"
+import ReviewList from './pages/ReviewList';
+import Review from './pages/Review';
 
 const App = () => {
   return (
     <div className="container">
       <BrowserRouter>
         <Route path="/" exact component={Login} />
-        <Route path="/info" component={UserInfo} />
         <Route path="/favorite" component={UserFavorite} />
         <Route path="/visited" component={UserVisited} />
         <Route path="/service" component={ServiceCenter} />

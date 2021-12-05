@@ -1,7 +1,7 @@
 import React from "react";
 
-import GoogleButton from "./GoogleButton";
-import KakaoButton from "./KakaoButton";
+import GoogleButton from "../components/GoogleButton";
+import KakaoButton from "../components/KakaoButton";
 
 import "./Login.css";
 

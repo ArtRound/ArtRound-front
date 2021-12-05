@@ -4,7 +4,7 @@ import { GoogleMap, InfoBox, LoadScript, Marker, InfoWindow, MarkerClusterer } f
 import greenMarker from '../img/marker-image/green_MarkerU.png';
 import pinkMarker from '../img/marker-image/pink_MarkerA.png'
 import Data from './Data';
-import FooterInfo from './FooterInfo';
+import FooterInfo from '../pages/FooterInfo';
 import Icon from './Icon';
 
 

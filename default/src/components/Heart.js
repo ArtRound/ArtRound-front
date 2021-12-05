@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import './ReviewList.css'
+import '../pages/ReviewList.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 
-function Heart(props){
+function Heart(props) {
 
-    let colorCount = Array.from({length:props.count}, (v,i)=>i)
-    let uncoloredCount = Array.from({length: (5-props.count)}, (v,i)=>i)
+    let colorCount = Array.from({ length: props.count }, (v, i) => i)
+    let uncoloredCount = Array.from({ length: (5 - props.count) }, (v, i) => i)
 
-    return(
+    return (
         <>
             {
-                colorCount.map((v,i)=>{
-                    return <ColorHeart/>
+                colorCount.map((v, i) => {
+                    return <ColorHeart />
                 })
             }
             {
-                uncoloredCount.map((v,i)=>{
-                    return <UncoloredHeart/>
+                uncoloredCount.map((v, i) => {
+                    return <UncoloredHeart />
                 })
             }
         </>
@@ -28,24 +28,24 @@ function Heart(props){
 export default Heart;
 
 
-function ColorHeart(){
-    return(
+function ColorHeart() {
+    return (
         <>
             <FontAwesomeIcon
                 icon={fasFaHeart}
-                className = "heart" 
+                className="heart"
             />
         </>
     )
 }
 
-function UncoloredHeart(){
-    return(
+function UncoloredHeart() {
+    return (
         <>
             <FontAwesomeIcon
-                className = "heart" 
+                className="heart"
                 icon={farFaHeart}
-                
+
             />
         </>
     )

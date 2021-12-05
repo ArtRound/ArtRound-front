@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Map.css';
-import GoogleMap from './GoogleMapComponent';
+import GoogleMap from '../components/GoogleMapComponent';
 import axios from 'axios';
 import { faChevronLeft, faSearchLocation } from "@fortawesome/free-solid-svg-icons";
-import Data from './Data';
+import Data from '../components/Data';
 
 
 function Map() {
