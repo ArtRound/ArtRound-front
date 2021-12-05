@@ -10,6 +10,7 @@ import Notice from "./components/Notice";
 import ContactUs from "./components/ContactUs";
 import Tos from "./components/ToS";
 import Noticepost from "./components/noticePost";
+import Map from "../src/components/Map"
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/tos" component={Tos} />
         <Route path="/noticepost" component={Noticepost} />
 
+        <Route path="/map" component={Map} />
       </BrowserRouter>
     </div>
   );

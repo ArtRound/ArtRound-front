@@ -1,0 +1,33 @@
+.footer-info{
+    width: 100vw;
+    height: 230px;
+    position: absolute;
+    bottom : 0;
+    z-index: 4;
+    background: white;
+    padding-left: 15px;
+}
+.price{
+    font-size: 15px;
+    padding-left: 20px;
+}
+.footer-review{
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+.art-img img{
+    width: 17rem;
+    height: 11rem;
+}
+.close-icon{
+    position : absolute;
+    top: 15px;
+    right: 0;
+    padding-right: 3rem;
+    cursor: pointer;
+}
+@media screen and (max-width:767px) {
+    .close-icon{
+        display: none;
+    }
+}
