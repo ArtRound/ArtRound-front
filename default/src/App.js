@@ -6,6 +6,8 @@ import UserFavorite from "./components/UserFavorite";
 import UserVisited from "./components/UserVisited";
 import ServiceCenter from "./components/ServiceCenter";
 import Detail from "./components/Detail";
+import Login from "./components/Login";
+import "./App.css";
 import Notice from "./components/Notice";
 import ContactUs from "./components/ContactUs";
 import Tos from "./components/ToS";
@@ -14,9 +16,9 @@ import Map from "../src/components/Map"
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <BrowserRouter>
-        <Route path="/" exact component={MyPage} />
+        <Route path="/" exact component={Login} />
         <Route path="/info" component={UserInfo} />
         <Route path="/favorite" component={UserFavorite} />
         <Route path="/visited" component={UserVisited} />
