@@ -35,8 +35,9 @@ const App = () => {
         <Route path="/introduce" component={Introduce} />
         <Route path="/map" component={Map} />
         <Route path="/answerpost" component={AnswerPost} />
-        <Route  path='/review' component={ReviewList} />
-        <Route  path='/submit' component={Review} />
+        <Route path='/review' component={ReviewList} />
+        <Route path='/submit' component={Review} />
+        <Route path='/mypage' component={MyPage} />
       </BrowserRouter>
     </div>
   );

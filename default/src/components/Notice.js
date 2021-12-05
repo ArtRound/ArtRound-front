@@ -8,7 +8,7 @@ const Notice = ({ history }) => {
   const [text, setText] = useState([]);
 
   function getNotice() {
-    axios.get("http://127.0.0.1:8000/review/")
+    axios.get("http://127.0.0.1:8000/main/notice/")
       .then((response) => {
         setText([...response.data]);
         console.log(response.data);
@@ -55,7 +55,7 @@ const Notice = ({ history }) => {
                   <button
                     className="btnDelete"
                     onClick={() => {
-                      axios.delete(`http://127.0.0.1:8000/review/${e.id}`);
+                      axios.delete(`http://127.0.0.1:8000/main/notice/${e.id}`);
                       setText(text.filter((text) => text.id !== e.id));
                     }}
                   >

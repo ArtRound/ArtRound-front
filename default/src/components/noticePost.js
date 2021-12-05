@@ -7,7 +7,7 @@ const noticePost = ({ history }) => {
   function textInput() {
     var getTitle = document.getElementById("title").value;
     var getContent = document.getElementById("content").value;
-    axios.post("http://127.0.0.1:8000/review/", {
+    axios.post("http://127.0.0.1:8000/main/notice/", {
       title: getTitle,
       content: getContent,
     })
