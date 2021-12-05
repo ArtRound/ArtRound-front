@@ -12,12 +12,13 @@ export default function GoogleButton({ onSocial }) {
       profileObj: { email, name },
     } = response;
 
-    await onSocial({
-      socialId: googleId,
-      socialType: "google",
-      email,
-      nickname: name,
-    });
+    // 구글 로그인 성공시 서버에 전달할 데이터
+    // await onSocial({
+    //   socialId: googleId,
+    //   socialType: "google",
+    //   email,
+    //   nickname: name,
+    // });
   };
 
   const onFailure = (error) => {
