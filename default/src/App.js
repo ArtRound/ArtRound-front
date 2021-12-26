@@ -16,6 +16,7 @@ import Introduce from "./pages/Introduce";
 import AnswerPost from "./pages/AnswerPost";
 import ReviewList from "./pages/ReviewList";
 import Review from "./pages/Review";
+import Information from './pages/Information';
 import KakaoRedirectHandler from "./components/KakaoRedirectHandler";
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/review" component={ReviewList} />
         <Route path="/submit" component={Review} />
         <Route path="/mypage" component={MyPage} />
+        <Route path="/information" component={Information} />
 
         <Route
           path="/main/login/kakao"

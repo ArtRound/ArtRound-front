@@ -26,7 +26,7 @@ const UserVisited = ({ history }) => {
 
     <div className="visited-container">
       <div className="user-visited">
-        <div className="art-around">Art Around</div>
+        <div className="art-around">ArtROUND</div>
         <div className="user-name">반유진</div>
       </div>  {/* user-visited */}
 
