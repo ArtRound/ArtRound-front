@@ -11,11 +11,12 @@ import Notice from "./pages/Notice";
 import ContactUs from "./pages/ContactUs";
 import Tos from "./pages/ToS";
 import Noticepost from "./pages/noticePost";
-import Map from "./pages/Map"
-import Introduce from "./pages/Introduce"
-import AnswerPost from "./pages/AnswerPost"
-import ReviewList from './pages/ReviewList';
-import Review from './pages/Review';
+import Map from "./pages/Map";
+import Introduce from "./pages/Introduce";
+import AnswerPost from "./pages/AnswerPost";
+import ReviewList from "./pages/ReviewList";
+import Review from "./pages/Review";
+import KakaoRedirectHandler from "./components/KakaoRedirectHandler";
 
 const App = () => {
   return (
@@ -33,9 +34,14 @@ const App = () => {
         <Route path="/introduce" component={Introduce} />
         <Route path="/map" component={Map} />
         <Route path="/answerpost" component={AnswerPost} />
-        <Route path='/review' component={ReviewList} />
-        <Route path='/submit' component={Review} />
-        <Route path='/mypage' component={MyPage} />
+        <Route path="/review" component={ReviewList} />
+        <Route path="/submit" component={Review} />
+        <Route path="/mypage" component={MyPage} />
+
+        <Route
+          path="/main/login/kakao"
+          component={KakaoRedirectHandler}
+        ></Route>
       </BrowserRouter>
     </div>
   );

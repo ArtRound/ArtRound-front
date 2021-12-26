@@ -1,9 +1,9 @@
 import React from "react";
 
 import GoogleButton from "../components/GoogleButton";
-import KakaoButton from "../components/KakaoButton";
 
 import "./Login.css";
+import { KAKAO_AUTH_URL } from "./../services/KakaoLogin";
 
 const Login = () => {
   return (
@@ -15,7 +15,9 @@ const Login = () => {
       </div>
 
       <GoogleButton />
-      <KakaoButton />
+      <a href={KAKAO_AUTH_URL}>
+        <span>카카오계정 로그인</span>
+      </a>
     </div>
   );
 };
