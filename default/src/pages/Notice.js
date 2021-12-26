@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Accordion } from 'react-bootstrap';
-import './Notice.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Accordion } from "react-bootstrap";
+import "./Notice.css";
 
 const Notice = ({ history }) => {
   const [text, setText] = useState([]);
 
-  function getNotice() {
-    axios.get("http://127.0.0.1:8000/main/notice/")
-      .then((response) => {
-        setText([...response.data]);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  function getNotice(accessToken) {
+    axios({
+      method: "get",
+      url: "http://127.0.0.1:8000/main/notice/",
+      xstfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFToken",
+      headers: {
+        Authorization: `Token ${accessToken}`,
+      },
+    }).catch(function (error) {
+      console.log(error);
+    });
+
+    // axios
+    //   .get("http://127.0.0.1:8000/main/notice/")
+    //   .then((response) => {
+    //     setText([...response.data]);
+    //     console.log(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  }
 
   return (
     <div className="screen">
@@ -27,28 +40,31 @@ const Notice = ({ history }) => {
         crossorigin="anonymous"
       />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
-
       <nav>
         <button
           onClick={() => {
             history.push("/service");
           }}
           className="noboot-btn"
-        >⬅</button>
+        >
+          ⬅
+        </button>
         <span>공지사항</span>
 
         {/* 글쓰기 버튼 관리자에게만 보이기 */}
-        <button className="postBtn"><Link to="/noticepost"> 글쓰기 </Link></button>
+        <button className="postBtn">
+          <Link to="/noticepost"> 글쓰기 </Link>
+        </button>
       </nav>
-
-
-      <div className="noticeFrame" >
+      <div className="noticeFrame">
         {getNotice()} {/* 함수로 axios.get 불러옴 */}
         {text.map((e) => (
           <div>
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1">
-                <Accordion.Header className="title">{e.title} &nbsp;</Accordion.Header>
+                <Accordion.Header className="title">
+                  {e.title} &nbsp;
+                </Accordion.Header>
                 <Accordion.Body>
                   {e.content}
                   <br />
@@ -71,12 +87,10 @@ const Notice = ({ history }) => {
                   <span>{e.content}</span> */}
           </div>
         ))}
-
-      </div>   {/* Notice Frame */}
-    </div>  /* screen */
+      </div>{" "}
+      {/* Notice Frame */}
+    </div> /* screen */
   );
 };
 
 export default Notice;
-
-

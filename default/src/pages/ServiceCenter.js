@@ -10,7 +10,9 @@ const ServiceCenter = ({ history }) => {
             history.push("/");
           }}
           className="back-btn"
-        >⬅</button>
+        >
+          ⬅
+        </button>
         <span>고객센터</span>
       </nav>
       <div className="container">
@@ -20,28 +22,35 @@ const ServiceCenter = ({ history }) => {
               history.push("/introduce");
             }}
             className="introduce-btn"
-          >서비스 소개</button>
+          >
+            서비스 소개
+          </button>
           <button
             onClick={() => {
               history.push("/notice");
             }}
             className="notice-btn"
-          >공지사항</button>
+          >
+            공지사항
+          </button>
 
           <button
             onClick={() => {
               history.push("/contactus");
             }}
             className="contact-btn"
-          >문의</button>
+          >
+            문의
+          </button>
 
           <button
             onClick={() => {
               history.push("/tos");
             }}
             className="tos-btn"
-          >이용약관</button>
-
+          >
+            이용약관
+          </button>
         </div>
       </div>
     </>
