@@ -5,7 +5,7 @@ import GoogleButton from "../components/GoogleButton";
 import "./Login.css";
 import { KAKAO_AUTH_URL } from "./../services/KakaoLogin";
 
-const Login = () => {
+const Login = ({ history }) => {
   return (
     <div className="cover-container">
       <div className="paragraph-wrapper">
@@ -14,7 +14,7 @@ const Login = () => {
         <p>-파블로 피카소-</p>
       </div>
 
-      <GoogleButton />
+      <GoogleButton history={history} />
       <a href={KAKAO_AUTH_URL}>
         <span>카카오계정 로그인</span>
       </a>
