@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GoogleLogin from "react-google-login";
 
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ export default function GoogleButton({ history }) {
     dispatch({
       type: "login",
       payload: {
-        isLoggedIn: true,
+        isAuthorized: true,
         access_token: response.accessToken,
         username: response.profileObj.name,
         gender: "gender 정보 없음",

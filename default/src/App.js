@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom"; //React-Router import
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom"; //React-Router import
 import MyPage from "./pages/Mypage";
 import UserFavorite from "./pages/UserFavorite";
 import UserVisited from "./pages/UserVisited";
@@ -16,14 +16,21 @@ import Introduce from "./pages/Introduce";
 import AnswerPost from "./pages/AnswerPost";
 import ReviewList from "./pages/ReviewList";
 import Review from "./pages/Review";
-import Information from './pages/Information';
+import Information from "./pages/Information";
 import KakaoRedirectHandler from "./components/KakaoRedirectHandler";
 
 const App = () => {
+  const isAuthorized = localStorage.getItem("isAuthorized");
   return (
     <div className="container">
       <BrowserRouter>
-        <Route path="/" exact component={Login} />
+        {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />}
+
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/mypage" component={MyPage} />
+        </Switch>
+
         <Route path="/favorite" component={UserFavorite} />
         <Route path="/visited" component={UserVisited} />
         <Route path="/service" component={ServiceCenter} />
@@ -37,7 +44,7 @@ const App = () => {
         <Route path="/answerpost" component={AnswerPost} />
         <Route path="/review" component={ReviewList} />
         <Route path="/submit" component={Review} />
-        <Route path="/mypage" component={MyPage} />
+
         <Route path="/information" component={Information} />
 
         <Route

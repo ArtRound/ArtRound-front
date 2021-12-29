@@ -101,9 +101,9 @@ function reducer(state = 기본stete, action) {
   return state;
 }
 
-// const info = [{ id: 0, username: "hjs", gender: "여자", age: 21, isLoggedIn:false }];
+// const info = [{ id: 0, username: "hjs", gender: "여자", age: 21, isAuthorized:false }];
 const initialInfoState = {
-  isLoggedIn: false,
+  isAuthorized: false,
   access_token: null,
   username: null,
   gender: null,
@@ -118,10 +118,14 @@ function infoReducer(state = initialInfoState, action) {
         "userInfo",
         JSON.stringify(action.payload.username)
       );
+      window.localStorage.setItem(
+        "isAuthorized",
+        JSON.stringify(action.payload.isAuthorized)
+      );
       console.log(action);
       return {
         ...state,
-        isLoggedIn: true,
+        isAuthorized: true,
         access_token: action.payload.access_token,
         username: action.payload.username,
         gender: action.payload.gender,
@@ -134,7 +138,7 @@ function infoReducer(state = initialInfoState, action) {
       return {
         ...state,
         ...initialInfoState,
-        isLoggedIn: false,
+        isAuthorized: false,
       };
 
     default:
