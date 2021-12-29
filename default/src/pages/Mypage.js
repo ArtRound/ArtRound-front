@@ -1,7 +1,21 @@
 import React from "react";
 import "./Mypage.css";
 
+import { useDispatch } from "react-redux";
+
 const MyPage = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch({
+      type: "logout",
+      payload: {
+        isAuthorized: false,
+      },
+    });
+
+    history.push("/login");
+  };
   return (
     <>
       <nav>
@@ -44,7 +58,9 @@ const MyPage = ({ history }) => {
           </button>
         </div>
         <div className="small-buttons">
-          <button className="logout">로그아웃</button>
+          <button className="logout" onClick={() => logout()}>
+            로그아웃
+          </button>
           <span> / </span>
           <button className="withdrawal">회원탈퇴</button>
         </div>

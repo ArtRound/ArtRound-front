@@ -135,6 +135,8 @@ function infoReducer(state = initialInfoState, action) {
 
     case "logout":
       window.localStorage.removeItem("userInfo");
+      window.localStorage.removeItem("isAuthorized");
+      console.log(action);
       return {
         ...state,
         ...initialInfoState,
