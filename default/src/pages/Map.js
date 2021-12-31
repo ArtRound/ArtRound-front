@@ -9,15 +9,19 @@ import greenMarker from '../img/marker-image/green_MarkerU.png';
 import pinkMarker from '../img/marker-image/pink_MarkerA.png'
 import FooterInfo from './FooterInfo';
 import Icon from '../components/Icon';
+import {placeData} from '../App';
 
+function Map(props) {
 
-function Map() {
+  //공공 api 데이터
+  const mapData = useContext(placeData);
 
   let [iconState, setIconState] = useState(true);
   let [footerInfoState, setFooterInfoState] = useState('');
   let [titleState, setTitleState] = useState('');
   let [closeIconState, setCloseIconState] = useState(false);
 
+  
   const containerStyle = {
     width: '100vw',
     height: '90vh'
@@ -68,10 +72,11 @@ function Map() {
     }
   }
 
+
+
   useEffect(() => {
     getCurrentLocation();
   }, [])
-
 
   return (
     <div>
@@ -116,11 +121,11 @@ function Map() {
           }
         </GoogleMap>
       </LoadScript>
-      <GoogleMap markerState={markerState} currentPosition={currentPosition} getCurrentLocation={getCurrentLocation}>
-      </GoogleMap>
+
       <button onClick={() => { getCurrentLocation() }} className="current-position-btn" >
         <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
       </button>
+
       {
         footerInfoState && (
           <FooterInfo
