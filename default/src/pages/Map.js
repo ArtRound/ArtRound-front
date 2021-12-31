@@ -1,21 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Map.css';
-import GoogleMap from '../components/GoogleMapComponent';
-import axios from 'axios';
 import { faChevronLeft, faSearchLocation } from "@fortawesome/free-solid-svg-icons";
-import Data from '../components/Data';
+import '../components/GoogleMap.css';
+import { GoogleMap, InfoBox, LoadScript, Marker, InfoWindow, MarkerClusterer } from '@react-google-maps/api';
+import greenMarker from '../img/marker-image/green_MarkerU.png';
+import pinkMarker from '../img/marker-image/pink_MarkerA.png'
+import FooterInfo from './FooterInfo';
+import Icon from '../components/Icon';
 
 
 function Map() {
+
+  let [iconState, setIconState] = useState(true);
+  let [footerInfoState, setFooterInfoState] = useState('');
+  let [titleState, setTitleState] = useState('');
+  let [closeIconState, setCloseIconState] = useState(false);
+
+  const containerStyle = {
+    width: '100vw',
+    height: '90vh'
+  };
+
+  function clickMarker(marker) {
+    // <FooterInfo/> 내리기
+    if (marker.fcltyNm === titleState) {
+      setIconState(true);
+      setFooterInfoState('');
+      setTitleState('');
+      setCloseIconState(false)
+    }
+    // <FooterInfo/> 올리기
+    else {
+      setIconState(false);
+      setFooterInfoState(marker);
+      setTitleState(marker.fcltyNm);
+      setCloseIconState(true)
+    }
+  }
+
+  function clickCloseBtn() {
+    setCloseIconState(false);
+    setIconState(true);
+    setFooterInfoState('');
+    setTitleState('');
+  }
+
 
   const [currentPosition, setCurrentPosition] = useState({
     lat: null,
     lng: null
   });
 
-  const [markerState, setMarkerState] = useState(false);
 
   let history = useHistory();
 
@@ -31,30 +68,10 @@ function Map() {
     }
   }
 
-  function multipleAxios() {
-    const URL = []
-    const getURL = []
-
-    for (let i = 0; i < 15; i++) {
-      URL[i] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D&pageNo=${i + 1}&numOfRows=100&type=json`
-      getURL[i] = axios.get(URL[i]);
-    }
-
-    axios.all([...getURL]).then(
-      axios.spread((...allData) => {
-        allData.map((v, i) => {
-          Data.push(...v.data.response.body.items);
-        })
-        setMarkerState(true);
-      })
-    )
-  }
-
-
   useEffect(() => {
     getCurrentLocation();
-    multipleAxios();
   }, [])
+
 
   return (
     <div>
@@ -65,11 +82,56 @@ function Map() {
           onClick={() => { history.goBack() }}
         /> <span>지도</span>
       </div>
+      <LoadScript googleMapsApiKey="AIzaSyBIjC2af8iZNL8mGIGln8O0u4COojSdYbw">
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={currentPosition}
+          zoom={15}
+        >
+          <Marker
+            position={currentPosition}
+            icon={greenMarker}
+          />
+          {
+            props.markerState === true
+              ? (
+                <MarkerClusterer >
+                  {(clusterer) =>
+                    mapData.map((v, i) => {
+                      console.log('원래 이렇게 계속 출력되었는가???');
+                      return (
+                        <Marker
+                          key={i}
+                          position={{ lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) }}
+                          icon={pinkMarker}
+                          clusterer={clusterer}
+                          onClick={() => {
+                            clickMarker(v)
+                          }} />
+                      );
+                    })}
+                </MarkerClusterer>
+              )
+              : null
+          }
+        </GoogleMap>
+      </LoadScript>
       <GoogleMap markerState={markerState} currentPosition={currentPosition} getCurrentLocation={getCurrentLocation}>
       </GoogleMap>
       <button onClick={() => { getCurrentLocation() }} className="current-position-btn" >
         <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
       </button>
+      {
+        footerInfoState && (
+          <FooterInfo
+            data={footerInfoState}
+            closeIconState={closeIconState}
+            clickCloseBtn={clickCloseBtn}
+          />
+        )
+      }
+
+      {iconState && <Icon />}
     </div>
   )
 }
