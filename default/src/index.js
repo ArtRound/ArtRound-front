@@ -148,7 +148,48 @@ function infoReducer(state = initialInfoState, action) {
   }
 }
 
-let store = createStore(combineReducers({ reducer, infoReducer }));
+// 즐겨찾기, 방문한 페이지 리덕스 JJIN 
+const favorite_exhibition = [
+  {
+    // img: null,
+    name: "피카소 전시회",
+    time: "10:00 ~ 18:00",
+    address: "양산시 범어리"
+  },
+  {
+    // img: null,
+    name: "피카소 전시회",
+    time: "10:00 ~ 18:00",
+    address: "양산시 범어리"
+  }
+]
+
+function fav_reducer(state = favorite_exhibition, action) {
+  if (action.type === "add") {
+    let copy = [...state];
+    copy.push(action.payload);
+    return copy;
+  } else if (action.type === "sortUp") {
+    let copy = [...state];
+    copy = copy.sort((a, b) => b.heart - a.heart);
+    return copy;
+  } else if (action.type === "sortDown") {
+    let copy = [...state];
+    copy = copy.sort((a, b) => a.heart - b.heart);
+    return copy;
+  } else if (action.type === "sortDate") {
+    let copy = [...state];
+    return copy;
+  }
+  return state;
+}
+
+// JJIN-END 
+
+
+let store = createStore(combineReducers({ reducer, infoReducer, fav_reducer }));
+
+
 
 ReactDOM.render(
   <React.StrictMode>

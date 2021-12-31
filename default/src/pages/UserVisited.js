@@ -3,15 +3,14 @@ import "./UserVisited.css";
 import title_img from "../img/exhibition_sample_img.png";
 
 const UserVisited = ({ history }) => {
-  const [ing, setIng] = useState(true);
+  // const [ing, setIng] = useState(true);
+  // function display_state() {
+  //   if (true) {
+  //     // 전시 중이면 useState -> false로 바꾸기 
+  //   } else {
 
-  function display_state() {
-    if (true) {
-      // 전시 중이면 useState -> false로 바꾸기 
-    } else {
-
-    }
-  }
+  //   }
+  // }
 
   return <div>
     <nav>
@@ -33,7 +32,7 @@ const UserVisited = ({ history }) => {
       <div className="list-visited">
         <img className="visited-img" src={title_img} alt="exhibition" />
 
-        {ing && <div id="display" className="display-ing">
+        {/* {ing && <div id="display" className="display-ing">
           <i class="fas fa-circle"></i>
           <div className="end">전시중</div>
         </div>}
@@ -41,7 +40,7 @@ const UserVisited = ({ history }) => {
         {!ing && <div id="display" className="display-end">
           <i class="fas fa-circle"></i>
           <div className="end">전시종료</div>
-        </div>}
+        </div>} */}
 
         <div className="visited-name">피카소 미술관</div>
         <div className="visited-detail">부경대 다래락</div>
