@@ -70,7 +70,7 @@ const App = () => {
         </Switch>
 
         <placeData.Provider value={datas}>
-          <Route path="/detail" component={Detail} />
+          <Route path="/detail/:id" component={Detail} />
           <Route path="/map"> <Map markerState={markerState} /> </Route> 
         </placeData.Provider>
 
