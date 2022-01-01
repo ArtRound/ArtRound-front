@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { placeData } from '../App';
+
 
 const Detail = () => {
 
+  //공공 api 데이터
+  const detailData = useContext(placeData);
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
+  let {id} = useParams();
 
   function wishList() {
     if (wish === true) {
@@ -23,11 +28,20 @@ const Detail = () => {
     }
   }
 
+  function changePrice(money){
+    if(money === '0') return ' 무료';
+    else return ' ' + money + '원';
+  }
+
+  let findInfo = detailData.find((v)=>{
+    return v.id == id;
+  });
+
   return (
     <div className="exhibition">
       <div className="top-bar">
         <button className="back-btn">⬅</button>
-        <div className="exhibition-title">피카소 미술 전시관</div>
+        <div className="exhibition-title">{findInfo.fcltyNm}</div>
       </div>
 
       <div className="ex-container">
@@ -54,40 +68,28 @@ const Detail = () => {
 
           <table className="detail-table">
             <tr>
-              <th>전시기간</th>
-              <td>2021.03.23 ~ 2021.10.22</td>
-            </tr>
-            <tr>
-              <th>전시장소</th>
-              <td>부경대학교 다래락</td>
-            </tr>
-            <tr>
               <th>관람시간</th>
-              <td>월-금: 09:00 ~ 21:00 <br />토요일: 09:00 ~ 15:00</td>
+              <td>월-금: {findInfo.weekdayOperOpenHhmm} ~ {findInfo.weekdayOperColseHhmm} <br />공휴일: {findInfo.holidayOperOpenHhmm} ~ {findInfo.holidayCloseOpenHhmm}</td>
             </tr>
             <tr>
               <th>휴관일</th>
-              <td>일요일</td>
+              <td>{findInfo.rstdeInfo}</td>
             </tr>
             <tr>
               <th>입장료</th>
-              <td>일반(만 19세-60세): 7500원<br />청소년(만 13세-18세): 5000원<br />어린이(12세 이하): 무료</td>
+              <td>일반(만 19세-60세):{changePrice(findInfo.adultChrge)}<br />청소년(만 13세-18세): {changePrice(findInfo.yngbgsChrge)}<br />어린이(12세 이하): {changePrice(findInfo.childChrge)}</td>
             </tr>
             <tr>
               <th>주소</th>
-              <td>경상남도 양산시 범어리 123-56</td>
-            </tr>
-            <tr>
-              <th>주차장</th>
-              <td>있음</td>
+              <td>{findInfo.rdnmadr}</td>
             </tr>
             <tr>
               <th>전화번호</th>
-              <td>055-123-4567</td>
+              <td>{findInfo.operPhoneNumber}</td>
             </tr>
             <tr>
               <th>홈페이지</th>
-              <td>https://cms.pknu.ac.kr/itcae/main.do</td>
+              <td><a href={`{findInfo.homepageUrl}`}>{findInfo.homepageUrl}</a></td>
             </tr>
             <tr>
               <th>Artist</th>
