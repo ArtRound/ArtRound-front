@@ -11,6 +11,7 @@ import artImg6 from '../img/art-image/art6.jpg';
 import artImg7 from '../img/art-image/art7.jpg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 
 
@@ -31,10 +32,10 @@ function FooterInfo(props){
                 props.closeIconState&&(
 
         <div className='footer-info'>
-            <h2 className='footer-title'>
-                {props.data.fcltyNm}
-                { price(props.data.adultChrge,props.data.childChrge) }
-            </h2>
+            <Link to={{pathname: `/detail/${props.data.id}`}} style={{textDecoration: 'none' , color:'black'}}>
+                <span className='footer-title'>{props.data.fcltyNm}</span>
+            </Link>
+            <span>{ price(props.data.adultChrge,props.data.childChrge) }</span>
             <FontAwesomeIcon className="close-icon" icon={faTimes} size={"2x"} onClick={()=>props.clickCloseBtn()}/> 
             <div className='footer-like'>
                 <span>❤</span>
