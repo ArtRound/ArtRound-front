@@ -39,11 +39,11 @@ function FooterInfo(props){
             <FontAwesomeIcon className="close-icon" icon={faTimes} size={"2x"} onClick={()=>props.clickCloseBtn()}/> 
             <div className='footer-like'>
                 <span>❤</span>
-                <span>52</span>
+                <span>{Math.floor(Math.random()*100)}</span>
             </div>
             <div className='footer-review'>
-                <span>블로그 후기 32  </span>
-                <span>방문자 후기 283</span>
+                <span>블로그 후기 {Math.floor(Math.random()*150)}  </span>
+                <span>방문자 후기 {Math.floor(Math.random()*300)}</span>
             </div>
             <div className="art-img">
                 <Swiper
