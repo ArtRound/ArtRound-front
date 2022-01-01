@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
 import { Link, useParams } from 'react-router-dom';
@@ -90,10 +90,6 @@ const Detail = () => {
             <tr>
               <th>홈페이지</th>
               <td><a href={`{findInfo.homepageUrl}`}>{findInfo.homepageUrl}</a></td>
-            </tr>
-            <tr>
-              <th>Artist</th>
-              <td>Yu Jin</td>
             </tr>
           </table>
 

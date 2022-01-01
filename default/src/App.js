@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom"; //React-Router import
 import MyPage from "./pages/Mypage";
 import UserFavorite from "./pages/UserFavorite";
@@ -18,6 +18,7 @@ import ReviewList from "./pages/ReviewList";
 import Review from "./pages/Review";
 import Information from "./pages/Information";
 import KakaoRedirectHandler from "./components/KakaoRedirectHandler";
+import axios from "axios";
 export let placeData = React.createContext();
 
 const App = () => {
@@ -46,7 +47,9 @@ const App = () => {
       .then(()=>{
         copy.map((item,i)=>{
           item.id = i;
+          // console.log(item, ' here is item');
           setDatas(datas => {
+            console.log(datas, ' here is datas');
             return [...datas, item];
           });
           return item;
@@ -62,7 +65,7 @@ const App = () => {
   return (
     <div className="container">
       <BrowserRouter>
-        {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />}
+        {/* {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />} */}
 
         <Switch>
           <Route path="/login" exact component={Login} />
