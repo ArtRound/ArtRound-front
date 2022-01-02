@@ -1,5 +1,7 @@
-import React, {useState, useEffect} from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom"; //React-Router import
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route } from "react-router-dom"; //React-Router import
+import axios from "axios";
+
 import MyPage from "./pages/Mypage";
 import UserFavorite from "./pages/UserFavorite";
 import UserVisited from "./pages/UserVisited";
@@ -17,64 +19,76 @@ import AnswerPost from "./pages/AnswerPost";
 import ReviewList from "./pages/ReviewList";
 import Review from "./pages/Review";
 import Information from "./pages/Information";
-import KakaoRedirectHandler from "./components/KakaoRedirectHandler";
-import axios from "axios";
+import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
+
 export let placeData = React.createContext();
 
 const App = () => {
   const isAuthorized = localStorage.getItem("isAuthorized");
 
   const [markerState, setMarkerState] = useState(false);
-  const [datas, setDatas]= useState([]);
+  const [datas, setDatas] = useState([]);
 
-  useEffect(()=>{
-    const URL = []
-    const getURL = []
+  useEffect(() => {
+    const URL = [];
+    const getURL = [];
 
     for (let i = 0; i < 15; i++) {
-      URL[i] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D&pageNo=${i + 1}&numOfRows=100&type=json`
+      URL[
+        i
+      ] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D&pageNo=${
+        i + 1
+      }&numOfRows=100&type=json`;
       getURL[i] = axios.get(URL[i]);
     }
 
     let copy = [];
-    
-    axios.all([...getURL])
-      .then((res)=>{
-        res.map((v,i)=>{
+
+    axios
+      .all([...getURL])
+      .then((res) => {
+        res.map((v, i) => {
           copy.push(...v.data.response.body.items);
-        })
+        });
       })
-      .then(()=>{
-        copy.map((item,i)=>{
+      .then(() => {
+        copy.map((item, i) => {
           item.id = i;
           // console.log(item, ' here is item');
-          setDatas(datas => {
-            console.log(datas, ' here is datas');
+          setDatas((datas) => {
+            console.log(datas, " here is datas");
             return [...datas, item];
           });
           return item;
         });
         setMarkerState(true);
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error);
-      })
-    },[])
-    
+      });
+  }, []);
 
   return (
     <div className="container">
       <BrowserRouter>
         {/* {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />} */}
 
-        <Switch>
-          <Route path="/login" exact component={Login} />
-          <Route path="/mypage" component={MyPage} />
-        </Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/main/login/kakao">
+          <Auth />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/mypage" component={MyPage} />
 
         <placeData.Provider value={datas}>
           <Route path="/detail/:id" component={Detail} />
-          <Route path="/map"> <Map markerState={markerState} /> </Route> 
+          <Route path="/map">
+            {" "}
+            <Map markerState={markerState} />{" "}
+          </Route>
         </placeData.Provider>
 
         <Route path="/favorite" component={UserFavorite} />
@@ -90,11 +104,6 @@ const App = () => {
         <Route path="/submit" component={Review} />
 
         <Route path="/information" component={Information} />
-
-        <Route
-          path="/main/login/kakao"
-          component={KakaoRedirectHandler}
-        ></Route>
       </BrowserRouter>
     </div>
   );
