@@ -15,7 +15,7 @@ export default function GoogleButton({ history }) {
       type: "login",
       payload: {
         isAuthorized: true,
-        access_token: response.accessToken,
+        access_token: access_token,
         username: response.profileObj.name,
         gender: "gender 정보 없음",
         age: "age 정보 없음",

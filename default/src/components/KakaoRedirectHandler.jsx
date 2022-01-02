@@ -8,10 +8,12 @@ export default function KakaoRedirectHandler({ history }) {
   console.log(code);
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `http://localhost:8000/main/login/kakao?code=${code}`,
-    })
+    axios
+      .get(`http://localhost:8000/main/login/kakao?code=${code}`, {
+        // prettier-ignore
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      })
       .then((res) => {
         console.log(res); // 토큰이 넘어올 것임
 
@@ -19,7 +21,7 @@ export default function KakaoRedirectHandler({ history }) {
 
         localStorage.setItem("token", ACCESS_TOKEN); //예시로 로컬에 저장함
 
-        history.replace("/mypage"); // 토큰 받았았고 로그인됐으니 화면 전환시켜줌(메인으로)
+        // history.replace("/mypage"); // 토큰 받았았고 로그인됐으니 화면 전환시켜줌(메인으로)
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);

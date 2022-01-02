@@ -1,9 +1,21 @@
 import React from "react";
+import axios from "axios";
 
 import GoogleButton from "../components/GoogleButton";
 
 import "./Login.css";
 import { KAKAO_AUTH_URL } from "./../services/KakaoLogin";
+// import KakaoLogin from "react-kakao-login";
+
+// const kakaoResponse = async (response) => {
+//   console.log(response.response.access_token);
+//   let res = await axios.get("http://localhost:8000/main/login/kakao", {
+//     params: {
+//       code: response.response.access_token,
+//     },
+//   });
+//   console.log(res);
+// };
 
 const Login = ({ history }) => {
   return (
@@ -15,9 +27,17 @@ const Login = ({ history }) => {
       </div>
 
       <GoogleButton history={history} />
-      <a href={KAKAO_AUTH_URL}>
-        <span>카카오계정 로그인</span>
-      </a>
+      <div className="kakaoButton">
+        <a href={KAKAO_AUTH_URL}>
+          <span>카카오계정 로그인</span>
+        </a>
+      </div>
+      {/* <KakaoLogin
+        token={"7ca497d03fec324f1c9582ef8a37ead6"}
+        onSuccess={console.log}
+        onFail={console.error}
+        onLogout={console.info}
+      /> */}
     </div>
   );
 };
