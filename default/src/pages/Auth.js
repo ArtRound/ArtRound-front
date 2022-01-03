@@ -27,6 +27,12 @@ export default function Auth() {
         payload
       );
 
+      await axios.get("http://localhost:8000/main/login/kakao/finish", {
+        params: {
+          code: res.data.access_token,
+        },
+      });
+
       console.log(res);
 
       // Kakao Javascript SDK 초기화

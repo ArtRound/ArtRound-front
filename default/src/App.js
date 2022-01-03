@@ -57,7 +57,7 @@ const App = () => {
           item.id = i;
           // console.log(item, ' here is item');
           setDatas((datas) => {
-            console.log(datas, " here is datas");
+            // console.log(datas, " here is datas");
             return [...datas, item];
           });
           return item;
