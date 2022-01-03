@@ -26,11 +26,11 @@ export default function Auth() {
         "https://kauth.kakao.com/oauth/token",
         payload
       );
+      console.log(res);
+      console.log(res.data.access_token)
 
-      await axios.get("http://localhost:8000/main/login/kakao/finish", {
-        params: {
-          code: res.data.access_token,
-        },
+      await axios.post("http://localhost:8000/main/login/kakao/finish/", {
+        data: JSON.stringify(res.data.access_token),  
       });
 
       console.log(res);
