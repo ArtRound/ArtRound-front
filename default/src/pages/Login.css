@@ -32,9 +32,6 @@
   text-align: end;
 }
 
-.cover-container > button {
-  width: 320px;
-  height: 55px;
-  margin-top: 8px;
-  border-radius: 10px;
+.kakao-login-button {
+  margin-top: 16px;
 }

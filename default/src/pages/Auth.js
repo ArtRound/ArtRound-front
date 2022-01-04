@@ -27,7 +27,6 @@ export default function Auth() {
       payload
     );
 
-
     fetch("http://localhost:8000/main/login/kakao/finish/", {
       method: "POST",
       headers: {
@@ -42,9 +41,12 @@ export default function Auth() {
       }),
     })
       .then(async (response) => {
-        const result = await response.json()
-        console.log(result);
-        history.push('/mypage');
+        const result = await response.json();
+        console.log(result["existing_user"]);
+
+        result["existing_user"] === false
+          ? history.push("/information")
+          : history.push("/mypage");
       })
       .catch((err) => {
         console.log(err);

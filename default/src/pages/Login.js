@@ -1,9 +1,10 @@
 import React from "react";
 
 import GoogleButton from "../components/GoogleButton";
+import kakaoButton from "../img/kakao_login_medium_narrow.png";
 
 import "./Login.css";
-import { KAKAO_AUTH_URL } from "./../services/KakaoLogin";
+import { KAKAO_AUTH_URL } from "../services/KakaoLogin";
 
 const Login = ({ history }) => {
   return (
@@ -16,9 +17,11 @@ const Login = ({ history }) => {
 
       <GoogleButton history={history} />
 
-      <h1>
-        <a href={KAKAO_AUTH_URL}>Kakao Login</a>
-      </h1>
+      <div className="kakao-login-button">
+        <a href={KAKAO_AUTH_URL}>
+          <img src={kakaoButton} alt="kakao login btn" />
+        </a>
+      </div>
     </div>
   );
 };
