@@ -27,32 +27,8 @@ export default function Auth() {
       payload
     );
 
-    // const data = JSON.stringify(res.data.access_token);
 
-    // await axios
-    //   .post("http://localhost:8000/main/login/kakao/finish/", data, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       //prettier-ignore
-    //       "Accept": "application/json",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log("성공", response);
-
-    //     // // Kakao Javascript SDK 초기화
-    //     // window.Kakao.init(REST_API_KEY);
-    //     // // access token 설정
-    //     // window.Kakao.Auth.setAccessToken(res.data.access_token);
-    //     // history.replace("/profile");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response.data);
-    //     console.log(err.response.status);
-    //     console.log(err.response.headers);
-    //   });
-
-    await fetch("http://localhost:8000/main/login/kakao/finish/", {
+    fetch("http://localhost:8000/main/login/kakao/finish/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -65,21 +41,10 @@ export default function Auth() {
         },
       }),
     })
-      .then((response) => {
-        console.log(response);
-        response.json();
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.result === "true") {
-          console.log("success");
-        }
-        // else{
-        //     history.push({
-        //         pathname: "/signupprofile",
-        //         state: {uid:response.uid,email:response.email}
-        //     })
-        // }
+      .then(async (response) => {
+        const result = await response.json()
+        console.log(result);
+        history.push('/mypage');
       })
       .catch((err) => {
         console.log(err);
