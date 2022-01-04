@@ -3,7 +3,12 @@ import axios from "axios";
 import qs from "qs";
 import { useHistory } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Auth() {
+  const dispatch = useDispatch();
+  const detail_info = useSelector((state) => state.infoReducer.detail_info);
+
   const REST_API_KEY = "4cabd9184b71cb231252329034193534";
   const REDIRECT_URI = "http://localhost:3000/main/login/kakao";
   const CLIENT_SECRET = "9dFVNap0AB2XWwrros7HHpzQ8Hr8Txl7";
@@ -42,9 +47,17 @@ export default function Auth() {
     })
       .then(async (response) => {
         const result = await response.json();
-        console.log(result["existing_user"]);
+        console.log(result);
 
-        result["existing_user"] === false
+        dispatch({
+          type: "login",
+          payload: {
+            isAuthorized: true,
+            access_token: result["jwt_token"],
+          },
+        });
+
+        detail_info === false
           ? history.push("/information")
           : history.push("/mypage");
       })
