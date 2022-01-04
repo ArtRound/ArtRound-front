@@ -108,7 +108,7 @@ const initialInfoState = {
   username: null,
   gender: null,
   age: null,
-  provider: null,
+  detail_info: false,
 };
 
 function infoReducer(state = initialInfoState, action) {
@@ -130,7 +130,7 @@ function infoReducer(state = initialInfoState, action) {
         username: action.payload.username,
         gender: action.payload.gender,
         age: action.payload.age,
-        provider: action.payload.provider,
+        detail_info: false,
       };
 
     case "logout":
@@ -148,21 +148,21 @@ function infoReducer(state = initialInfoState, action) {
   }
 }
 
-// 즐겨찾기, 방문한 페이지 리덕스 JJIN 
+// 즐겨찾기, 방문한 페이지 리덕스 JJIN
 const favorite_exhibition = [
   {
     // img: null,
     name: "피카소 전시회",
     time: "10:00 ~ 18:00",
-    address: "양산시 범어리"
+    address: "양산시 범어리",
   },
   {
     // img: null,
     name: "피카소 전시회",
     time: "10:00 ~ 18:00",
-    address: "양산시 범어리"
-  }
-]
+    address: "양산시 범어리",
+  },
+];
 
 function fav_reducer(state = favorite_exhibition, action) {
   if (action.type === "add") {
@@ -184,12 +184,9 @@ function fav_reducer(state = favorite_exhibition, action) {
   return state;
 }
 
-// JJIN-END 
-
+// JJIN-END
 
 let store = createStore(combineReducers({ reducer, infoReducer, fav_reducer }));
-
-
 
 ReactDOM.render(
   <React.StrictMode>
