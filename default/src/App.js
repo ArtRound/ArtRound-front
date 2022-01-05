@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Route } from "react-router-dom"; //React-Router import
 import axios from "axios";
 
@@ -13,7 +13,6 @@ import Notice from "./pages/Notice";
 import ContactUs from "./pages/ContactUs";
 import Tos from "./pages/ToS";
 import Noticepost from "./pages/noticePost";
-import Map from "./pages/Map";
 import Introduce from "./pages/Introduce";
 import AnswerPost from "./pages/AnswerPost";
 import ReviewList from "./pages/ReviewList";
@@ -21,6 +20,9 @@ import Review from "./pages/Review";
 import Information from "./pages/Information";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import Loader from "./components/Loader";
+
+let Map = lazy(()=>{ return import('./pages/Map')});
 
 export let placeData = React.createContext();
 
@@ -85,10 +87,14 @@ const App = () => {
 
         <placeData.Provider value={datas}>
           <Route path="/detail/:id" component={Detail} />
-          <Route path="/map">
-            {" "}
-            <Map markerState={markerState} />{" "}
-          </Route>
+
+          <Suspense fallback={<Loader/>}>
+            <Route path="/map">
+              {" "}
+              <Map markerState={markerState} />{" "}
+            </Route>
+          </Suspense>
+          
         </placeData.Provider>
 
         <Route path="/favorite" component={UserFavorite} />
