@@ -118,10 +118,6 @@ const Detail = () => {
                 <a href={`{findInfo.homepageUrl}`}>{findInfo.homepageUrl}</a>
               </td>
             </tr>
-            <tr>
-              <th>Artist</th>
-              <td>Yu Jin</td>
-            </tr>
           </table>
 
           <Link to="/review">
