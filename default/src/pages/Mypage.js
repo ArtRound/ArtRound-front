@@ -14,7 +14,7 @@ const MyPage = ({ history }) => {
       },
     });
 
-    history.push("/login");
+    history.push("/");
   };
   return (
     <>

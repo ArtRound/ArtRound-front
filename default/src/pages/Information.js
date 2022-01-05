@@ -21,6 +21,7 @@ const Information = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault();
 
+    // 리덕스에 추가 정보 저장
     const payload = {
       username: data.username,
       gender: data.gender,
@@ -33,6 +34,7 @@ const Information = ({ history }) => {
       payload: payload,
     });
 
+    // 서버에 추가 정보 저장
     const res = await postKakaoUserProfile(access_token, {
       code: access_token,
       name: data.username,
@@ -47,7 +49,6 @@ const Information = ({ history }) => {
     const {
       target: { name, value },
     } = e;
-    console.log(name, value);
     switch (name) {
       case "username":
         setData({
