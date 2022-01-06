@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export async function postKakaoUserProfile(
-  access_token,
-  id,
-  username,
-  age,
-  gender
+  access_token, 
+  id, 
+  username, 
+  gender, 
+  age
 ) {
   console.log(access_token, id, username, age, gender);
   await fetch("http://localhost:8000/main/login/kakao/finish/", {

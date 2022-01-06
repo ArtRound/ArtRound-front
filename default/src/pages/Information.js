@@ -36,13 +36,8 @@ const Information = ({ history }) => {
     });
 
     // 서버에 추가 정보 저장
-    const res = await postKakaoUserProfile(access_token, {
-      code: access_token,
-      id: id,
-      name: data.username,
-      gender: data.gender,
-      age: data.age,
-    });
+    const res = await postKakaoUserProfile(access_token, id, data.username, data.gender, data.age);
+    console.log(res)
 
     res !== null ? history.push("/mypage") : alert("정보 입력 실패");
   }
