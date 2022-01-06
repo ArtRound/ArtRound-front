@@ -2,11 +2,12 @@ import axios from "axios";
 
 export async function postKakaoUserProfile(
   access_token,
+  id,
   username,
   age,
   gender
 ) {
-  console.log(access_token, username, age, gender);
+  console.log(access_token, id, username, age, gender);
   await fetch("http://localhost:8000/main/login/kakao/finish/", {
     method: "POST",
     headers: {
@@ -17,6 +18,7 @@ export async function postKakaoUserProfile(
     body: JSON.stringify({
       params: {
         code: access_token,
+        id: id,
         name: username,
         age: age,
         gender: gender,

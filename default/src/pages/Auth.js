@@ -26,6 +26,7 @@ export default function Auth() {
       code: code,
       client_secret: CLIENT_SECRET,
     });
+
     // access token 가져오기
     const res = await axios.post(
       "https://kauth.kakao.com/oauth/token",
@@ -54,6 +55,7 @@ export default function Auth() {
           payload: {
             isAuthorized: true,
             access_token: result["jwt_token"],
+            id: result.id,
           },
         });
 

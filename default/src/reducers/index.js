@@ -142,6 +142,7 @@ function fav_reducer(state = favorite_exhibition, action) {
 const initialInfoState = {
   isAuthorized: false,
   access_token: null,
+  id: null,
   username: null,
   gender: null,
   age: null,
@@ -153,22 +154,20 @@ function infoReducer(state = initialInfoState, action) {
     case "login":
       return {
         ...state,
-        isAuthorized: true,
+        isAuthorized: action.payload.isAuthorized,
         access_token: action.payload.access_token,
+        id: action.payload.id,
         username: action.payload.username,
         gender: action.payload.gender,
         age: action.payload.age,
-        detail_info: false,
+        detail_info: action.payload.detail_info,
       };
 
     case "logout":
-      window.localStorage.removeItem("userName");
-      window.localStorage.removeItem("isAuthorized");
-      console.log(action);
       return {
         ...state,
-        ...initialInfoState,
-        isAuthorized: false,
+        isAuthorized: action.payload.isAuthorized,
+        detail_info: action.payload.detail_info,
       };
 
     default:
