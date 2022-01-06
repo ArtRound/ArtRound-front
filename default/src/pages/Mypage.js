@@ -1,16 +1,19 @@
 import React from "react";
 import "./Mypage.css";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyPage = ({ history }) => {
   const dispatch = useDispatch();
+
+  const info = useSelector((state) => state.infoReducer);
 
   const logout = () => {
     dispatch({
       type: "logout",
       payload: {
         isAuthorized: false,
+        detail_info: true,
       },
     });
 
@@ -28,7 +31,7 @@ const MyPage = ({ history }) => {
           <div className="photo-circle">
             <p>📷</p>
           </div>
-          <p className="name">반유진</p>
+          <p className="name">{info.username}</p>
           <p className="email">dbwls387@naver.com</p>
         </div>
         <div className="buttons">
