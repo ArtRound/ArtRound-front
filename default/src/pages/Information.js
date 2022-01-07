@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { postKakaoUserProfile } from "../services/AuthService";
 import "./Information.css";
@@ -6,12 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Information = ({ history }) => {
   const dispatch = useDispatch();
-  const access_token = useSelector((state) => state.infoReducer.access_token);
+  // const access_token = useSelector((state) => state.infoReducer.access_token);
   const id = useSelector((state) => state.infoReducer.id);
-
-  useEffect(() => {
-    console.log(access_token);
-  }, [access_token]);
 
   const [data, setData] = useState({
     username: "",
@@ -36,8 +32,12 @@ const Information = ({ history }) => {
     });
 
     // 서버에 추가 정보 저장
-    const res = await postKakaoUserProfile(id, data.username, data.gender, data.age);
-    console.log(res)
+    const res = await postKakaoUserProfile(
+      id,
+      data.username,
+      data.gender,
+      data.age
+    );
 
     res !== null ? history.push("/mypage") : alert("정보 입력 실패");
   }

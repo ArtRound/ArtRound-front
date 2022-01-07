@@ -1,17 +1,10 @@
-import axios from "axios";
-
-export async function postKakaoUserProfile(
-  id,
-  username,
-  gender,
-  age
-) {
+export async function postKakaoUserProfile(id, username, gender, age) {
   console.log(id, username, age, gender);
   await fetch("http://localhost:8000/main/add_info/", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     credentials: "include",
     body: JSON.stringify({

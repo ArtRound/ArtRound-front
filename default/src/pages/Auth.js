@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import qs from "qs";
 import { useHistory } from "react-router-dom";
@@ -17,7 +17,6 @@ export default function Auth() {
 
   const getToken = async () => {
     const code = new URL(window.location.href).searchParams.get("code");
-    console.log(code);
 
     const payload = qs.stringify({
       grant_type: "authorization_code",
