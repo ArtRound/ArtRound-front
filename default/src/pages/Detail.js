@@ -3,6 +3,7 @@ import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
 import { Link, useParams } from "react-router-dom";
 import { placeData } from "../App";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Detail = () => {
   //공공 api 데이터
@@ -10,17 +11,43 @@ const Detail = () => {
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
   let { id } = useParams();
+  let dispatch = useDispatch();
+  let fav_state = useSelector((fav_state) => fav_state.fav_reducer);
+  console.log(fav_state);
 
   function wishList() {
-    if (wish === true) {
+    if (wish === false) {
       // 즐겨찾기 목록에 넣기
-    } else {
+      setWish(!wish);
+      dispatch({
+        type: "add",
+        payload: {
+          name: findInfo.fcltyNm,
+          time: "월-금: " + findInfo.weekdayOperOpenHhmm + " ~ "
+            + findInfo.weekdayOperColseHhmm + " " +
+            "/ 공휴일: " + findInfo.holidayOperOpenHhmm + " ~ "
+            + findInfo.holidayCloseOpenHhmm,
+          address: findInfo.rdnmadr
+        },
+      });
+    }
+    else {
+      //즐겨찾기 목록에서 삭제 
+      setWish(!wish)
+      dispatch({
+        type: "del"
+      })
     }
   }
   function visitedList() {
-    if (visited === true) {
+    if (visited === false) {
       // 방문 목록에 넣기
+      setVisited(!visited);
+
     } else {
+      // 방문 목록에서 삭제 
+      setVisited(!visited)
+
     }
   }
 
@@ -33,6 +60,7 @@ const Detail = () => {
     return v.id == id;
   });
 
+
   return (
     <div className="exhibition">
       <div className="top-bar">
@@ -44,12 +72,13 @@ const Detail = () => {
         <div className="div-btn">
           {/* 즐겨찾기 버튼 누르기 전과 후 */}
           {!wish && (
-            <button className="btn-wish" onClick={() => setWish(!wish)}>
+            <button className="btn-wish" onClick={() => wishList()}>
               <i class="far fa-heart fa-2x"></i>즐겨찾기
             </button>
           )}
+
           {wish && (
-            <button className="btn-wish" onClick={() => setWish(!wish)}>
+            <button className="btn-wish" onClick={() => wishList()}>
               <i class="fas fa-heart fa-2x"></i>즐겨찾기
             </button>
           )}
@@ -58,14 +87,21 @@ const Detail = () => {
             <i class="fas fa-share-square fa-2x"></i>공유하기
           </button>
 
+          <Link to="/favorite">
+            {" "}
+            <button type="button">
+              즐겨찾기 즐겨찾기
+            </button>{" "}
+          </Link>
+
           {/* 방문 버튼 누르기 전과 후 */}
           {!visited && (
-            <button className="btn-wish" onClick={() => setVisited(!visited)}>
+            <button className="btn-wish" onClick={() => visitedList()}>
               <i class="far fa-flag fa-2x"></i>방문
             </button>
           )}
           {visited && (
-            <button className="btn-wish" onClick={() => setVisited(!visited)}>
+            <button className="btn-wish" onClick={() => visitedList()}>
               <i class="fas fa-flag fa-2x"></i>방문
             </button>
           )}
@@ -122,7 +158,7 @@ const Detail = () => {
 
           <Link to="/review">
             {" "}
-            <button type="button" className="review-btn">
+            <button type="button" className="review-post-btn">
               후기 보기
             </button>{" "}
           </Link>
@@ -130,7 +166,7 @@ const Detail = () => {
         {/* detail-container */}
       </div>{" "}
       {/* ex-container */}
-    </div>
+    </div >
   );
 };
 

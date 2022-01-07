@@ -9,8 +9,6 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./reducers/index";
 
-// JJIN-END
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
