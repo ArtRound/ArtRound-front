@@ -32,7 +32,12 @@ const MyPage = ({ history }) => {
             <p>📷</p>
           </div>
           <p className="name">{info.username}</p>
-          <p className="email">dbwls387@naver.com</p>
+          <p className="age">{info.age}세</p>
+          {info.gender === "female" ? (
+            <p className="gender_print">여자</p>
+          ) : (
+            <p className="gender_print">남자</p>
+          )}
         </div>
         <div className="buttons">
           <button
