@@ -22,7 +22,12 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Loader from "./components/Loader";
 
-let Map = lazy(()=>{ return import('./pages/Map')});
+import PublicRoute from "./services/PublicRoute";
+import PrivateRoute from "./services/PrivateRoute";
+
+let Map = lazy(() => {
+  return import("./pages/Map");
+});
 
 export let placeData = React.createContext();
 
@@ -76,7 +81,9 @@ const App = () => {
       <BrowserRouter>
         {/* {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />} */}
 
-        <Route exact path="/" component={Login} />
+        <PublicRoute restricted exact path="/" component={Login} />
+        <PublicRoute path="/information" component={Information} />
+
         <Route path="/main/login/kakao">
           <Auth />
         </Route>
@@ -86,30 +93,27 @@ const App = () => {
         <Route path="/mypage" component={MyPage} />
 
         <placeData.Provider value={datas}>
-          <Route path="/detail/:id" component={Detail} />
+          <PrivateRoute path="/detail/:id" component={Detail} />
 
-          <Suspense fallback={<Loader/>}>
-            <Route path="/map">
+          <Suspense fallback={<Loader />}>
+            <PrivateRoute path="/map">
               {" "}
               <Map markerState={markerState} />{" "}
-            </Route>
+            </PrivateRoute>
           </Suspense>
-          
         </placeData.Provider>
 
-        <Route path="/favorite" component={UserFavorite} />
-        <Route path="/visited" component={UserVisited} />
-        <Route path="/service" component={ServiceCenter} />
-        <Route path="/notice" component={Notice} />
-        <Route path="/contactus" component={ContactUs} />
-        <Route path="/tos" component={Tos} />
-        <Route path="/noticepost" component={Noticepost} />
-        <Route path="/introduce" component={Introduce} />
-        <Route path="/answerpost" component={AnswerPost} />
-        <Route path="/review" component={ReviewList} />
-        <Route path="/submit" component={Review} />
-
-        <Route path="/information" component={Information} />
+        <PrivateRoute path="/favorite" component={UserFavorite} />
+        <PrivateRoute path="/visited" component={UserVisited} />
+        <PrivateRoute path="/service" component={ServiceCenter} />
+        <PrivateRoute path="/notice" component={Notice} />
+        <PrivateRoute path="/contactus" component={ContactUs} />
+        <PrivateRoute path="/tos" component={Tos} />
+        <PrivateRoute path="/noticepost" component={Noticepost} />
+        <PrivateRoute path="/introduce" component={Introduce} />
+        <PrivateRoute path="/answerpost" component={AnswerPost} />
+        <PrivateRoute path="/review" component={ReviewList} />
+        <PrivateRoute path="/submit" component={Review} />
       </BrowserRouter>
     </div>
   );

@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Information = ({ history }) => {
   const dispatch = useDispatch();
-  // const access_token = useSelector((state) => state.infoReducer.access_token);
+  const access_token = useSelector((state) => state.infoReducer.access_token);
+  console.log(access_token);
   const id = useSelector((state) => state.infoReducer.id);
 
   const [data, setData] = useState({
