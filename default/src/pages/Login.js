@@ -1,6 +1,6 @@
 import React from "react";
 
-import GoogleButton from "../components/GoogleButton";
+// import GoogleButton from "../components/GoogleButton";
 import kakaoButton from "../img/kakao_login_medium_narrow.png";
 
 import "./Login.css";
@@ -15,7 +15,7 @@ const Login = ({ history }) => {
         <p>-파블로 피카소-</p>
       </div>
 
-      <GoogleButton history={history} />
+      {/* <GoogleButton history={history} /> */}
 
       <div className="kakao-login-button">
         <a href={KAKAO_AUTH_URL}>
