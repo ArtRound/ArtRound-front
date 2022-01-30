@@ -58,9 +58,10 @@ export default function Auth() {
           },
         });
 
-        detail_info === false
-          ? history.push("/information")
-          : history.push("/mypage");
+        history.push("/mypage");
+        // detail_info === false
+        //   ? history.push("/information")
+        //   : history.push("/mypage");
       })
       .catch((err) => {
         console.log(err);
