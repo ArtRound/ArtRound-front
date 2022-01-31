@@ -103,12 +103,8 @@ function reducer(state = 기본stete, action) {
 }
 
 // 즐겨찾기, 방문한 페이지 리덕스 JJIN
-const favorite_exhibition = [
-
-];
-const visited_exhibition = {
-
-};
+const favorite_exhibition = [];
+const visited_exhibition = {};
 
 function fav_reducer(state = favorite_exhibition, action) {
   if (action.type === "add") {
@@ -116,7 +112,7 @@ function fav_reducer(state = favorite_exhibition, action) {
     copy.push(action.payload);
     return copy;
   } else if (action.type === "del") {
-    return state.filter(post => post.id !== action.id)
+    return state.filter((post) => post.id !== action.id);
   }
   return state;
 }
@@ -131,9 +127,9 @@ function fav_reducer(state = favorite_exhibition, action) {
 //   return state;
 // }
 
-// const info = [{ id: 0, username: "hjs", gender: "여자", age: 21, isAuthorized:false }];
+// const info = [{ id: 0, username: "hjs", gender: "여자", age: 21, existing_user:false }];
 const initialInfoState = {
-  isAuthorized: false,
+  existing_user: false,
   access_token: null,
   id: null,
   username: null,
@@ -147,7 +143,7 @@ function infoReducer(state = initialInfoState, action) {
     case "login":
       return {
         ...state,
-        isAuthorized: action.payload.isAuthorized,
+        existing_user: action.payload.existing_user,
         access_token: action.payload.access_token,
         id: action.payload.id,
         username: action.payload.username,
@@ -159,7 +155,7 @@ function infoReducer(state = initialInfoState, action) {
     case "logout":
       return {
         ...state,
-        isAuthorized: action.payload.isAuthorized,
+        existing_user: action.payload.existing_user,
         detail_info: action.payload.detail_info,
       };
 
