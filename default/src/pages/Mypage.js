@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Mypage.css";
+import axios from "axios";
 
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 const MyPage = ({ history }) => {
   const dispatch = useDispatch();
 
-  const info = useSelector((state) => state.infoReducer);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    age: 0,
+    gender: "",
+    profile_image: "",
+  });
+
+  const userInfoHandler = (response) => {
+    const data = response.data;
+    setUserInfo((prevState) => {
+      return {
+        ...prevState,
+        name: data["name"],
+        age: data["age"],
+        gender: data["gender"],
+        profile_image: data["profile_image"],
+      };
+    });
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/main/get_info/")
+      .then((response) => {
+        userInfoHandler(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   const logout = () => {
     dispatch({
@@ -28,12 +57,18 @@ const MyPage = ({ history }) => {
 
       <div className="container">
         <div className="profile-box">
-          <div className="photo-circle">
-            <p>📷</p>
-          </div>
-          <p className="name">{info.username}</p>
-          <p className="age">{info.age}세</p>
-          {info.gender === "female" ? (
+          {userInfo.profile_image === "" ? (
+            <p className="photo-circle">📷</p>
+          ) : (
+            <img
+              src={userInfo.profile_image}
+              alt="profile_image"
+              className="photo-circle"
+            />
+          )}
+          <p className="name">{userInfo.name}</p>
+          <p className="age">{userInfo.age}세</p>
+          {userInfo.gender === "female" ? (
             <p className="gender_print">여자</p>
           ) : (
             <p className="gender_print">남자</p>

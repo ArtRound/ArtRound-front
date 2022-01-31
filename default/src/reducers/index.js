@@ -129,13 +129,11 @@ function fav_reducer(state = favorite_exhibition, action) {
 
 // const info = [{ id: 0, username: "hjs", gender: "여자", age: 21, existing_user:false }];
 const initialInfoState = {
-  existing_user: false,
   access_token: null,
-  id: null,
   username: null,
   gender: null,
   age: null,
-  detail_info: false,
+  profile_image: null,
 };
 
 function infoReducer(state = initialInfoState, action) {
@@ -143,13 +141,11 @@ function infoReducer(state = initialInfoState, action) {
     case "login":
       return {
         ...state,
-        existing_user: action.payload.existing_user,
         access_token: action.payload.access_token,
-        id: action.payload.id,
         username: action.payload.username,
         gender: action.payload.gender,
         age: action.payload.age,
-        detail_info: action.payload.detail_info,
+        profile_image: action.payload.profile_image,
       };
 
     case "logout":

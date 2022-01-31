@@ -2,18 +2,14 @@ import { useEffect } from "react";
 import axios from "axios";
 import qs from "qs";
 import { useHistory } from "react-router-dom";
-
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function Auth() {
+  let history = useHistory();
   const dispatch = useDispatch();
-  const detail_info = useSelector((state) => state.infoReducer.detail_info);
-
   const REST_API_KEY = "4cabd9184b71cb231252329034193534";
   const REDIRECT_URI = "http://localhost:3000/main/login/kakao";
   const CLIENT_SECRET = "9dFVNap0AB2XWwrros7HHpzQ8Hr8Txl7";
-
-  const history = useHistory();
 
   const getToken = async () => {
     const code = new URL(window.location.href).searchParams.get("code");
@@ -52,16 +48,13 @@ export default function Auth() {
         dispatch({
           type: "login",
           payload: {
-            isAuthorized: true,
             access_token: result["jwt_token"],
-            id: result.id,
+            profile_image: result.profile_image,
           },
         });
-
-        history.push("/mypage");
-        // detail_info === false
-        //   ? history.push("/information")
-        //   : history.push("/mypage");
+        result.existing_user === "true"
+          ? history.push("/mypage")
+          : history.push("/information");
       })
       .catch((err) => {
         console.log(err);

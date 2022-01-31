@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Information = ({ history }) => {
   const dispatch = useDispatch();
+
   const access_token = useSelector((state) => state.infoReducer.access_token);
-  console.log(access_token);
-  const id = useSelector((state) => state.infoReducer.id);
+  const profile_image = useSelector((state) => state.infoReducer.profile_image);
+
+  console.log(access_token, profile_image);
 
   const [data, setData] = useState({
-    username: "",
+    name: "",
     gender: "남자",
     age: 1,
   });
@@ -19,25 +21,28 @@ const Information = ({ history }) => {
   async function onSubmit(e) {
     e.preventDefault();
 
-    // 리덕스에 추가 정보 저장
-    const payload = {
-      username: data.username,
-      gender: data.gender,
-      age: data.age,
-      detail_info: true,
-    };
+    setData({ ...data, detail_info: true });
 
-    dispatch({
-      type: "login",
-      payload: payload,
-    });
+    // 리덕스에 추가 정보 저장
+    // const payload = {
+    //   name: data.name,
+    //   gender: data.gender,
+    //   age: data.age,
+    //   detail_info: data.detail_info,
+    // };
+
+    // dispatch({
+    //   type: "login",
+    //   payload: payload,
+    // });
 
     // 서버에 추가 정보 저장
     const res = await postKakaoUserProfile(
-      id,
-      data.username,
+      access_token,
+      data.name,
       data.gender,
-      data.age
+      data.age,
+      profile_image
     );
 
     res !== null ? history.push("/mypage") : alert("정보 입력 실패");
@@ -48,10 +53,10 @@ const Information = ({ history }) => {
       target: { name, value },
     } = e;
     switch (name) {
-      case "username":
+      case "name":
         setData({
           ...data,
-          username: value,
+          name: value,
         });
         break;
       case "gender":
@@ -80,10 +85,10 @@ const Information = ({ history }) => {
         <input
           type="text"
           className="inputname"
-          name="username"
-          id="username"
+          name="name"
+          id="name"
           placeholder="이름을 입력해주세요."
-          value={data.username}
+          value={data.name}
           onChange={changeInput}
         />
         <select

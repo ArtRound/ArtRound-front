@@ -1,5 +1,11 @@
-export async function postKakaoUserProfile(id, username, gender, age) {
-  console.log(id, username, age, gender);
+export async function postKakaoUserProfile(
+  access_token,
+  username,
+  gender,
+  age,
+  profile_image
+) {
+  console.log(access_token, username, age, gender, profile_image);
   await fetch("http://localhost:8000/main/add_info/", {
     method: "POST",
     headers: {
@@ -10,9 +16,10 @@ export async function postKakaoUserProfile(id, username, gender, age) {
     body: JSON.stringify({
       params: {
         name: username,
-        id: id,
+        access_token: access_token,
         gender: gender,
         age: age,
+        profile_image: profile_image,
       },
     }),
   })
