@@ -24,6 +24,7 @@ import Loader from "./components/Loader";
 
 import PublicRoute from "./services/PublicRoute";
 import PrivateRoute from "./services/PrivateRoute";
+import { useSelector } from "react-redux";
 
 let Map = lazy(() => {
   return import("./pages/Map");
@@ -32,65 +33,78 @@ let Map = lazy(() => {
 export let placeData = React.createContext();
 
 const App = () => {
-  const isAuthorized = localStorage.getItem("isAuthorized");
-
   const [markerState, setMarkerState] = useState(false);
   const [datas, setDatas] = useState([]);
 
-  useEffect(() => {
-    const URL = [];
-    const getURL = [];
+  // useEffect(() => {
+  //   const URL = [];
+  //   const getURL = [];
 
-    for (let i = 0; i < 15; i++) {
-      URL[
-        i
-      ] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D&pageNo=${
-        i + 1
-      }&numOfRows=100&type=json`;
-      getURL[i] = axios.get(URL[i]);
-    }
+  //   for (let i = 0; i < 15; i++) {
+  //     URL[
+  //       i
+  //     ] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D&pageNo=${
+  //       i + 1
+  //     }&numOfRows=100&type=json`;
+  //     getURL[i] = axios.get(URL[i]);
+  //   }
 
-    let copy = [];
+  //   let copy = [];
 
-    axios
-      .all([...getURL])
-      .then((res) => {
-        res.map((v, i) => {
-          copy.push(...v.data.response.body.items);
-        });
-      })
-      .then(() => {
-        copy.map((item, i) => {
-          item.id = i;
-          // console.log(item, ' here is item');
-          setDatas((datas) => {
-            // console.log(datas, " here is datas");
-            return [...datas, item];
-          });
-          return item;
-        });
-        setMarkerState(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //   axios
+  //     .all([...getURL])
+  //     .then((res) => {
+  //       res.map((v, i) => {
+  //         copy.push(...v.data.response.body.items);
+  //       });
+  //     })
+  //     .then(() => {
+  //       copy.map((item, i) => {
+  //         item.id = i;
+  //         // console.log(item, ' here is item');
+  //         setDatas((datas) => {
+  //           // console.log(datas, " here is datas");
+  //           return [...datas, item];
+  //         });
+  //         return item;
+  //       });
+  //       setMarkerState(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  const isAuthenticated = useSelector((state) => state.infoReducer);
+  console.log(isAuthenticated);
 
   return (
     <div className="container">
       <BrowserRouter>
-        {/* {!isAuthorized ? <Redirect to="/login" /> : <Redirect to="/mypage" />} */}
+        <PublicRoute
+          exact
+          path="/"
+          component={Login}
+          isAuthenticated={isAuthenticated}
+        />
 
-        <PublicRoute restricted exact path="/" component={Login} />
-        <PublicRoute path="/information" component={Information} />
-
-        <Route path="/main/login/kakao">
+        <PublicRoute path="/main/login/kakao">
           <Auth />
-        </Route>
-        <Route path="/profile">
+        </PublicRoute>
+
+        <PrivateRoute path="/profile">
           <Profile />
-        </Route>
-        <Route path="/mypage" component={MyPage} />
+        </PrivateRoute>
+        <PrivateRoute
+          path="/mypage"
+          component={MyPage}
+          isAuthenticated={isAuthenticated}
+        />
+        <PrivateRoute
+          path="/information"
+          component={Information}
+          isAuthenticated={isAuthenticated}
+        />
 
         <placeData.Provider value={datas}>
           <PrivateRoute path="/detail/:id" component={Detail} />
