@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 const Information = ({ history }) => {
   const dispatch = useDispatch();
 
-  const access_token = useSelector((state) => state.infoReducer.access_token);
+  const id = useSelector((state) => state.infoReducer.id);
   const profile_image = useSelector((state) => state.infoReducer.profile_image);
 
-  console.log(access_token, profile_image);
+  console.log(id, profile_image);
 
   const [data, setData] = useState({
     name: "",
@@ -38,7 +38,7 @@ const Information = ({ history }) => {
 
     // 서버에 추가 정보 저장
     const res = await postKakaoUserProfile(
-      access_token,
+      id,
       data.name,
       data.gender,
       data.age,

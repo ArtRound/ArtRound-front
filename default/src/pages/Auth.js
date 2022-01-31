@@ -48,7 +48,7 @@ export default function Auth() {
         dispatch({
           type: "login",
           payload: {
-            access_token: result["jwt_token"],
+            id: result.id,
             profile_image: result.profile_image,
           },
         });
