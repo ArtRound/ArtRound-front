@@ -75,20 +75,21 @@ const App = () => {
   //     });
   // }, []);
 
-  const isAuthenticated = useSelector((state) => state.infoReducer);
+  const isAuthenticated = useSelector((state) => state.infoReducer.id);
   console.log(isAuthenticated);
 
   return (
     <div className="container">
       <BrowserRouter>
         <PublicRoute
+          restricted={true}
           exact
           path="/"
           component={Login}
           isAuthenticated={isAuthenticated}
         />
 
-        <PublicRoute path="/main/login/kakao">
+        <PublicRoute restricted={true} path="/main/login/kakao">
           <Auth />
         </PublicRoute>
 

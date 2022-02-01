@@ -1,22 +1,15 @@
+import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-function PrivateRoute({ children, isAuthenticated, ...rest }) {
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isLogin = useSelector((state) => state.infoReducer.id);
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        isAuthenticated ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location },
-            }}
-          />
-        )
+      render={(props) =>
+        isLogin ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );
-}
+};
 export default PrivateRoute;

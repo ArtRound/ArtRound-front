@@ -43,8 +43,8 @@ const MyPage = ({ history }) => {
     dispatch({
       type: "logout",
       payload: {
-        id: "",
-        profile_image: "",
+        id: false,
+        profile_image: false,
       },
     });
 
