@@ -75,19 +75,10 @@ const App = () => {
   //     });
   // }, []);
 
-  const isAuthenticated = useSelector((state) => state.infoReducer.id);
-  console.log(isAuthenticated);
-
   return (
     <div className="container">
       <BrowserRouter>
-        <PublicRoute
-          restricted={true}
-          exact
-          path="/"
-          component={Login}
-          isAuthenticated={isAuthenticated}
-        />
+        <PublicRoute restricted={true} exact path="/" component={Login} />
 
         <PublicRoute restricted={true} path="/main/login/kakao">
           <Auth />
@@ -96,16 +87,8 @@ const App = () => {
         <PrivateRoute path="/profile">
           <Profile />
         </PrivateRoute>
-        <PrivateRoute
-          path="/mypage"
-          component={MyPage}
-          isAuthenticated={isAuthenticated}
-        />
-        <PrivateRoute
-          path="/information"
-          component={Information}
-          isAuthenticated={isAuthenticated}
-        />
+        <PrivateRoute path="/mypage" component={MyPage} />
+        <PrivateRoute path="/information" component={Information} />
 
         <placeData.Provider value={datas}>
           <PrivateRoute path="/detail/:id" component={Detail} />
