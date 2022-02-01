@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { postKakaoUserProfile } from "../services/AuthService";
+import { useSelector } from "react-redux";
 import "./Information.css";
-import { useDispatch, useSelector } from "react-redux";
+import PostKakaoUserProfile from "../services/PostKakaoUserProfile";
 
 const Information = ({ history }) => {
-  const dispatch = useDispatch();
-
   const id = useSelector((state) => state.infoReducer.id);
   const profile_image = useSelector((state) => state.infoReducer.profile_image);
-
-  console.log(id, profile_image);
 
   const [data, setData] = useState({
     name: "",
@@ -18,26 +14,11 @@ const Information = ({ history }) => {
     age: 1,
   });
 
-  async function onSubmit(e) {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    setData({ ...data, detail_info: true });
-
-    // 리덕스에 추가 정보 저장
-    // const payload = {
-    //   name: data.name,
-    //   gender: data.gender,
-    //   age: data.age,
-    //   detail_info: data.detail_info,
-    // };
-
-    // dispatch({
-    //   type: "login",
-    //   payload: payload,
-    // });
-
     // 서버에 추가 정보 저장
-    const res = await postKakaoUserProfile(
+    const res = await PostKakaoUserProfile(
       id,
       data.name,
       data.gender,
@@ -46,7 +27,7 @@ const Information = ({ history }) => {
     );
 
     res !== null ? history.push("/mypage") : alert("정보 입력 실패");
-  }
+  };
 
   function changeInput(e) {
     const {

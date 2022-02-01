@@ -1,12 +1,6 @@
-export async function postKakaoUserProfile(
-  id,
-  username,
-  gender,
-  age,
-  profile_image
-) {
-  console.log(id, username, age, gender, profile_image);
-  await fetch("http://localhost:8000/main/add_info/", {
+const PostKakaoUserProfile = (id, name, gender, age, profile_image) => {
+  console.log(id, name, age, gender, profile_image);
+  fetch("http://localhost:8000/main/add_info/", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -15,8 +9,8 @@ export async function postKakaoUserProfile(
     credentials: "include",
     body: JSON.stringify({
       params: {
-        name: username,
         id: id,
+        name: name,
         gender: gender,
         age: age,
         profile_image: profile_image,
@@ -26,11 +20,10 @@ export async function postKakaoUserProfile(
     .then((response) => response.json())
     .then((response) => {
       console.log(response);
-      if (response.data === true) {
-        console.log("true");
-      }
     })
     .catch((err) => {
       console.log(err);
     });
-}
+};
+
+export default PostKakaoUserProfile;

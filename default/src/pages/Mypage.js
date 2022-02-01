@@ -2,40 +2,42 @@ import React, { useEffect, useState } from "react";
 import "./Mypage.css";
 import axios from "axios";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const MyPage = ({ history }) => {
+  let user_id = useSelector((state) => state.infoReducer.id);
+  let profile_image = useSelector((state) => state.infoReducer.profile_image);
+
   const dispatch = useDispatch();
 
   const [userInfo, setUserInfo] = useState({
     name: "",
     age: 0,
     gender: "",
-    profile_image: "",
   });
 
   const userInfoHandler = (response) => {
-    const data = response.data;
+    const data = response.data["0"];
+    console.log(data);
     setUserInfo((prevState) => {
       return {
         ...prevState,
         name: data["name"],
         age: data["age"],
         gender: data["gender"],
-        profile_image: data["profile_image"],
       };
     });
   };
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/main/get_info/")
+      .get(`http://127.0.0.1:8000/main/get_info/${user_id}`)
       .then((response) => {
         userInfoHandler(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [user_id]);
 
   const logout = () => {
     dispatch({
@@ -57,11 +59,11 @@ const MyPage = ({ history }) => {
 
       <div className="container">
         <div className="profile-box">
-          {userInfo.profile_image === "" ? (
+          {profile_image === "" ? (
             <p className="photo-circle">📷</p>
           ) : (
             <img
-              src={userInfo.profile_image}
+              src={profile_image}
               alt="profile_image"
               className="photo-circle"
             />
