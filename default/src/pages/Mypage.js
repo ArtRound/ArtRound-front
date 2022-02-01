@@ -43,8 +43,8 @@ const MyPage = ({ history }) => {
     dispatch({
       type: "logout",
       payload: {
-        isAuthorized: false,
-        detail_info: true,
+        id: "",
+        profile_image: "",
       },
     });
 

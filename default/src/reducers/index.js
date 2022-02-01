@@ -151,8 +151,8 @@ function infoReducer(state = initialInfoState, action) {
     case "logout":
       return {
         ...state,
-        existing_user: action.payload.existing_user,
-        detail_info: action.payload.detail_info,
+        id: action.payload.id,
+        profile_image: action.payload.profile_image,
       };
 
     default:
