@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Map.css";
@@ -7,9 +7,18 @@ import {
   faSearchLocation,
 } from "@fortawesome/free-solid-svg-icons";
 import "../components/GoogleMap.css";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  MarkerClusterer,
+} from "@react-google-maps/api";
 import greenMarker from "../img/marker-image/green_MarkerU.png";
+import pinkMarker from "../img/marker-image/pink_MarkerA.png";
 import Icon from "../components/Icon";
+import axios from "axios";
+import FooterInfo from "./FooterInfo";
+import { nanoid } from "nanoid";
 
 function Map() {
   let history = useHistory();
@@ -63,13 +72,75 @@ function Map() {
     }
   };
 
+  const params = {
+    pageNo: 0,
+    numOfRows: 100,
+    type: "json",
+    key: "BfdusobQEjVcCsm1nVfc3AnA%2BsBih1Corc0TwKt9B%2Ft46CeONaFq%2Bn0%2BxkUnGO9fzeQHPLjXLLCk8aFpYejEbQ%3D%3D",
+  };
+
+  const openUrl = [];
+  const [loading, setLoading] = useState(false);
+  const [footerUi, setFooterUi] = useState(false);
+
+  const openRef = useRef([]);
+  const footerRef = useRef();
+
+  const openDataAxios = () => {
+    for (let i = 1; i <= 16; i++) {
+      openUrl[
+        i
+      ] = `http://api.data.go.kr/openapi/tn_pubr_public_museum_artgr_info_api?serviceKey=${
+        params.key
+      }&pageNo=${params.pageNo + i}&numOfRows=${params.numOfRows}&type=${
+        params.type
+      }`;
+    }
+
+    let count = 0;
+    openUrl.map((url) => {
+      axios
+        .get(url)
+        .then((result) => {
+          openRef.current.push(...result.data.response.body.items);
+        })
+        .then(() => {
+          count++;
+          if (count === 16) {
+            setLoading(true);
+          }
+        })
+        .catch((e) => {
+          console.log("error", e);
+        });
+    });
+  };
+
+  const clickOpen = (item) => {
+    if (!footerRef.current) {
+      footerRef.current = { ...item };
+    }
+
+    if (footerRef.current.id === item.id) {
+      setFooterUi(!footerUi);
+    } else if (footerRef.current.id !== item.id) {
+      setFooterUi(false);
+      footerRef.current = { ...item };
+      setFooterUi(true);
+    }
+  };
+
   useEffect(() => {
     getCurrentLocation();
+    openDataAxios();
   }, []);
+
+  console.log("locationState.isLoading ", locationState.isLoading);
+  console.log("loading ", loading);
 
   return (
     <div>
-      {locationState.isLoading === false ? (
+      {locationState.isLoading.isLoading === false && loading === true ? (
         <>
           <div className="nav">
             <FontAwesomeIcon
@@ -89,6 +160,23 @@ function Map() {
               zoom={15}
             >
               <Marker position={locationState.center} icon={greenMarker} />
+              {openRef.current.map((item, i) => {
+                item.id = item.fcltyNm;
+                console.log("www");
+                return (
+                  <Marker
+                    key={nanoid()}
+                    position={{
+                      lat: parseFloat(item.latitude),
+                      lng: parseFloat(item.longitude),
+                    }}
+                    icon={pinkMarker}
+                    onClick={() => {
+                      clickOpen(item);
+                    }}
+                  />
+                );
+              })}
             </GoogleMap>
           </LoadScript>
 
@@ -102,6 +190,10 @@ function Map() {
             <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
           </button>
           <Icon />
+
+          {footerUi && (
+            <FooterInfo data={footerRef.current} footerUi={footerUi} />
+          )}
         </>
       ) : (
         <div>loding wait</div>
