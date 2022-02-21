@@ -5,19 +5,34 @@
   bottom: 0;
   z-index: 4;
   background: white;
-  padding-left: 15px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .price {
   font-size: 15px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-bottom: 20px;
 }
 .footer-review {
   margin-top: 7px;
   margin-bottom: 10px;
 }
+.footer-review-number {
+  font-size: 13px;
+  margin-right: 10px;
+}
+.art-img {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .art-img img {
-  width: 17rem;
+  width: 100%;
   height: 11rem;
+  cursor: pointer;
+  padding-right: 30px;
 }
 .close-icon {
   position: absolute;
@@ -32,11 +47,15 @@
 
 .footer-transition-enter {
   opacity: 0;
+  transform: translateY(1000px);
 }
 .footer-transition-enter-active {
+  transition: all 1s;
   opacity: 1;
-  transition: all 1000ms;
+  transform: translateY(0px);
 }
+
+
 
 @media screen and (max-width: 767px) {
   .close-icon {

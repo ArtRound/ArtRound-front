@@ -119,14 +119,15 @@ function Map() {
   const clickOpen = (item) => {
     if (!footerRef.current) {
       footerRef.current = { ...item };
-    }
-
-    if (footerRef.current.id === item.id) {
-      setFooterUi(!footerUi);
-    } else if (footerRef.current.id !== item.id) {
-      setFooterUi(false);
-      footerRef.current = { ...item };
       setFooterUi(true);
+    } else {
+      if (footerRef.current.id === item.id) {
+        setFooterUi(!footerUi);
+      } else if (footerRef.current.id !== item.id) {
+        setFooterUi(false);
+        footerRef.current = { ...item };
+        setFooterUi(true);
+      }
     }
   };
 
@@ -135,12 +136,9 @@ function Map() {
     openDataAxios();
   }, []);
 
-  console.log("locationState.isLoading ", locationState.isLoading);
-  console.log("loading ", loading);
-
   return (
     <div>
-      {locationState.isLoading.isLoading === false && loading === true ? (
+      {locationState.isLoading === false && loading === true ? (
         <>
           <div className="nav">
             <FontAwesomeIcon
@@ -162,7 +160,6 @@ function Map() {
               <Marker position={locationState.center} icon={greenMarker} />
               {openRef.current.map((item, i) => {
                 item.id = item.fcltyNm;
-                console.log("www");
                 return (
                   <Marker
                     key={nanoid()}
@@ -190,10 +187,7 @@ function Map() {
             <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
           </button>
           <Icon />
-
-          {footerUi && (
-            <FooterInfo data={footerRef.current} footerUi={footerUi} />
-          )}
+          {footerUi && <FooterInfo data={footerRef.current} />}
         </>
       ) : (
         <div>loding wait</div>
