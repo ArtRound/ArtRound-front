@@ -19,6 +19,7 @@ import Icon from "../components/Icon";
 import axios from "axios";
 import FooterInfo from "./FooterInfo";
 import { nanoid } from "nanoid";
+import Loader from "../components/Loader";
 
 function Map() {
   let history = useHistory();
@@ -210,7 +211,7 @@ function Map() {
           {footerUi && <FooterInfo data={footerRef.current} />}
         </>
       ) : (
-        <div>loding wait</div>
+        <Loader/>
       )}
     </div>
   );
