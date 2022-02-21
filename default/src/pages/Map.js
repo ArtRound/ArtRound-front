@@ -131,6 +131,12 @@ function Map() {
     }
   };
 
+  const mapRef = useRef(null);
+
+  const handleLoad = (map) => {
+    mapRef.current = map;
+  };
+
   useEffect(() => {
     getCurrentLocation();
     openDataAxios();
@@ -153,8 +159,9 @@ function Map() {
 
           <LoadScript googleMapsApiKey="AIzaSyBIjC2af8iZNL8mGIGln8O0u4COojSdYbw">
             <GoogleMap
+              onLoad={handleLoad}
               mapContainerStyle={containerStyle}
-              center={center}
+              center={locationState.center}
               zoom={15}
             >
               <Marker position={locationState.center} icon={greenMarker} />
@@ -179,7 +186,14 @@ function Map() {
 
           <button
             onClick={() => {
-              getCurrentLocation();
+              setLocationState((prev) => ({
+                ...prev,
+                center: {
+                  lat: center.lat,
+                  lng: center.lng,
+                },
+                isLoading: false,
+              }));
             }}
             className="current-position-btn"
             style={{ cursor: "pointer" }}
