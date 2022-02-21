@@ -165,22 +165,28 @@ function Map() {
               zoom={15}
             >
               <Marker position={locationState.center} icon={greenMarker} />
-              {openRef.current.map((item, i) => {
-                item.id = item.fcltyNm;
-                return (
-                  <Marker
-                    key={nanoid()}
-                    position={{
-                      lat: parseFloat(item.latitude),
-                      lng: parseFloat(item.longitude),
-                    }}
-                    icon={pinkMarker}
-                    onClick={() => {
-                      clickOpen(item);
-                    }}
-                  />
-                );
-              })}
+
+              <MarkerClusterer>
+                {(clusterer) =>
+                  openRef.current.map((item) => {
+                    item.id = item.fcltyNm;
+                    return (
+                      <Marker
+                        key={nanoid()}
+                        position={{
+                          lat: parseFloat(item.latitude),
+                          lng: parseFloat(item.longitude),
+                        }}
+                        icon={pinkMarker}
+                        onClick={() => {
+                          clickOpen(item);
+                        }}
+                        clusterer={clusterer}
+                      />
+                    );
+                  })
+                }
+              </MarkerClusterer>
             </GoogleMap>
           </LoadScript>
 
