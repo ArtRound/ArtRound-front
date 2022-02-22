@@ -41,10 +41,11 @@ const MyPage = ({ history }) => {
 
   const logout = () => {
     dispatch({
-      type: "logout",
+      type: "LOGOUT_USER",
       payload: {
-        id: false,
-        profile_image: false,
+        id: "",
+        profile_image: "",
+        isLoggedIn: false,
       },
     });
 
