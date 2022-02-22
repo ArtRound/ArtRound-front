@@ -46,7 +46,12 @@ function FooterInfo(props) {
     >
       <div className="footer-info">
         <Link
-          to={{ pathname: `/detail/${props.data.id}` }}
+          to={{
+            pathname: `/detail/${props.data.id}`,
+            state: {
+              detailData: props.data,
+            },
+          }}
           style={{ textDecoration: "none", color: "black" }}
         >
           <span className="footer-title">{props.data.fcltyNm}</span>

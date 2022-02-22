@@ -1,16 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
-import { Link, useParams } from "react-router-dom";
-import { placeData } from "../App";
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const Detail = () => {
+const Detail = (props) => {
   //공공 api 데이터
-  const detailData = useContext(placeData);
+  const [detailData, setDetailData] = useState(props.location.state.detailData);
+
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
-  let { id } = useParams();
   let dispatch = useDispatch();
   let fav_state = useSelector((fav_state) => fav_state.fav_reducer);
   console.log(fav_state);
@@ -22,32 +21,35 @@ const Detail = () => {
       dispatch({
         type: "add",
         payload: {
-          name: findInfo.fcltyNm,
-          time: "월-금: " + findInfo.weekdayOperOpenHhmm + " ~ "
-            + findInfo.weekdayOperColseHhmm + " " +
-            "/ 공휴일: " + findInfo.holidayOperOpenHhmm + " ~ "
-            + findInfo.holidayCloseOpenHhmm,
-          address: findInfo.rdnmadr
+          name: detailData.fcltyNm,
+          time:
+            "월-금: " +
+            detailData.weekdayOperOpenHhmm +
+            " ~ " +
+            detailData.weekdayOperColseHhmm +
+            " " +
+            "/ 공휴일: " +
+            detailData.holidayOperOpenHhmm +
+            " ~ " +
+            detailData.holidayCloseOpenHhmm,
+          address: detailData.rdnmadr,
         },
       });
-    }
-    else {
-      //즐겨찾기 목록에서 삭제 
-      setWish(!wish)
+    } else {
+      //즐겨찾기 목록에서 삭제
+      setWish(!wish);
       dispatch({
-        type: "del"
-      })
+        type: "del",
+      });
     }
   }
   function visitedList() {
     if (visited === false) {
       // 방문 목록에 넣기
       setVisited(!visited);
-
     } else {
-      // 방문 목록에서 삭제 
-      setVisited(!visited)
-
+      // 방문 목록에서 삭제
+      setVisited(!visited);
     }
   }
 
@@ -56,16 +58,11 @@ const Detail = () => {
     else return " " + money + "원";
   }
 
-  let findInfo = detailData.find((v) => {
-    return v.id == id;
-  });
-
-
   return (
     <div className="exhibition">
       <div className="top-bar">
         <button className="back-btn">⬅</button>
-        <div className="exhibition-title">{findInfo.fcltyNm}</div>
+        <div className="exhibition-title">{detailData.fcltyNm}</div>
       </div>
       <div className="ex-container">
         <img className="title-img" src={title_img} alt="exhibition" />
@@ -89,9 +86,7 @@ const Detail = () => {
 
           <Link to="/favorite">
             {" "}
-            <button type="button">
-              즐겨찾기 즐겨찾기
-            </button>{" "}
+            <button type="button">즐겨찾기 즐겨찾기</button>{" "}
           </Link>
 
           {/* 방문 버튼 누르기 전과 후 */}
@@ -120,38 +115,40 @@ const Detail = () => {
             <tr>
               <th>관람시간</th>
               <td>
-                월-금: {findInfo.weekdayOperOpenHhmm} ~{" "}
-                {findInfo.weekdayOperColseHhmm} <br />
-                공휴일: {findInfo.holidayOperOpenHhmm} ~{" "}
-                {findInfo.holidayCloseOpenHhmm}
+                월-금: {detailData.weekdayOperOpenHhmm} ~{" "}
+                {detailData.weekdayOperColseHhmm} <br />
+                공휴일: {detailData.holidayOperOpenHhmm} ~{" "}
+                {detailData.holidayCloseOpenHhmm}
               </td>
             </tr>
             <tr>
               <th>휴관일</th>
-              <td>{findInfo.rstdeInfo}</td>
+              <td>{detailData.rstdeInfo}</td>
             </tr>
             <tr>
               <th>입장료</th>
               <td>
-                일반(만 19세-60세):{changePrice(findInfo.adultChrge)}
+                일반(만 19세-60세):{changePrice(detailData.adultChrge)}
                 <br />
-                청소년(만 13세-18세): {changePrice(findInfo.yngbgsChrge)}
+                청소년(만 13세-18세): {changePrice(detailData.yngbgsChrge)}
                 <br />
-                어린이(12세 이하): {changePrice(findInfo.childChrge)}
+                어린이(12세 이하): {changePrice(detailData.childChrge)}
               </td>
             </tr>
             <tr>
               <th>주소</th>
-              <td>{findInfo.rdnmadr}</td>
+              <td>{detailData.rdnmadr}</td>
             </tr>
             <tr>
               <th>전화번호</th>
-              <td>{findInfo.operPhoneNumber}</td>
+              <td>{detailData.operPhoneNumber}</td>
             </tr>
             <tr>
               <th>홈페이지</th>
               <td>
-                <a href={`{findInfo.homepageUrl}`}>{findInfo.homepageUrl}</a>
+                <a href={`{detailData.homepageUrl}`}>
+                  {detailData.homepageUrl}
+                </a>
               </td>
             </tr>
           </table>
@@ -166,7 +163,7 @@ const Detail = () => {
         {/* detail-container */}
       </div>{" "}
       {/* ex-container */}
-    </div >
+    </div>
   );
 };
 
