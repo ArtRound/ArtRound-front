@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isLogin = useSelector((state) => state.infoReducer.id);
+  const isLoggedin = useSelector((state) => state.infoReducer.isLoggedin);
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogin ? <Component {...props} /> : <Redirect to="/" />
+        isLoggedin ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

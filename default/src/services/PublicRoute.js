@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
-  const isLogin = useSelector((state) => state.infoReducer.id);
+  const isLoggedin = useSelector((state) => state.infoReducer.isLoggedin);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogin && restricted ? (
+        isLoggedin && restricted ? (
           <Redirect to="/mypage" />
         ) : (
           <Component {...props} />

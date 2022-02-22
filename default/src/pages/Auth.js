@@ -46,10 +46,11 @@ export default function Auth() {
         console.log(result);
 
         dispatch({
-          type: "login",
+          type: "LOGIN_USER",
           payload: {
             id: result.id,
             profile_image: result.profile_image,
+            isLoggedin: true,
           },
         });
         result.existing_user === "true"
