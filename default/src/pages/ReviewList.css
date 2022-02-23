@@ -1,153 +1,151 @@
-.nav{
-    font-size: 18px;
-    padding: 10px;
-    background-color: white;
+.nav {
+  font-size: 18px;
+  padding: 10px;
+  background-color: white;
 }
-.nav-icon{
-    padding: 0 4px;
-    cursor: pointer;
+.nav-icon {
+  padding: 0 4px;
+  cursor: pointer;
 }
-.review-title{
-    margin-top: 4px;
-    font-size: 28px;
-    font-weight: bold;
+.review-title {
+  margin-top: 4px;
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: bold;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-hr{
-    margin: 25px 17px 19px 17px;
+hr {
+  margin: 25px 17px 19px 17px;
 }
-.list-wrap{
-    margin-left: 32px;
-    margin-right: 42px;
-}
-
-.category{
-    margin-right: 12px;
-    margin-bottom: 35px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.heart{
-    width: 21px;
-    height: 18px;
-    margin-bottom: 10px;
-    color: red;
-}
-.list-title{
-    margin-right: 7px;
-    font-size: 16px;
-}
-.list-date{
-    font-size: 12px;
-}
-.list-content{
-    font-size: 14px;
-    margin-top : 10px;
-    margin-bottom : 10px;
-}
-.category>span{
-    padding-right: 13px;
-    cursor: pointer;
-}
-.list-like>span, .font-like{
-    padding-right: 5px;
-    cursor: pointer;
-}
-.btn-wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.submit-btn{
-    width: 296px;
-    height: 40px;
-    border-radius: 22px;
-    background-color: #7CBAF7;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 77px;
-    margin-bottom: 30px;
-    cursor: pointer;
+.list-wrap {
+  margin-left: 32px;
+  margin-right: 42px;
 }
 
-
-
-
-
-.review{
-    text-align: center;
-    font-size: 18px;
-    margin-top: 21;
-
-}
-.review-form{
-    margin-top: 35px;
-    /* background-color: yellow; */
-}
-.review-heart{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.unclick-heart{
-    color: rgb(78, 75, 75);
-    padding-right: 10px;
-}
-.click-heart{
-    color: red;
-    padding-right: 10px;
-
+.category {
+  margin-right: 12px;
+  margin-bottom: 35px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-
-.review-textfield{
-    width: 324px;
-    height: 235px;
-    display: block;
-    margin-top: 33px;
-
+.color-heart,
+.uncolor-heart {
+  font-size: 20px;
+  margin-bottom: 17px;
+  margin-right: 4px;
+}
+.color-heart {
+  color: red;
+}
+.uncolor-heart {
+  color: #333;
+}
+.list-title {
+  margin-right: 7px;
+  font-size: 20px;
+}
+.list-date {
+  font-size: 12px;
+}
+.list-content {
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.category > span {
+  padding-right: 13px;
+  cursor: pointer;
+}
+.list-like > span,
+.font-like {
+  padding-right: 5px;
+  cursor: pointer;
+}
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submit-btn {
+  width: 296px;
+  height: 40px;
+  border-radius: 22px;
+  background-color: #7cbaf7;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 77px;
+  margin-bottom: 30px;
+  cursor: pointer;
 }
 
+.review {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+.review-form {
+  margin-top: 35px;
+}
+.review-heart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.unclick-heart {
+  color: rgb(78, 75, 75);
+  padding-right: 10px;
+}
+.click-heart {
+  color: red;
+  padding-right: 10px;
+}
+
+.review-textfield {
+  width: 324px;
+  height: 235px;
+  display: block;
+  margin-top: 33px;
+}
 
 /* 사진 추가하기 */
-.review-file-wrap{
-    width: 324px;
-    height: 137px;
-    background: rgba(233, 233, 233, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 42px;
+.review-file-wrap {
+  width: 324px;
+  height: 137px;
+  background: rgba(233, 233, 233, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
 }
 
-#review-file{
-    display: none;
+#review-file {
+  display: none;
 }
 
-.review-file-label{
-    font-size: 12px;
-    background-color: #DEDEDE;
-    width: 115px;
-    height: 28px;
-    padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 15px;
-    padding-bottom: 3px;
+.review-file-label {
+  font-size: 12px;
+  background-color: #dedede;
+  width: 115px;
+  height: 28px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 15px;
+  padding-bottom: 3px;
 }
 
-.review-btn{
-    margin-top: 44px;
+.review-btn {
+  margin-top: 44px;
 }
-.review-wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
+.review-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-
