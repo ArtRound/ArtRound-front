@@ -57,7 +57,6 @@ const Detail = (props) => {
     if (money === "0") return " 무료";
     else return " " + money + "원";
   }
-
   return (
     <div className="exhibition">
       <div className="top-bar">
@@ -153,7 +152,14 @@ const Detail = (props) => {
             </tr>
           </table>
 
-          <Link to="/review">
+          <Link
+            to={{
+              pathname: "/review",
+              state: {
+                reviewData: detailData.id,
+              },
+            }}
+          >
             {" "}
             <button type="button" className="review-post-btn">
               후기 보기
