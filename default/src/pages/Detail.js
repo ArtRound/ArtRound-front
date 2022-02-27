@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Detail = (props) => {
   //공공 api 데이터
-  const [detailData, setDetailData] = useState(props.location.state.detailData);
+  const [detailData, setdetailData] = useState({
+    ...props.location.state.detailData,
+  });
 
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
@@ -43,6 +45,7 @@ const Detail = (props) => {
       });
     }
   }
+
   function visitedList() {
     if (visited === false) {
       // 방문 목록에 넣기

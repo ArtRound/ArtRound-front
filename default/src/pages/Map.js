@@ -45,7 +45,7 @@ function Map() {
 
   const [loading, setLoading] = useState(false);
   const [footerUi, setFooterUi] = useState(false);
-  const footerRef = useRef();
+  const [footerInfoData, setFooterInfoData] = useState({});
   const mapData = useRef([]);
   const mapRef = useRef(null);
 
@@ -54,16 +54,25 @@ function Map() {
   };
 
   const clickOpen = (item) => {
-    if (!footerRef.current) {
-      footerRef.current = { ...item };
+    if (!footerInfoData) {
+      setFooterInfoData(item);
       setFooterUi(true);
+
+      console.log("1 station");
     } else {
-      if (footerRef.current.id === item.id) {
+      if (footerInfoData.id === item.id) {
         setFooterUi(!footerUi);
-      } else if (footerRef.current.id !== item.id) {
+        setFooterInfoData(item);
+
+        console.log("2 station");
+      } else if (footerInfoData.id !== item.id) {
         setFooterUi(false);
-        footerRef.current = { ...item };
+        setFooterInfoData(item);
         setFooterUi(true);
+
+        console.log("3 station");
+        console.log("footerInfoData id ", footerInfoData.id);
+        console.log("item id ", item.id);
       }
     }
   };
@@ -180,7 +189,7 @@ function Map() {
             <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
           </button>
           <Icon />
-          {footerUi && <FooterInfo data={footerRef.current} />}
+          {footerUi && <FooterInfo footerInfoData={footerInfoData} />}
         </>
       ) : (
         <Loader />

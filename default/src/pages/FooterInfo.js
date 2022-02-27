@@ -47,16 +47,22 @@ function FooterInfo(props) {
       <div className="footer-info">
         <Link
           to={{
-            pathname: `/detail/${props.data.id}`,
+            pathname: `/detail/${props.footerInfoData.id}`,
             state: {
-              detailData: props.data,
+              detailData: props.footerInfoData,
+              // detailData: props.footerInfoData.id,
             },
           }}
           style={{ textDecoration: "none", color: "black" }}
         >
-          <span className="footer-title">{props.data.fcltyNm}</span>
+          <span className="footer-title">{props.footerInfoData.fcltyNm}</span>
         </Link>
-        <span>{price(props.data.adultChrge, props.data.childChrge)}</span>
+        <span>
+          {price(
+            props.footerInfoData.adultChrge,
+            props.footerInfoData.childChrge
+          )}
+        </span>
         <FontAwesomeIcon className="close-icon" icon={faTimes} size={"2x"} />
         <div className="footer-like">
           <span>❤️</span> <span>{Math.floor(Math.random() * 100)}</span>
