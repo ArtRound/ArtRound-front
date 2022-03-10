@@ -2,53 +2,79 @@ import React, { useState } from "react";
 import "./ReviewList.css";
 import ReviewNav from "../components/ReviewNav";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Rating from "@mui/material/Rating";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { styled } from "@mui/material/styles";
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#ff6d75",
+  },
+  "& .MuiRating-iconHover": {
+    color: "#ff3d47",
+  },
+});
 
 function Review(props) {
-  let dispatch = useDispatch();
-  let today = new Date();
-  let [reviewData, setReviewData] = useState("");
+  const user_id = useSelector((state) => state.infoReducer.id);
 
-  let [heartCount, setHeartCount] = useState(0);
+  const [submitData, setSubmitData] = useState({
+    title: props.location.state.submitTitile,
+    content: "",
+    user_id: user_id,
+    heart: 0,
+    art_info_id: props.location.state.submitId,
+  });
 
-  const [postData, setPostData] = useState(null);
-  let user_id = useSelector((state) => state.infoReducer.id);
-  let art_info_id = props.location.state.submitId;
-
-  const axiosPostData = () => {
-    axios
-      .post(`http://localhost:8000/main/art_info/${art_info_id}/review/`, {
-        title: "test",
-        content: "artround content",
-        user_id: user_id,
-        heart: "3",
-        art_info_id: art_info_id,
-      })
-      .then((res) => {
-        setPostData(res.data);
-      })
-      .catch((error) => {
-        console.log("axios error ", error.response);
-      });
+  const axiosPostData = (e) => {
+    if (submitData.content) {
+      axios
+        .post(
+          `http://localhost:8000/main/art_info/${submitData.art_info_id}/review/`,
+          {
+            title: submitData.title,
+            content: submitData.content,
+            user_id: submitData.user_id,
+            heart: submitData.heart,
+            art_info_id: submitData.art_info_id,
+          }
+        )
+        .then((res) => {
+          console.log("axios success ", res.data);
+        })
+        .catch((error) => {
+          console.log("axios error ", error.response);
+        });
+    } else {
+      alert("후기를 작성해주세요");
+      e.preventDefault();
+    }
   };
 
   return (
     <div>
       <ReviewNav navTitle={"후기 등록"} />
-      <div className="review-title">피카소 미술관</div>
+      <div className="review-title">{submitData.title}</div>
       <p className="review">후기를 남겨주세요</p>
 
       <div className="review-heart">
-        <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
-        <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
-        <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
-        <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
-        <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
+        <StyledRating
+          name="customized-color"
+          defaultValue={0}
+          getLabelText={(value) => `${value} Heart${value !== 1 ? "s" : ""}`}
+          precision={1}
+          icon={<FavoriteIcon fontSize="inherit" />}
+          emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+          size="large"
+          onChange={(value) => {
+            setSubmitData((prev) => {
+              return { ...prev, heart: value.target.value };
+            });
+          }}
+        />
       </div>
 
       <hr />
@@ -58,7 +84,9 @@ function Review(props) {
           placeholder="후기를 남겨주세요."
           className="review-textfield"
           onChange={(e) => {
-            setReviewData(e.target.value);
+            setSubmitData((prev) => {
+              return { ...prev, content: e.target.value };
+            });
           }}
         />
         <div className="review-file-wrap">
@@ -78,37 +106,3 @@ function Review(props) {
 }
 
 export default Review;
-
-function ReviewHeart(props) {
-  let [colorState, setColorState] = useState(false);
-
-  return (
-    <div>
-      {colorState === true ? (
-        <>
-          <FontAwesomeIcon
-            icon={fasFaHeart}
-            className="click-heart"
-            size={"3x"}
-            onClick={() => {
-              setColorState(!colorState);
-              props.setHeartCount(props.heartCount - 1);
-            }}
-          />
-        </>
-      ) : (
-        <>
-          <FontAwesomeIcon
-            icon={farFaHeart}
-            className="unclick-heart"
-            size={"3x"}
-            onClick={() => {
-              setColorState(!colorState);
-              props.setHeartCount(props.heartCount + 1);
-            }}
-          />
-        </>
-      )}
-    </div>
-  );
-}
