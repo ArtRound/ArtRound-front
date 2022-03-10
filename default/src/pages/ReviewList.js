@@ -29,6 +29,42 @@ function ReviewList(props) {
   };
   const fixUpdated_at = (date) => date.match(/\d{4}-\d{2}-\d{2}/);
 
+  const sortLastest = () => {
+    setReviewData((prev) => {
+      prev.sort((a, b) => {
+        return new Date(b.updated_at) - new Date(a.updated_at);
+      });
+      return [...prev];
+    });
+  };
+
+  const sortOldest = () => {
+    setReviewData((prev) => {
+      prev.sort((a, b) => {
+        return new Date(a.updated_at) - new Date(b.updated_at);
+      });
+      return [...prev];
+    });
+  };
+
+  const sortHighHeart = () => {
+    setReviewData((prev) => {
+      prev.sort((a, b) => {
+        return b.heart - a.heart;
+      });
+      return [...prev];
+    });
+  };
+
+  const sortLowHeart = () => {
+    setReviewData((prev) => {
+      prev.sort((a, b) => {
+        return a.heart - b.heart;
+      });
+      return [...prev];
+    });
+  };
+
   useEffect(() => {
     getReviewData();
   }, []);
@@ -42,18 +78,21 @@ function ReviewList(props) {
           <div className="review-title">{props.location.state.dataTitle}</div>
           <hr />
           <div className="category">
-            <span className="new" onClick={() => {}}>
+            <span className="new" onClick={sortLastest}>
               최신순
             </span>
-            <span className="high" onClick={() => {}}>
+            <span className="new" onClick={sortOldest}>
+              오래된순
+            </span>
+            <span className="high" onClick={sortHighHeart}>
               평점 높은 순
             </span>
-            <span onClick={() => {}} className="low">
+            <span className="low" onClick={sortLowHeart}>
               평점 낮은 순
             </span>
           </div>
 
-          {reviewData.map((item, index) => {
+          {reviewData.map((item) => {
             return (
               <div className="list-wrap" key={nanoid()}>
                 <Heart count={item.heart} />
