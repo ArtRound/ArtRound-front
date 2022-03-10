@@ -8,11 +8,11 @@ import Heart from "../components/Heart";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
+import { nanoid } from "nanoid";
 
 function ReviewList(props) {
   const [reviewLoading, setReviewLoading] = useState(false);
   const [reviewData, setReviewData] = useState([]);
-  console.log("review list ", props);
 
   const getReviewData = () => {
     axios
@@ -38,7 +38,7 @@ function ReviewList(props) {
         <div>
           <ReviewNav navTitle={"후기 목록"} />
 
-          <div className="review-title">{reviewData.fcltyNm}</div>
+          <div className="review-title">{props.location.state.dataTitle}</div>
           <hr />
           <div className="category">
             <span className="new" onClick={() => {}}>
@@ -52,36 +52,20 @@ function ReviewList(props) {
             </span>
           </div>
 
-          <div className="list-wrap">
-            <Heart count={3} />
-            <div>
-              <span className="list-title">디자인도둑</span>
-              <span className="list-date">2022-02-17</span>
-            </div>
-            <p className="list-content">
-              청춘은 평화스러운 물방아 그들은 운다. 그러므로 공자는 역사를 같지
-              바로 눈이 것이다. 천고에 심장은 풀이 할지니, 피다. 가진 열락의
-              밝은 사랑의 놀이 없으면, 있는 있다. 하는 그들은 그러므로 것이다.
-              든 이는 아니더면, 청춘 새가 청춘 아니다.
-            </p>
-            <ThumnsUp />
-            <hr />
-          </div>
-          <div className="list-wrap">
-            <Heart count={3} />
-            <div>
-              <span className="list-title">디자인도둑</span>
-              <span className="list-date">2022-02-17</span>
-            </div>
-            <p className="list-content">
-              청춘은 평화스러운 물방아 그들은 운다. 그러므로 공자는 역사를 같지
-              바로 눈이 것이다. 천고에 심장은 풀이 할지니, 피다. 가진 열락의
-              밝은 사랑의 놀이 없으면, 있는 있다. 하는 그들은 그러므로 것이다.
-              든 이는 아니더면, 청춘 새가 청춘 아니다.
-            </p>
-            <ThumnsUp />
-            <hr />
-          </div>
+          {reviewData.map((item, index) => {
+            return (
+              <div className="list-wrap" key={nanoid()}>
+                <Heart count={item.heart} />
+                <div>
+                  <span className="list-title">{item.user_id}</span>
+                  <span className="list-date">{item.updated_at}</span>
+                </div>
+                <p className="list-content">{item.content}</p>
+                <ThumnsUp />
+                <hr />
+              </div>
+            );
+          })}
 
           <div className="btn-wrap">
             <Link
@@ -112,26 +96,49 @@ function ThumnsUp() {
   let [count, setCount] = useState(randomCount);
 
   return (
-    <div className="list-like">
-      <span
-        onClick={() => {
-          setThumbsUp(!thumbsUp);
-        }}
-      >
-        좋아요
-      </span>
-
+    <>
       {thumbsUp === true ? (
-        <>
-          <FontAwesomeIcon className="font-like" icon={fasFaThumbsUp} />
+        <div className="list-like">
+          <span
+            onClick={() => {
+              setThumbsUp(!thumbsUp);
+            }}
+          >
+            좋아요
+          </span>
+          <FontAwesomeIcon
+            className="font-like"
+            icon={fasFaThumbsUp}
+            onClick={() => {
+              setThumbsUp(!thumbsUp);
+            }}
+          />
           <span>{count + 1}</span>
-        </>
+        </div>
       ) : (
-        <>
-          <FontAwesomeIcon className="font-like" icon={farFaThumbsUp} />
+        <div
+          className="list-like"
+          onClick={() => {
+            setThumbsUp(!thumbsUp);
+          }}
+        >
+          <span
+            onClick={() => {
+              setThumbsUp(!thumbsUp);
+            }}
+          >
+            좋아요
+          </span>
+          <FontAwesomeIcon
+            className="font-like"
+            icon={farFaThumbsUp}
+            onClick={() => {
+              setThumbsUp(!thumbsUp);
+            }}
+          />
           <span>{count}</span>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
