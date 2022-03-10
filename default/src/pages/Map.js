@@ -57,22 +57,14 @@ function Map() {
     if (!footerInfoData) {
       setFooterInfoData(item);
       setFooterUi(true);
-
-      console.log("1 station");
     } else {
       if (footerInfoData.id === item.id) {
         setFooterUi(!footerUi);
         setFooterInfoData(item);
-
-        console.log("2 station");
       } else if (footerInfoData.id !== item.id) {
         setFooterUi(false);
         setFooterInfoData(item);
         setFooterUi(true);
-
-        console.log("3 station");
-        console.log("footerInfoData id ", footerInfoData.id);
-        console.log("item id ", item.id);
       }
     }
   };
@@ -85,8 +77,8 @@ function Map() {
         mapData.current.push(...result.data);
         setLoading(true);
       })
-      .catch((e) => {
-        console.log("here is error", e);
+      .catch((error) => {
+        console.log("axios error", error.response);
       });
   };
 
@@ -114,7 +106,7 @@ function Map() {
     } else {
       setLocationState((prev) => ({
         ...prev,
-        errMsg: "geolocation을 사용할수 없어요..",
+        errMsg: "geolocation을 사용할 수 없어요",
         isLoading: false,
       }));
     }

@@ -6,16 +6,36 @@ import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-function Review() {
+function Review(props) {
   let dispatch = useDispatch();
   let today = new Date();
-  let currenrDate =
-    today.getFullYear() + "." + (today.getMonth() + 1) + "." + today.getDate();
-
   let [reviewData, setReviewData] = useState("");
 
   let [heartCount, setHeartCount] = useState(0);
+
+  const [postData, setPostData] = useState(null);
+  let user_id = useSelector((state) => state.infoReducer.id);
+  let art_info_id = props.location.state.submitId;
+
+  const axiosPostData = () => {
+    axios
+      .post(`http://localhost:8000/main/art_info/${art_info_id}/review/`, {
+        title: "test",
+        content: "artround content",
+        user_id: user_id,
+        heart: "3",
+        art_info_id: art_info_id,
+      })
+      .then((res) => {
+        setPostData(res.data);
+      })
+      .catch((error) => {
+        console.log("axios error ", error.response);
+      });
+  };
 
   return (
     <div>
@@ -23,7 +43,6 @@ function Review() {
       <div className="review-title">피카소 미술관</div>
       <p className="review">후기를 남겨주세요</p>
 
-      {/* <form className="review-form"> */}
       <div className="review-heart">
         <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
         <ReviewHeart heartCount={heartCount} setHeartCount={setHeartCount} />
@@ -49,26 +68,11 @@ function Review() {
           <input type="file" multiple id="review-file" />
         </div>
         <Link to="/review">
-          <button
-            className="submit-btn review-btn"
-            onClick={() => {
-              dispatch({
-                type: "add",
-                payload: {
-                  heart: heartCount,
-                  name: "상상상",
-                  date: currenrDate,
-                  content: reviewData,
-                  img: null,
-                },
-              });
-            }}
-          >
+          <button className="submit-btn review-btn" onClick={axiosPostData}>
             등록하기
           </button>
         </Link>
       </div>
-      {/* </form> */}
     </div>
   );
 }

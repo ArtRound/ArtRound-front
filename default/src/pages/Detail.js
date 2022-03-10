@@ -159,7 +159,8 @@ const Detail = (props) => {
             to={{
               pathname: "/review",
               state: {
-                reviewData: detailData.id,
+                dataId: detailData.id,
+                dataTitle: detailData.fcltyNm,
               },
             }}
           >
