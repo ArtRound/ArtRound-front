@@ -140,7 +140,10 @@ function ThumnsUp() {
   return (
     <>
       {thumbsUp === true ? (
-        <div className="list-like">
+        <div
+          className="list-like"
+          style={{ color: "#2662BB", opacity: "100%" }}
+        >
           <span
             onClick={() => {
               setThumbsUp(!thumbsUp);
@@ -163,6 +166,7 @@ function ThumnsUp() {
           onClick={() => {
             setThumbsUp(!thumbsUp);
           }}
+          style={{ opacity: "60%" }}
         >
           <span
             onClick={() => {
@@ -178,7 +182,7 @@ function ThumnsUp() {
               setThumbsUp(!thumbsUp);
             }}
           />
-          <span>{count}</span>
+          <span style={{ color: "#2662BB" }}>{count}</span>
         </div>
       )}
     </>

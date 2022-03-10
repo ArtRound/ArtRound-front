@@ -23,6 +23,7 @@ hr {
 .list-wrap {
   margin-left: 32px;
   margin-right: 42px;
+  padding-top: 5px;
 }
 
 .category {
@@ -51,9 +52,10 @@ hr {
 }
 .list-date {
   font-size: 12px;
+  opacity: 50%;
 }
 .list-content {
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -61,11 +63,19 @@ hr {
   padding-right: 13px;
   cursor: pointer;
 }
+.list-like {
+  padding-bottom: 10px;
+}
 .list-like > span,
 .font-like {
   padding-right: 5px;
   cursor: pointer;
+  font-size: 15px;
 }
+.font-like {
+  font-size: 20px;
+}
+
 .btn-wrap {
   display: flex;
   justify-content: center;
