@@ -95,15 +95,15 @@ function ReviewList(props) {
           {reviewData.map((item) => {
             return (
               <div className="list-wrap" key={nanoid()}>
-                <Heart count={item.heart} />
-                <div>
+                <Heart count={item.heart} readOnly={true} />
+                <div className="list-box">
                   <span className="list-title">{item.user_id}</span>
                   <span className="list-date">
                     {fixUpdated_at(item.updated_at)}
                   </span>
+                  <p className="list-content">{item.content}</p>
+                  <ThumnsUp />
                 </div>
-                <p className="list-content">{item.content}</p>
-                <ThumnsUp />
                 <hr />
               </div>
             );

@@ -25,7 +25,9 @@ hr {
   margin-right: 42px;
   padding-top: 5px;
 }
-
+.list-box {
+  margin-left: 1px;
+}
 .category {
   margin-right: 12px;
   margin-bottom: 35px;

@@ -1,31 +1,52 @@
 import React from "react";
 import "../pages/ReviewList.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as fasFaHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as farFaHeart } from "@fortawesome/free-regular-svg-icons";
+import Rating from "@mui/material/Rating";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { styled } from "@mui/material/styles";
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#ff6d75",
+  },
+  "& .MuiRating-iconHover": {
+    color: "#ff3d47",
+  },
+});
 
 const Heart = (props) => {
-  let colorCount = Array.from({ length: props.count }, (v, i) => i);
-  let uncoloredCount = Array.from({ length: 5 - props.count }, (v, i) => i);
 
   return (
-    <div style={{ display: "flex" }}>
-      {colorCount.map((v, i) => {
-        return <ColorHeart />;
-      })}
-      {uncoloredCount.map((v, i) => {
-        return <UncoloredHeart />;
-      })}
-    </div>
+    <>
+      {props.readOnly === true ? (
+        <StyledRating
+          name="customized-color"
+          defaultValue={props.count}
+          getLabelText={(value) => `${value} Heart${value !== 1 ? "s" : ""}`}
+          icon={<FavoriteIcon fontSize="inherit" />}
+          emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+          size="midium"
+          readOnly
+          style={{ paddingBottom: 15 }}
+        />
+      ) : (
+        <StyledRating
+          name="customized-color"
+          defaultValue={0}
+          getLabelText={(value) => `${value} Heart${value !== 1 ? "s" : ""}`}
+          precision={1}
+          icon={<FavoriteIcon fontSize="inherit" />}
+          emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+          size="large"
+          onChange={(value) => {
+            props.setSubmitData((prev) => {
+              return { ...prev, heart: value.target.value };
+            });
+          }}
+        />
+      )}
+    </>
   );
 };
 
 export default Heart;
-
-const ColorHeart = () => {
-  return <FontAwesomeIcon icon={fasFaHeart} className="color-heart" />;
-};
-
-const UncoloredHeart = () => {
-  return <FontAwesomeIcon className="uncolor-heart" icon={farFaHeart} />;
-};

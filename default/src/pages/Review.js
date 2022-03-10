@@ -4,23 +4,10 @@ import ReviewNav from "../components/ReviewNav";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Rating from "@mui/material/Rating";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { styled } from "@mui/material/styles";
-
-const StyledRating = styled(Rating)({
-  "& .MuiRating-iconFilled": {
-    color: "#ff6d75",
-  },
-  "& .MuiRating-iconHover": {
-    color: "#ff3d47",
-  },
-});
+import Heart from "../components/Heart";
 
 function Review(props) {
   const user_id = useSelector((state) => state.infoReducer.id);
-
   const [submitData, setSubmitData] = useState({
     title: props.location.state.submitTitile,
     content: "",
@@ -61,20 +48,7 @@ function Review(props) {
       <p className="review">후기를 남겨주세요</p>
 
       <div className="review-heart">
-        <StyledRating
-          name="customized-color"
-          defaultValue={0}
-          getLabelText={(value) => `${value} Heart${value !== 1 ? "s" : ""}`}
-          precision={1}
-          icon={<FavoriteIcon fontSize="inherit" />}
-          emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-          size="large"
-          onChange={(value) => {
-            setSubmitData((prev) => {
-              return { ...prev, heart: value.target.value };
-            });
-          }}
-        />
+        <Heart readOnly={false} setSubmitData={setSubmitData} />
       </div>
 
       <hr />
