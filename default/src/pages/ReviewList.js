@@ -27,6 +27,7 @@ function ReviewList(props) {
         console.log("axios error", error.response);
       });
   };
+  const fixUpdated_at = (date) => date.match(/\d{4}-\d{2}-\d{2}/);
 
   useEffect(() => {
     getReviewData();
@@ -58,7 +59,9 @@ function ReviewList(props) {
                 <Heart count={item.heart} />
                 <div>
                   <span className="list-title">{item.user_id}</span>
-                  <span className="list-date">{item.updated_at}</span>
+                  <span className="list-date">
+                    {fixUpdated_at(item.updated_at)}
+                  </span>
                 </div>
                 <p className="list-content">{item.content}</p>
                 <ThumnsUp />
