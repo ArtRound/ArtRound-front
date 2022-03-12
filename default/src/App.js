@@ -15,7 +15,7 @@ import Noticepost from "./pages/noticePost";
 import Introduce from "./pages/Introduce";
 import AnswerPost from "./pages/AnswerPost";
 import ReviewList from "./pages/ReviewList";
-import Review from "./pages/Review";
+import Submit from "./pages/Submit";
 import Information from "./pages/Information";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
@@ -52,7 +52,7 @@ const App = () => {
         <PrivateRoute path="/introduce" component={Introduce} />
         <PrivateRoute path="/answerpost" component={AnswerPost} />
         <PrivateRoute path="/review" component={ReviewList} />
-        <PrivateRoute path="/submit" component={Review} />
+        <PrivateRoute path="/submit" component={Submit} />
       </BrowserRouter>
     </div>
   );
