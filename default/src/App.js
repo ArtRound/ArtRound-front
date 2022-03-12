@@ -1,6 +1,5 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom"; //React-Router import
-
 import MyPage from "./pages/Mypage";
 import UserFavorite from "./pages/UserFavorite";
 import UserVisited from "./pages/UserVisited";
@@ -24,6 +23,8 @@ import Map from "./pages/Map";
 import PublicRoute from "./services/PublicRoute";
 import PrivateRoute from "./services/PrivateRoute";
 
+import { Provider } from "./context";
+
 const App = () => {
   return (
     <div className="container">
@@ -40,8 +41,6 @@ const App = () => {
 
         <PrivateRoute path="/mypage" component={MyPage} />
         <PrivateRoute path="/information" component={Information} />
-        <PrivateRoute path="/detail/:id" component={Detail} />
-        <PrivateRoute path="/map" component={Map} />
         <PrivateRoute path="/favorite" component={UserFavorite} />
         <PrivateRoute path="/visited" component={UserVisited} />
         <PrivateRoute path="/service" component={ServiceCenter} />
@@ -51,8 +50,13 @@ const App = () => {
         <PrivateRoute path="/noticepost" component={Noticepost} />
         <PrivateRoute path="/introduce" component={Introduce} />
         <PrivateRoute path="/answerpost" component={AnswerPost} />
-        <PrivateRoute path="/review" component={ReviewList} />
-        <PrivateRoute path="/submit" component={Submit} />
+
+        <Provider>
+          <PrivateRoute path="/map" component={Map} />
+          <PrivateRoute path="/detail/:id" component={Detail} />
+          <PrivateRoute path="/review" component={ReviewList} />
+          <PrivateRoute path="/submit" component={Submit} />
+        </Provider>
       </BrowserRouter>
     </div>
   );

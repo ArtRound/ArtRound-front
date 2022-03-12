@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ReviewList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp as fasFaThumbsUp } from "@fortawesome/free-solid-svg-icons";
@@ -9,16 +9,17 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { nanoid } from "nanoid";
+import { Context } from "../context";
 
-function ReviewList(props) {
+function ReviewList() {
+  const { state } = useContext(Context);
+
   const [reviewLoading, setReviewLoading] = useState(false);
   const [reviewData, setReviewData] = useState([]);
 
   const getReviewData = () => {
     axios
-      .get(
-        `http://localhost:8000/main/art_info/${props.location.state.dataId}/review/`
-      )
+      .get(`http://localhost:8000/main/art_info/${state.art_id}/review/`)
       .then((result) => {
         setReviewData(result.data);
         setReviewLoading(true);
@@ -74,8 +75,7 @@ function ReviewList(props) {
       {reviewLoading === true ? (
         <div>
           <ReviewNav navTitle={"후기 목록"} />
-
-          <div className="review-title">{props.location.state.dataTitle}</div>
+          <div className="review-title">{state.fcltyNm}</div>
           <hr />
           <div className="category">
             <span className="new" onClick={sortLastest}>
@@ -110,15 +110,7 @@ function ReviewList(props) {
           })}
 
           <div className="btn-wrap">
-            <Link
-              to={{
-                pathname: "/submit",
-                state: {
-                  submitId: props.location.state.dataId,
-                  submitTitile: props.location.state.dataTitle,
-                },
-              }}
-            >
+            <Link to="/submit">
               <button className="submit-btn">후기 작성하기</button>
             </Link>
           </div>

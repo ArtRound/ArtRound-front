@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./FooterInfo.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { Context } from "../context/index";
+import { ADD_DATA } from "../context/actionTypes";
 
 function FooterInfo(props) {
   function price(adult, child) {
@@ -38,6 +40,32 @@ function FooterInfo(props) {
     setTansitionState(true);
   });
 
+  const { dispatch } = useContext(Context);
+
+  const setContext = () => {
+    console.log("run dispatch");
+    dispatch({
+      type: ADD_DATA,
+      payload: {
+        art_id: props.footerInfoData.id,
+        fcltyNm: props.footerInfoData.fcltyNm,
+        weekdayOperOpenHhmm: props.footerInfoData.weekdayOperOpenHhmm,
+        weekdayOperColseHhmm: props.footerInfoData.weekdayOperColseHhmm,
+        holidayOperOpenHhmm: props.footerInfoData.holidayOperOpenHhmm,
+        holidayCloseOpenHhmm: props.footerInfoData.holidayCloseOpenHhmm,
+        rstdeInfo: props.footerInfoData.rstdeInfo,
+        adultChrge: props.footerInfoData.adultChrge,
+        yngbgsChrge: props.footerInfoData.yngbgsChrge,
+        childChrge: props.footerInfoData.childChrge,
+        rdnmadr: props.footerInfoData.rdnmadr,
+        phoneNumber: props.footerInfoData.phoneNumber,
+        homepageUrl: props.footerInfoData.homepageUrl,
+        latitude: props.footerInfoData.latitude,
+        longitude: props.footerInfoData.longitude,
+      },
+    });
+  };
+
   return (
     <CSSTransition
       in={transitionState}
@@ -48,12 +76,8 @@ function FooterInfo(props) {
         <Link
           to={{
             pathname: `/detail/${props.footerInfoData.id}`,
-            state: {
-              detailData: props.footerInfoData,
-              // detailData: props.footerInfoData.id,
-            },
           }}
-          style={{ textDecoration: "none", color: "black" }}
+          onClick={setContext}
         >
           <span className="footer-title">{props.footerInfoData.fcltyNm}</span>
         </Link>

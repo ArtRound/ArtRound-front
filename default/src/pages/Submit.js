@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ReviewList.css";
 import ReviewNav from "../components/ReviewNav";
 import { Link } from "react-router-dom";
@@ -6,29 +6,29 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Heart from "../components/Heart";
 
-function Review(props) {
+import { Context } from "../context";
+
+function Review() {
+  const { state } = useContext(Context);
   const user_id = useSelector((state) => state.infoReducer.id);
   const [submitData, setSubmitData] = useState({
-    title: props.location.state.submitTitile,
+    title: state.fcltyNm,
     content: "",
     user_id: user_id,
     heart: 0,
-    art_info_id: props.location.state.submitId,
+    art_info_id: state.art_id,
   });
 
   const axiosPostData = (e) => {
     if (submitData.content) {
       axios
-        .post(
-          `http://localhost:8000/main/art_info/${submitData.art_info_id}/review/`,
-          {
-            title: submitData.title,
-            content: submitData.content,
-            user_id: submitData.user_id,
-            heart: submitData.heart,
-            art_info_id: submitData.art_info_id,
-          }
-        )
+        .post(`http://localhost:8000/main/art_info/${state.art_id}/review/`, {
+          title: submitData.title,
+          content: submitData.content,
+          user_id: submitData.user_id,
+          heart: submitData.heart,
+          art_info_id: submitData.art_info_id,
+        })
         .then((res) => {
           console.log("axios success ", res.data);
         })

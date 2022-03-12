@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Context } from "../context";
 
-const Detail = (props) => {
-  //공공 api 데이터
-  const [detailData, setdetailData] = useState({
-    ...props.location.state.detailData,
-  });
-
+const Detail = () => {
+  const { state } = useContext(Context); // 공공데이터
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
   let dispatch = useDispatch();
@@ -23,18 +20,18 @@ const Detail = (props) => {
       dispatch({
         type: "add",
         payload: {
-          name: detailData.fcltyNm,
+          name: state.fcltyNm,
           time:
             "월-금: " +
-            detailData.weekdayOperOpenHhmm +
+            state.weekdayOperOpenHhmm +
             " ~ " +
-            detailData.weekdayOperColseHhmm +
+            state.weekdayOperColseHhmm +
             " " +
             "/ 공휴일: " +
-            detailData.holidayOperOpenHhmm +
+            state.holidayOperOpenHhmm +
             " ~ " +
-            detailData.holidayCloseOpenHhmm,
-          address: detailData.rdnmadr,
+            state.holidayCloseOpenHhmm,
+          address: state.rdnmadr,
         },
       });
     } else {
@@ -64,7 +61,7 @@ const Detail = (props) => {
     <div className="exhibition">
       <div className="top-bar">
         <button className="back-btn">⬅</button>
-        <div className="exhibition-title">{detailData.fcltyNm}</div>
+        <div className="exhibition-title">{state.fcltyNm}</div>
       </div>
       <div className="ex-container">
         <img className="title-img" src={title_img} alt="exhibition" />
@@ -117,53 +114,43 @@ const Detail = (props) => {
             <tr>
               <th>관람시간</th>
               <td>
-                월-금: {detailData.weekdayOperOpenHhmm} ~{" "}
-                {detailData.weekdayOperColseHhmm} <br />
-                공휴일: {detailData.holidayOperOpenHhmm} ~{" "}
-                {detailData.holidayCloseOpenHhmm}
+                월-금: {state.weekdayOperOpenHhmm} ~{" "}
+                {state.weekdayOperColseHhmm} <br />
+                공휴일: {state.holidayOperOpenHhmm} ~{" "}
+                {state.holidayCloseOpenHhmm}
               </td>
             </tr>
             <tr>
               <th>휴관일</th>
-              <td>{detailData.rstdeInfo}</td>
+              <td>{state.rstdeInfo}</td>
             </tr>
             <tr>
               <th>입장료</th>
               <td>
-                일반(만 19세-60세):{changePrice(detailData.adultChrge)}
+                일반(만 19세-60세):{changePrice(state.adultChrge)}
                 <br />
-                청소년(만 13세-18세): {changePrice(detailData.yngbgsChrge)}
+                청소년(만 13세-18세): {changePrice(state.yngbgsChrge)}
                 <br />
-                어린이(12세 이하): {changePrice(detailData.childChrge)}
+                어린이(12세 이하): {changePrice(state.childChrge)}
               </td>
             </tr>
             <tr>
               <th>주소</th>
-              <td>{detailData.rdnmadr}</td>
+              <td>{state.rdnmadr}</td>
             </tr>
             <tr>
               <th>전화번호</th>
-              <td>{detailData.operPhoneNumber}</td>
+              <td>{state.operPhoneNumber}</td>
             </tr>
             <tr>
               <th>홈페이지</th>
               <td>
-                <a href={`{detailData.homepageUrl}`}>
-                  {detailData.homepageUrl}
-                </a>
+                <a href={`{state.homepageUrl}`}>{state.homepageUrl}</a>
               </td>
             </tr>
           </table>
 
-          <Link
-            to={{
-              pathname: "/review",
-              state: {
-                dataId: detailData.id,
-                dataTitle: detailData.fcltyNm,
-              },
-            }}
-          >
+          <Link to="/review">
             {" "}
             <button type="button" className="review-post-btn">
               후기 보기
