@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import { ADD_DATA } from "./actionTypes";
+import { useEffect } from "react";
 
 const initialState = {
   art_id: "",
@@ -35,7 +36,15 @@ const reducer = (state = initialState, action) => {
 };
 
 const Provider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, () => {
+    const localData = localStorage.getItem("art_info");
+    return localData ? JSON.parse(localData) : {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("art_info", JSON.stringify(state), [state]);
+  }, [state]);
+
   const value = { state, dispatch };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
