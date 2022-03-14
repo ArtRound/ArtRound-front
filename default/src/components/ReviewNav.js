@@ -1,22 +1,28 @@
 import React from "react";
-import '../pages/ReviewList.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from 'react-router-dom';
+import "../pages/ReviewList.css";
+import { Link, useHistory } from "react-router-dom";
+import { FaMapMarkedAlt, FaArrowLeft } from "react-icons/fa";
 
-
-function ReviewNav(props) {
-
-    let history = useHistory();
-
-    return (
-        <div className="nav">
-            <FontAwesomeIcon
-                className="nav-icon"
-                icon={faChevronLeft}
-                onClick={() => { history.goBack() }} /> <span>{props.navTitle}</span>
-        </div>
-    )
-}
+const ReviewNav = (props) => {
+  let history = useHistory();
+  return (
+    <div className="review-nav-container">
+      <button
+        className="back-btn"
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        <FaArrowLeft />
+      </button>
+      <div className="review-nav-center">
+        <span className="review-nav-title">{props.title}</span>
+        <Link to="/map">
+          <FaMapMarkedAlt className="map-icon" />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default ReviewNav;

@@ -74,8 +74,7 @@ function ReviewList() {
     <>
       {reviewLoading === true ? (
         <div>
-          <ReviewNav navTitle={"후기 목록"} />
-          <div className="review-title">{state.fcltyNm}</div>
+          <ReviewNav title={state.fcltyNm} />
           <hr />
           <div className="category">
             <span className="new" onClick={sortLastest}>

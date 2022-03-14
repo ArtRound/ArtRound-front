@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Heart from "../components/Heart";
-
 import { Context } from "../context";
 
 function Review() {
@@ -43,10 +42,8 @@ function Review() {
 
   return (
     <div>
-      <ReviewNav navTitle={"후기 등록"} />
-      <div className="review-title">{submitData.title}</div>
+      <ReviewNav title={submitData.title} />
       <p className="review">후기를 남겨주세요</p>
-
       <div className="review-heart">
         <Heart readOnly={false} setSubmitData={setSubmitData} />
       </div>

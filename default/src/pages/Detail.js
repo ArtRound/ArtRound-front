@@ -4,6 +4,7 @@ import title_img from "../img/exhibition_sample_img.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Context } from "../context";
+import ReviewNav from "../components/ReviewNav";
 
 const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
@@ -59,10 +60,7 @@ const Detail = () => {
   }
   return (
     <div className="exhibition">
-      <div className="top-bar">
-        <button className="back-btn">⬅</button>
-        <div className="exhibition-title">{state.fcltyNm}</div>
-      </div>
+      <ReviewNav title={state.fcltyNm} />
       <div className="ex-container">
         <img className="title-img" src={title_img} alt="exhibition" />
         <div className="div-btn">
