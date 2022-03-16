@@ -1,7 +1,7 @@
 import React from "react";
 import "../pages/ReviewList.css";
-import { Link, useHistory } from "react-router-dom";
-import { FaMapMarkedAlt, FaArrowLeft } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ReviewNav = (props) => {
   let history = useHistory();
@@ -17,9 +17,6 @@ const ReviewNav = (props) => {
       </button>
       <div className="review-nav-center">
         <span className="review-nav-title">{props.title}</span>
-        <Link to="/map">
-          <FaMapMarkedAlt className="map-icon" />
-        </Link>
       </div>
     </div>
   );
