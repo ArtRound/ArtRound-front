@@ -28,8 +28,9 @@ const Detail = () => {
             "월-금: " +
             state.weekdayOperOpenHhmm +
             " ~ " +
-            state.weekdayOperColseHhmm +
-            " " +
+            state.weekdayOperColseHhmm,
+
+          end_time:
             "/ 공휴일: " +
             state.holidayOperOpenHhmm +
             " ~ " +
