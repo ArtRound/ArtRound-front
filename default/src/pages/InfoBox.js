@@ -111,11 +111,19 @@ const InfoBox = (props) => {
 
 export default InfoBox;
 
-export const MapFooter = () => {
+export const MapFooter = (props) => {
+  const clickSearch = () => {
+    if(props.showSearch === true){
+      props.setShowMarker(0);
+      props.setShowSearch(!props.showSearch)
+    }else{
+      props.setShowSearch(!props.showSearch)
+    }
+  }
   return (
     <div className="map-footer-wrap">
       <Link style={{ color: "black" }}>
-        <BsSearch />
+        <BsSearch onClick={clickSearch} />
       </Link>
 
       <Link to="/visited" style={{ color: "black" }}>

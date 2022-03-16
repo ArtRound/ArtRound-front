@@ -9,6 +9,7 @@ import { nanoid } from "nanoid";
 import Loader from "../components/Loader";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { MapFooter } from "./InfoBox";
+import Search from "./Search";
 
 const KakaoMap = () => {
   let history = useHistory();
@@ -77,6 +78,10 @@ const KakaoMap = () => {
     getArtData();
   }, []);
 
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchMarker, setSearchMarker] = useState([]);
+  const [showMarker, setShowMarker] = useState(0);
+
   return (
     <>
       {currentPositionState.isLoading === false && artDataLoading === false ? (
@@ -100,34 +105,56 @@ const KakaoMap = () => {
             level={3}
           >
             <MapMarker position={currentPositionState.center} />
-            {artData.current.map((item) => {
-              return (
-                <MapMarker
-                  key={nanoid()}
-                  position={{
-                    lat: parseFloat(item.latitude),
-                    lng: parseFloat(item.longitude),
-                  }}
-                  image={{
-                    src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                    size: {
-                      widht: 24,
-                      height: 35,
-                    },
-                  }}
-                  title={item.fcltyNm}
-                  clickable={true}
-                  onClick={() => {
-                    clickMarker(item);
-                  }}
-                />
-              );
-            })}
+            {showMarker === 0 &&
+              artData.current.map((item) => {
+                return (
+                  <MapMarker
+                    key={nanoid()}
+                    position={{
+                      lat: parseFloat(item.latitude),
+                      lng: parseFloat(item.longitude),
+                    }}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                      size: {
+                        widht: 24,
+                        height: 35,
+                      },
+                    }}
+                    title={item.fcltyNm}
+                    clickable={true}
+                    onClick={() => clickMarker(item)}
+                  />
+                );
+              })}
+            {showMarker === 1 &&
+              searchMarker.map((item) => {
+                return (
+                  <MapMarker
+                    position={{
+                      lat: parseFloat(item.latitude),
+                      lng: parseFloat(item.longitude),
+                    }}
+                    onClick={() => clickMarker(item)}
+                  />
+                );
+              })}
             {isOpen && (
-              <InfoBox setIsOpen={setIsOpen} infoBoxData={infoBoxData} />
+              <InfoBox infoBoxData={infoBoxData} setIsOpen={setIsOpen} />
             )}
           </Map>
-          <MapFooter />
+          <MapFooter
+            showSearch={showSearch}
+            setShowSearch={setShowSearch}
+            setShowMarker={setShowMarker}
+          />
+          {showSearch && (
+            <Search
+              artData={artData}
+              setSearchMarker={setSearchMarker}
+              setShowMarker={setShowMarker}
+            />
+          )}
         </>
       ) : (
         <Loader />
