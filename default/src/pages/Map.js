@@ -2,91 +2,34 @@ import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Map.css";
-import {
-  faChevronLeft,
-  faSearchLocation,
-} from "@fortawesome/free-solid-svg-icons";
-import "../components/GoogleMap.css";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  MarkerClusterer,
-} from "@react-google-maps/api";
-import greenMarker from "../img/marker-image/green_MarkerU.png";
-import pinkMarker from "../img/marker-image/pink_MarkerA.png";
-import Icon from "../components/Icon";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import FooterInfo from "./FooterInfo";
+import InfoBox from "./InfoBox";
 import { nanoid } from "nanoid";
 import Loader from "../components/Loader";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { MapFooter } from "./InfoBox";
 
-function Map() {
+const KakaoMap = () => {
   let history = useHistory();
-
-  const containerStyle = {
-    width: "100vw",
-    height: "90vh",
-  };
-
-  const [locationState, setLocationState] = useState({
+  const [currentPositionState, setCurrentPositionState] = useState({
     center: {
-      lat: "",
-      lng: "",
+      lat: 33.450701,
+      lng: 126.570667,
     },
     errMsg: null,
     isLoading: true,
   });
+  const artData = useRef([]); //전시회 데이터
+  const [artDataLoading, setArtDataLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [infoBoxData, setInfoBoxData] = useState({});
 
-  const center = {
-    lat: locationState.center.lat,
-    lng: locationState.center.lng,
-  };
-
-  const [loading, setLoading] = useState(false);
-  const [footerUi, setFooterUi] = useState(false);
-  const [footerInfoData, setFooterInfoData] = useState({});
-  const mapData = useRef([]);
-  const mapRef = useRef(null);
-
-  const handleLoad = (map) => {
-    mapRef.current = map;
-  };
-
-  const clickOpen = (item) => {
-    if (!footerInfoData) {
-      setFooterInfoData(item);
-      setFooterUi(true);
-    } else {
-      if (footerInfoData.id === item.id) {
-        setFooterUi(!footerUi);
-        setFooterInfoData(item);
-      } else if (footerInfoData.id !== item.id) {
-        setFooterUi(false);
-        setFooterInfoData(item);
-        setFooterUi(true);
-      }
-    }
-  };
-
-  const getMapData = () => {
-    const axiosMapData = axios.create();
-    axiosMapData
-      .get("http://localhost:8000/main/art_info/")
-      .then((result) => {
-        mapData.current.push(...result.data);
-        setLoading(true);
-      })
-      .catch((error) => {
-        console.log("axios error", error.response);
-      });
-  };
-
-  const getCurrentLocation = () => {
+  const getCurrentPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocationState((prev) => ({
+          setCurrentPositionState((prev) => ({
             ...prev,
             center: {
               lat: position.coords.latitude, // 위도
@@ -96,7 +39,7 @@ function Map() {
           }));
         },
         (err) => {
-          setLocationState((prev) => ({
+          setCurrentPositionState((prev) => ({
             ...prev,
             errMsg: err.message,
             isLoading: false,
@@ -104,22 +47,39 @@ function Map() {
         }
       );
     } else {
-      setLocationState((prev) => ({
+      setCurrentPositionState((prev) => ({
         ...prev,
-        errMsg: "geolocation을 사용할 수 없어요",
+        errMsg: "geolocation을 사용할수 없습니다",
         isLoading: false,
       }));
     }
   };
 
+  const getArtData = () => {
+    axios
+      .get("http://localhost:8000/main/art_info/")
+      .then((result) => {
+        artData.current.push(...result.data);
+        setArtDataLoading(false);
+      })
+      .catch((error) => {
+        console.log("axios error", error.response);
+      });
+  };
+
+  const clickMarker = (item) => {
+    setInfoBoxData(item);
+    setIsOpen(true);
+  };
+
   useEffect(() => {
-    getCurrentLocation();
-    getMapData();
+    getCurrentPosition();
+    getArtData();
   }, []);
 
   return (
-    <div>
-      {locationState.isLoading === false && loading === true ? (
+    <>
+      {currentPositionState.isLoading === false && artDataLoading === false ? (
         <>
           <div className="nav">
             <FontAwesomeIcon
@@ -131,63 +91,48 @@ function Map() {
             />{" "}
             <span>지도</span>
           </div>
-
-          <LoadScript googleMapsApiKey="AIzaSyBIjC2af8iZNL8mGIGln8O0u4COojSdYbw">
-            <GoogleMap
-              onLoad={handleLoad}
-              mapContainerStyle={containerStyle}
-              center={locationState.center}
-              zoom={15}
-            >
-              <Marker position={locationState.center} icon={greenMarker} />
-
-              <MarkerClusterer>
-                {(clusterer) =>
-                  mapData.current.map((item) => {
-                    return (
-                      <Marker
-                        key={nanoid()}
-                        position={{
-                          lat: parseFloat(item.latitude),
-                          lng: parseFloat(item.longitude),
-                        }}
-                        icon={pinkMarker}
-                        onClick={() => {
-                          clickOpen(item);
-                        }}
-                        clusterer={clusterer}
-                      />
-                    );
-                  })
-                }
-              </MarkerClusterer>
-            </GoogleMap>
-          </LoadScript>
-
-          <button
-            onClick={() => {
-              setLocationState((prev) => ({
-                ...prev,
-                center: {
-                  lat: center.lat,
-                  lng: center.lng,
-                },
-                isLoading: false,
-              }));
+          <Map
+            center={currentPositionState.center}
+            style={{
+              width: "100vw",
+              height: "90vh",
             }}
-            className="current-position-btn"
-            style={{ cursor: "pointer" }}
+            level={3}
           >
-            <FontAwesomeIcon icon={faSearchLocation} size={"2x"} />
-          </button>
-          <Icon />
-          {footerUi && <FooterInfo footerInfoData={footerInfoData} />}
+            <MapMarker position={currentPositionState.center} />
+            {artData.current.map((item) => {
+              return (
+                <MapMarker
+                  key={nanoid()}
+                  position={{
+                    lat: parseFloat(item.latitude),
+                    lng: parseFloat(item.longitude),
+                  }}
+                  image={{
+                    src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                    size: {
+                      widht: 24,
+                      height: 35,
+                    },
+                  }}
+                  title={item.fcltyNm}
+                  clickable={true}
+                  onClick={() => {
+                    clickMarker(item);
+                  }}
+                />
+              );
+            })}
+            {isOpen && (
+              <InfoBox setIsOpen={setIsOpen} infoBoxData={infoBoxData} />
+            )}
+          </Map>
+          <MapFooter />
         </>
       ) : (
         <Loader />
       )}
-    </div>
+    </>
   );
-}
-
-export default Map;
+};
+export default KakaoMap;
