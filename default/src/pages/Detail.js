@@ -11,9 +11,7 @@ const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
-  let dispatch = useDispatch();
-  let fav_state = useSelector((fav_state) => fav_state.fav_reducer);
-  console.log(fav_state);
+  state={ fav_list = []}
 
   function wishList() {
     if (wish === false) {
@@ -28,10 +26,11 @@ const Detail = () => {
             "월-금: " +
             state.weekdayOperOpenHhmm +
             " ~ " +
-            state.weekdayOperColseHhmm,
+            state.weekdayOperColseHhmm +
+            "  ",
 
           end_time:
-            "/ 공휴일: " +
+            " / 공휴일: " +
             state.holidayOperOpenHhmm +
             " ~ " +
             state.holidayCloseOpenHhmm,
@@ -45,6 +44,25 @@ const Detail = () => {
     } else {
       //즐겨찾기 목록에서 삭제
       setWish(!wish);
+      axios
+        .get("http://127.0.0.1:8000/main/favorites/")
+        .then((response) => {
+          fav_list.map
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      //////////// 데이터에서 제목이랑 같은 데이터 아이디 찾기
+
+      axios
+        .delete(`http://127.0.0.1:8000/main/favorites/`)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }
 

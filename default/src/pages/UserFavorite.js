@@ -46,8 +46,11 @@ const UserFavorite = ({ history }) => {
               <div className="fav">
                 <div className="visited-name">{f.title}</div>
                 <div className="visited-detail">{f.content}</div>
-                <div className="visited-detail">{f.start_time}</div>
-                <div className="visited-detail">{f.end_time}</div>
+                <div className="visited-detail">
+                  {f.start_time}
+                  {f.end_time}
+                </div>
+
                 <hr />
               </div>
             );
