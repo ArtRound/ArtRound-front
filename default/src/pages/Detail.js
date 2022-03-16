@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Context } from "../context";
 import ReviewNav from "../components/ReviewNav";
+import axios from "axios";
 
 const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
@@ -18,11 +19,12 @@ const Detail = () => {
     if (wish === false) {
       // 즐겨찾기 목록에 넣기
       setWish(!wish);
-      dispatch({
-        type: "add",
-        payload: {
-          name: state.fcltyNm,
-          time:
+
+      axios
+        .post("http://127.0.0.1:8000/main/favorites/", {
+          title: state.fcltyNm,
+          content: state.rdnmadr,
+          start_time:
             "월-금: " +
             state.weekdayOperOpenHhmm +
             " ~ " +
@@ -32,15 +34,16 @@ const Detail = () => {
             state.holidayOperOpenHhmm +
             " ~ " +
             state.holidayCloseOpenHhmm,
-          address: state.rdnmadr,
-        },
-      });
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       //즐겨찾기 목록에서 삭제
       setWish(!wish);
-      dispatch({
-        type: "del",
-      });
     }
   }
 

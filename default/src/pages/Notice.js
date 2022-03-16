@@ -8,27 +8,27 @@ const Notice = ({ history }) => {
   const [text, setText] = useState([]);
 
   function getNotice(accessToken) {
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/main/notice/",
-      xstfCookieName: "csrftoken",
-      xsrfHeaderName: "X-CSRFToken",
-      headers: {
-        Authorization: `Token ${accessToken}`,
-      },
-    }).catch(function (error) {
-      console.log(error);
-    });
+    // axios({
+    //   method: "get",
+    //   url: "http://127.0.0.1:8000/main/notice/",
+    //   xstfCookieName: "csrftoken",
+    //   xsrfHeaderName: "X-CSRFToken",
+    //   headers: {
+    //     Authorization: `Token ${accessToken}`,
+    //   },
+    // }).catch(function (error) {
+    //   console.log(error);
+    // });
 
-    // axios
-    //   .get("http://127.0.0.1:8000/main/notice/")
-    //   .then((response) => {
-    //     setText([...response.data]);
-    //     console.log(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("http://127.0.0.1:8000/main/notice/")
+      .then((response) => {
+        setText([...response.data]);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
