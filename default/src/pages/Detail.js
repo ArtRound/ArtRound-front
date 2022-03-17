@@ -14,17 +14,18 @@ const Detail = () => {
   const [visited, setVisited] = useState(false);
   const [id, setId] = useState(0); // 하트 토글할 때 필요한 id
   const [artId, setArtId] = useState(0); // 현재 전시회 id
-  console.log(state);
+  const fHeartData = localStorage.getItem("fHeart");
 
   useEffect(() => {
     setArtId(state["art_id"]);
   }, [state]);
-  console.log(artId);
+  console.log("artID: ", artId);
 
   function wishList() {
-    if (wish === false) {
+    if (wish === false && fHeartData === null) {
       // 즐겨찾기 목록에 넣기
       setWish(!wish);
+      localStorage.setItem("fHeart", "favorite!!");
 
       axios
         .post("http://127.0.0.1:8000/main/favorites/", {
@@ -54,6 +55,8 @@ const Detail = () => {
     } else {
       //즐겨찾기 목록에서 삭제
       setWish(!wish);
+      localStorage.removeItem("fHeart");
+
       axios
         .delete(`http://127.0.0.1:8000/main/favorites/${id}`)
         .then(function (response) {
@@ -86,13 +89,13 @@ const Detail = () => {
         <img className="title-img" src={title_img} alt="exhibition" />
         <div className="div-btn">
           {/* 즐겨찾기 버튼 누르기 전과 후 */}
-          {!wish && (
+          {!fHeartData && (
             <button className="btn-wish" onClick={() => wishList()}>
               <i className="far fa-heart fa-2x"></i>즐겨찾기
             </button>
           )}
 
-          {wish && (
+          {fHeartData && (
             <button className="btn-wish" onClick={() => wishList()}>
               <i className="fas fa-heart fa-2x"></i>즐겨찾기
             </button>
