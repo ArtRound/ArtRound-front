@@ -15,6 +15,7 @@ const Detail = () => {
   const [id, setId] = useState(0); // 하트 토글할 때 필요한 id
   const [artId, setArtId] = useState(0); // 현재 전시회 id
   const fHeartData = localStorage.getItem("fHeart");
+  const vHeartData = localStorage.getItem("vHeart");
 
   useEffect(() => {
     setArtId(state["art_id"]);
@@ -69,12 +70,48 @@ const Detail = () => {
   }
 
   function visitedList() {
-    if (visited === false) {
+    if (visited === false && vHeartData === null) {
       // 방문 목록에 넣기
       setVisited(!visited);
+      localStorage.setItem("vHeart", "visited!!");
+
+      axios
+        .post("http://127.0.0.1:8000/main/visited/", {
+          title: state.fcltyNm,
+          address: state.rdnmadr,
+          start_time:
+            "월-금: " +
+            state.weekdayOperOpenHhmm +
+            " ~ " +
+            state.weekdayOperColseHhmm +
+            "  ",
+
+          end_time:
+            " / 공휴일: " +
+            state.holidayOperOpenHhmm +
+            " ~ " +
+            state.holidayCloseOpenHhmm,
+        })
+        .then(function (response) {
+          console.log(response.data["id"]);
+          setId(response.data["id"]);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       // 방문 목록에서 삭제
       setVisited(!visited);
+      localStorage.removeItem("vHeart");
+
+      axios
+        .delete(`http://127.0.0.1:8000/main/visited/${id}`)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }
 
@@ -105,18 +142,18 @@ const Detail = () => {
             <i className="fas fa-share-square fa-2x"></i>공유하기
           </button>
 
-          <Link to="/favorite">
+          <Link to="/visited">
             {" "}
-            <button type="button">즐겨찾기 즐겨찾기</button>{" "}
+            <button type="button">방문하기 방문하기</button>{" "}
           </Link>
 
           {/* 방문 버튼 누르기 전과 후 */}
-          {!visited && (
+          {!vHeartData && (
             <button className="btn-wish" onClick={() => visitedList()}>
               <i className="far fa-flag fa-2x"></i>방문
             </button>
           )}
-          {visited && (
+          {vHeartData && (
             <button className="btn-wish" onClick={() => visitedList()}>
               <i className="fas fa-flag fa-2x"></i>방문
             </button>
