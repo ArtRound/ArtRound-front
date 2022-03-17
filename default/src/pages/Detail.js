@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
 import { Link } from "react-router-dom";
@@ -6,12 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Context } from "../context";
 import ReviewNav from "../components/ReviewNav";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
   const [wish, setWish] = useState(false);
   const [visited, setVisited] = useState(false);
-  state={ fav_list = []}
+  const [id, setId] = useState(0); // 하트 토글할 때 필요한 id
+  const [artId, setArtId] = useState(0); // 현재 전시회 id
+  console.log(state);
+
+  useEffect(() => {
+    setArtId(state["art_id"]);
+  }, [state]);
+  console.log(artId);
 
   function wishList() {
     if (wish === false) {
@@ -34,9 +42,11 @@ const Detail = () => {
             state.holidayOperOpenHhmm +
             " ~ " +
             state.holidayCloseOpenHhmm,
+          art_info_id: artId,
         })
         .then(function (response) {
-          console.log(response);
+          console.log(response.data["id"]);
+          setId(response.data["id"]);
         })
         .catch(function (error) {
           console.log(error);
@@ -45,18 +55,7 @@ const Detail = () => {
       //즐겨찾기 목록에서 삭제
       setWish(!wish);
       axios
-        .get("http://127.0.0.1:8000/main/favorites/")
-        .then((response) => {
-          fav_list.map
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      //////////// 데이터에서 제목이랑 같은 데이터 아이디 찾기
-
-      axios
-        .delete(`http://127.0.0.1:8000/main/favorites/`)
+        .delete(`http://127.0.0.1:8000/main/favorites/${id}`)
         .then(function (response) {
           console.log(response);
         })
@@ -89,18 +88,18 @@ const Detail = () => {
           {/* 즐겨찾기 버튼 누르기 전과 후 */}
           {!wish && (
             <button className="btn-wish" onClick={() => wishList()}>
-              <i class="far fa-heart fa-2x"></i>즐겨찾기
+              <i className="far fa-heart fa-2x"></i>즐겨찾기
             </button>
           )}
 
           {wish && (
             <button className="btn-wish" onClick={() => wishList()}>
-              <i class="fas fa-heart fa-2x"></i>즐겨찾기
+              <i className="fas fa-heart fa-2x"></i>즐겨찾기
             </button>
           )}
 
           <button className="btn-wish">
-            <i class="fas fa-share-square fa-2x"></i>공유하기
+            <i className="fas fa-share-square fa-2x"></i>공유하기
           </button>
 
           <Link to="/favorite">
@@ -111,17 +110,17 @@ const Detail = () => {
           {/* 방문 버튼 누르기 전과 후 */}
           {!visited && (
             <button className="btn-wish" onClick={() => visitedList()}>
-              <i class="far fa-flag fa-2x"></i>방문
+              <i className="far fa-flag fa-2x"></i>방문
             </button>
           )}
           {visited && (
             <button className="btn-wish" onClick={() => visitedList()}>
-              <i class="fas fa-flag fa-2x"></i>방문
+              <i className="fas fa-flag fa-2x"></i>방문
             </button>
           )}
 
           <button className="btn-wish">
-            <i class="fas fa-car fa-2x"></i>교통
+            <i className="fas fa-car fa-2x"></i>교통
           </button>
         </div>{" "}
         {/* div-btn */}
@@ -131,43 +130,55 @@ const Detail = () => {
           </div>
 
           <table className="detail-table">
-            <tr>
-              <th>관람시간</th>
-              <td>
-                월-금: {state.weekdayOperOpenHhmm} ~{" "}
-                {state.weekdayOperColseHhmm} <br />
-                공휴일: {state.holidayOperOpenHhmm} ~{" "}
-                {state.holidayCloseOpenHhmm}
-              </td>
-            </tr>
-            <tr>
-              <th>휴관일</th>
-              <td>{state.rstdeInfo}</td>
-            </tr>
-            <tr>
-              <th>입장료</th>
-              <td>
-                일반(만 19세-60세):{changePrice(state.adultChrge)}
-                <br />
-                청소년(만 13세-18세): {changePrice(state.yngbgsChrge)}
-                <br />
-                어린이(12세 이하): {changePrice(state.childChrge)}
-              </td>
-            </tr>
-            <tr>
-              <th>주소</th>
-              <td>{state.rdnmadr}</td>
-            </tr>
-            <tr>
-              <th>전화번호</th>
-              <td>{state.operPhoneNumber}</td>
-            </tr>
-            <tr>
-              <th>홈페이지</th>
-              <td>
-                <a href={`{state.homepageUrl}`}>{state.homepageUrl}</a>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>관람시간</th>
+                <td>
+                  월-금: {state.weekdayOperOpenHhmm} ~{" "}
+                  {state.weekdayOperColseHhmm} <br />
+                  공휴일: {state.holidayOperOpenHhmm} ~{" "}
+                  {state.holidayCloseOpenHhmm}
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>휴관일</th>
+                <td>{state.rstdeInfo}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>입장료</th>
+                <td>
+                  일반(만 19세-60세):{changePrice(state.adultChrge)}
+                  <br />
+                  청소년(만 13세-18세): {changePrice(state.yngbgsChrge)}
+                  <br />
+                  어린이(12세 이하): {changePrice(state.childChrge)}
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>주소</th>
+                <td>{state.rdnmadr}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>전화번호</th>
+                <td>{state.operPhoneNumber}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>홈페이지</th>
+                <td>
+                  <a href={`{state.homepageUrl}`}>{state.homepageUrl}</a>
+                </td>
+              </tr>
+            </tbody>
           </table>
 
           <Link to="/review">

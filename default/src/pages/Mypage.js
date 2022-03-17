@@ -17,7 +17,6 @@ const MyPage = ({ history }) => {
 
   const userInfoHandler = (response) => {
     const data = response.data["0"];
-    console.log(data);
     setUserInfo((prevState) => {
       return {
         ...prevState,

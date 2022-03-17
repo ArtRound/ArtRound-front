@@ -43,7 +43,6 @@ export default function Auth() {
     })
       .then(async (response) => {
         const result = await response.json();
-        console.log(result);
 
         dispatch({
           type: "login",
