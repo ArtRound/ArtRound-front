@@ -136,6 +136,13 @@ const KakaoMap = () => {
                       lng: parseFloat(item.longitude),
                     }}
                     onClick={() => clickMarker(item)}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                      size: {
+                        widht: 24,
+                        height: 35,
+                      },
+                    }}
                   />
                 );
               })}
