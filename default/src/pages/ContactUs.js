@@ -5,8 +5,10 @@ import { useState } from "react";
 import "./ContactUs.css";
 import AnswerContainer from "./AnswerContainer";
 import QuestionContainer from "./QuestionContainer";
+import { useSelector } from "react-redux";
 
 const ContactUs = ({ history }) => {
+  const user_id = useSelector((state) => state.infoReducer.id);
   const [text, setText] = useState([]);
   const [answerToggle, setAnswerToggle] = useState(false);
   const [questionToggle, setQuestionToggle] = useState(true);
@@ -22,9 +24,8 @@ const ContactUs = ({ history }) => {
     console.log(getContent);
 
     axios
-      .post("http://127.0.0.1:8000/main/question/", {
-        user_id: getUseremail,
-        answer_id: getUseremail,
+      .post("http://localhost:8000/main/question/", {
+        user_id: user_id,
         type: getType,
         title: getTitle,
         content: getContent,
