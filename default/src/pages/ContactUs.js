@@ -24,6 +24,7 @@ const ContactUs = ({ history }) => {
     axios
       .post("http://127.0.0.1:8000/main/question/", {
         user_id: getUseremail,
+        answer_id: getUseremail,
         type: getType,
         title: getTitle,
         content: getContent,

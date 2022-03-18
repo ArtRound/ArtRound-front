@@ -2,11 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { Context } from "../context";
 import ReviewNav from "../components/ReviewNav";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
@@ -14,8 +12,8 @@ const Detail = () => {
   const [visited, setVisited] = useState(false);
   const [id, setId] = useState(0); // 하트 토글할 때 필요한 id
   const [artId, setArtId] = useState(0); // 현재 전시회 id
-  const fHeartData = localStorage.getItem("fHeart");
-  const vHeartData = localStorage.getItem("vHeart");
+  const fHeartData = localStorage.getItem(artId);
+  const vHeartData = localStorage.getItem(artId + "_visit");
 
   useEffect(() => {
     setArtId(state["art_id"]);
@@ -26,7 +24,7 @@ const Detail = () => {
     if (wish === false && fHeartData === null) {
       // 즐겨찾기 목록에 넣기
       setWish(!wish);
-      localStorage.setItem("fHeart", "favorite!!");
+      localStorage.setItem(artId, "favorite!!");
 
       axios
         .post("http://127.0.0.1:8000/main/favorites/", {
@@ -56,7 +54,7 @@ const Detail = () => {
     } else {
       //즐겨찾기 목록에서 삭제
       setWish(!wish);
-      localStorage.removeItem("fHeart");
+      localStorage.removeItem(artId);
 
       axios
         .delete(`http://127.0.0.1:8000/main/favorites/${id}`)
@@ -73,7 +71,7 @@ const Detail = () => {
     if (visited === false && vHeartData === null) {
       // 방문 목록에 넣기
       setVisited(!visited);
-      localStorage.setItem("vHeart", "visited!!");
+      localStorage.setItem(artId + "_visit", "visited!!");
 
       axios
         .post("http://127.0.0.1:8000/main/visited/", {
@@ -102,7 +100,7 @@ const Detail = () => {
     } else {
       // 방문 목록에서 삭제
       setVisited(!visited);
-      localStorage.removeItem("vHeart");
+      localStorage.removeItem(artId + "_visit");
 
       axios
         .delete(`http://127.0.0.1:8000/main/visited/${id}`)
