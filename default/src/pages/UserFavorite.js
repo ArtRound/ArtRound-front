@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./UserVisited.css";
-import title_img from "../img/exhibition_sample_img.png";
-import { useSelector } from "react-redux";
 import axios from "axios";
 
 const UserFavorite = ({ history }) => {
   const [text, setText] = useState([]);
-  function getFavortie() {
-    axios
-      .get("http://127.0.0.1:8000/main/favorites/")
-      .then((response) => {
-        setText([...response.data]);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  function GetFavortie() {
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:8000/main/favorites/")
+        .then((response) => {
+          setText([...response.data]);
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, []);
   }
 
   return (
     <div>
-      {getFavortie()} {/* 함수로 axios.get 불러옴 */}
+      {GetFavortie()} {/* 함수로 axios.get 불러옴 */}
       <nav>
         <button
           onClick={() => {
@@ -41,9 +41,13 @@ const UserFavorite = ({ history }) => {
           {text.map((f) => {
             return (
               <div className="fav">
-                <div className="visited-name">{f.title}</div>
-                <div className="visited-detail">{f.content}</div>
-                <div className="visited-detail">
+                <div key={f.id} className="visited-name">
+                  {f.title}
+                </div>
+                <div key={f.id} className="visited-detail">
+                  {f.content}
+                </div>
+                <div key={f.id} className="visited-detail">
                   {f.start_time}
                   {f.end_time}
                 </div>

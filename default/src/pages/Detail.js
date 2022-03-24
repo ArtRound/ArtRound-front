@@ -18,14 +18,10 @@ const Detail = () => {
   useEffect(() => {
     setArtId(state["art_id"]);
   }, [state]);
-  console.log("artID: ", artId);
 
   function wishList() {
-    if (wish === false && fHeartData === null) {
+    if (fHeartData === null) {
       // 즐겨찾기 목록에 넣기
-      setWish(!wish);
-      localStorage.setItem(artId, "favorite!!");
-
       axios
         .post("http://127.0.0.1:8000/main/favorites/", {
           title: state.fcltyNm,
@@ -47,19 +43,21 @@ const Detail = () => {
         .then(function (response) {
           console.log(response.data["id"]);
           setId(response.data["id"]);
+          localStorage.setItem(artId, response.data["id"] + "_favorite!!");
+          setWish(!wish);
         })
         .catch(function (error) {
           console.log(error);
         });
     } else {
       //즐겨찾기 목록에서 삭제
-      setWish(!wish);
-      localStorage.removeItem(artId);
-
+      const h_arr = fHeartData.split("_");
       axios
-        .delete(`http://127.0.0.1:8000/main/favorites/${id}`)
+        .delete(`http://127.0.0.1:8000/main/favorites/${h_arr[0]}`)
         .then(function (response) {
           console.log(response);
+          localStorage.removeItem(artId);
+          setWish(!wish);
         })
         .catch(function (error) {
           console.log(error);
@@ -68,11 +66,8 @@ const Detail = () => {
   }
 
   function visitedList() {
-    if (visited === false && vHeartData === null) {
+    if (vHeartData === null) {
       // 방문 목록에 넣기
-      setVisited(!visited);
-      localStorage.setItem(artId + "_visit", "visited!!");
-
       axios
         .post("http://127.0.0.1:8000/main/visited/", {
           title: state.fcltyNm,
@@ -93,19 +88,24 @@ const Detail = () => {
         .then(function (response) {
           console.log(response.data["id"]);
           setId(response.data["id"]);
+          localStorage.setItem(
+            artId + "_visit",
+            response.data["id"] + "_visited!!"
+          );
+          setVisited(!visited);
         })
         .catch(function (error) {
           console.log(error);
         });
     } else {
       // 방문 목록에서 삭제
-      setVisited(!visited);
-      localStorage.removeItem(artId + "_visit");
-
+      const v_arr = vHeartData.split("_");
       axios
-        .delete(`http://127.0.0.1:8000/main/visited/${id}`)
+        .delete(`http://127.0.0.1:8000/main/visited/${v_arr[0]}`)
         .then(function (response) {
           console.log(response);
+          localStorage.removeItem(artId + "_visit");
+          setVisited(!visited);
         })
         .catch(function (error) {
           console.log(error);
