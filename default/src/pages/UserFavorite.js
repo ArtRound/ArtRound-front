@@ -40,7 +40,7 @@ const UserFavorite = ({ history }) => {
         <div className="list-visited">
           {text.map((f) => {
             return (
-              <button key={f.id} className="fav">
+              <div key={f.id} className="fav">
                 <div className="visited-name">{f.title}</div>
                 <div className="visited-detail">{f.content}</div>
                 <div className="visited-detail">
@@ -48,7 +48,7 @@ const UserFavorite = ({ history }) => {
                 </div>
 
                 <hr />
-              </button>
+              </div>
             );
           })}
         </div>{" "}
