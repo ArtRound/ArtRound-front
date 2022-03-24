@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserVisited.css";
 
 const UserVisited = ({ history }) => {
@@ -13,21 +13,23 @@ const UserVisited = ({ history }) => {
   // }
 
   const [text, setText] = useState([]);
-  function getVisited() {
-    axios
-      .get("http://127.0.0.1:8000/main/visited/")
-      .then((response) => {
-        setText([...response.data]);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  function GetVisited() {
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:8000/main/visited/")
+        .then((response) => {
+          setText([...response.data]);
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, []);
   }
 
   return (
     <div>
-      {getVisited()} {/* 함수로 axios.get 불러옴 */}
+      {GetVisited()} {/* 함수로 axios.get 불러옴 */}
       <nav>
         <button
           onClick={() => {
@@ -47,12 +49,11 @@ const UserVisited = ({ history }) => {
         <div className="list-visited">
           {text.map((f) => {
             return (
-              <div className="fav">
+              <div key={f.id} className="fav">
                 <div className="visited-name">{f.title}</div>
                 <div className="visited-detail">{f.address}</div>
                 <div className="visited-detail">
-                  {f.start_time}
-                  {f.end_time}
+                  {f.start_time} {f.end_time}
                 </div>
                 <hr />
               </div>

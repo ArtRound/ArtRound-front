@@ -40,20 +40,15 @@ const UserFavorite = ({ history }) => {
         <div className="list-visited">
           {text.map((f) => {
             return (
-              <div className="fav">
-                <div key={f.id} className="visited-name">
-                  {f.title}
-                </div>
-                <div key={f.id} className="visited-detail">
-                  {f.content}
-                </div>
-                <div key={f.id} className="visited-detail">
-                  {f.start_time}
-                  {f.end_time}
+              <button key={f.id} className="fav">
+                <div className="visited-name">{f.title}</div>
+                <div className="visited-detail">{f.content}</div>
+                <div className="visited-detail">
+                  {f.start_time} {f.end_time}
                 </div>
 
                 <hr />
-              </div>
+              </button>
             );
           })}
         </div>{" "}

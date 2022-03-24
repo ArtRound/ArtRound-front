@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Accordion } from "react-bootstrap";
@@ -7,7 +7,7 @@ import "./Notice.css";
 const Notice = ({ history }) => {
   const [text, setText] = useState([]);
 
-  function getNotice(accessToken) {
+  function GetNotice(accessToken) {
     // axios({
     //   method: "get",
     //   url: "http://127.0.0.1:8000/main/notice/",
@@ -20,15 +20,17 @@ const Notice = ({ history }) => {
     //   console.log(error);
     // });
 
-    axios
-      .get("http://127.0.0.1:8000/main/notice/")
-      .then((response) => {
-        setText([...response.data]);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    useEffect(() => {
+      axios
+        .get("http://127.0.0.1:8000/main/notice/")
+        .then((response) => {
+          setText([...response.data]);
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, []);
   }
 
   return (
@@ -57,9 +59,9 @@ const Notice = ({ history }) => {
         </button>
       </nav>
       <div className="noticeFrame">
-        {getNotice()} {/* 함수로 axios.get 불러옴 */}
+        {GetNotice()} {/* 함수로 axios.get 불러옴 */}
         {text.map((e) => (
-          <div>
+          <div key={e.id}>
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1">
                 <Accordion.Header className="title">
