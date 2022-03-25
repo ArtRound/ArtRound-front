@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { MapFooter } from "./InfoBox";
 import Search from "./Search";
+import { GiPositionMarker } from "react-icons/gi";
 
 const KakaoMap = () => {
   let history = useHistory();
@@ -20,6 +21,7 @@ const KakaoMap = () => {
     },
     errMsg: null,
     isLoading: true,
+    isPanto: false,
   });
   const artData = useRef([]); //전시회 데이터
   const [artDataLoading, setArtDataLoading] = useState(true);
@@ -73,14 +75,15 @@ const KakaoMap = () => {
     setIsOpen(true);
   };
 
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchMarker, setSearchMarker] = useState([]);
+  const [showMarker, setShowMarker] = useState(0);
+
+  const moveCurrentPosition = () => {};
   useEffect(() => {
     getCurrentPosition();
     getArtData();
   }, []);
-
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchMarker, setSearchMarker] = useState([]);
-  const [showMarker, setShowMarker] = useState(0);
 
   return (
     <>
@@ -103,7 +106,12 @@ const KakaoMap = () => {
               height: "90vh",
             }}
             level={3}
+            isPanto={currentPositionState.isPanto}
           >
+            <GiPositionMarker
+              className="find-current-position"
+              onClick={moveCurrentPosition}
+            />
             <MapMarker position={currentPositionState.center} />
             {showMarker === 0 &&
               artData.current.map((item) => {

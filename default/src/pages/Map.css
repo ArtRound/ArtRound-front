@@ -28,3 +28,20 @@ body{
   justify-content: center;
   align-items: center;
 }
+.find-current-position{
+  width: 40px;
+  height: 40px;
+  padding: 7px;
+  position: absolute;
+  right: 3vw;
+  bottom: 10vh;
+  z-index: 10;
+  cursor: pointer;
+  background-color: rgb(209, 202, 202);
+  color: #7cbaf7;
+  border-radius: 50%;
+  opacity: 60%;
+}
+.find-current-position:hover{
+  opacity: 100%;
+}
