@@ -171,6 +171,12 @@ hr {
   flex-direction: column;
 }
 
+.review-image {
+  width: 140px;
+  height: 110px;
+  object-fit: cover;
+}
+
 /* ReviewNav */
 
 .review-nav-container {
