@@ -4,18 +4,6 @@ const QuestionContainer = (props) => {
   return (
     <div id="cont1" className="question">
       <div className="questionFrame">
-        <div className="smalltitle">고객 정보</div>
-        <div className="smallcontent">
-          문의하신 내용은 문의 내역에서 답변 드립니다.{" "}
-        </div>
-        <input
-          type="text"
-          className="inputemail"
-          id="qnaUseremail"
-          placeholder="이메일을 입력해주세요."
-        />
-        <hr />
-
         <div className="smalltitle">문의하기</div>
         <div className="smallcontent">
           문의 유형과 서비스 구분을 입력해주시면 보다 상세하고 정확한 답변을

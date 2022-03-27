@@ -14,14 +14,9 @@ const ContactUs = ({ history }) => {
   const [questionToggle, setQuestionToggle] = useState(true);
 
   function questionInput() {
-    var getUseremail = document.getElementById("qnaUseremail").value;
     var getType = document.getElementById("qnaType").value;
     var getTitle = document.getElementById("qnaTitle").value;
     var getContent = document.getElementById("qnaContent").value;
-    console.log(getUseremail);
-    console.log(getType);
-    console.log(getTitle);
-    console.log(getContent);
 
     axios
       .post("http://localhost:8000/main/question/", {
@@ -45,6 +40,8 @@ const ContactUs = ({ history }) => {
       .then((response) => {
         setText([...response.data]);
         console.log(response.data);
+        const question_id = response.data["id"];
+        console.log(question_id);
       })
       .catch(function (error) {
         console.log(error);

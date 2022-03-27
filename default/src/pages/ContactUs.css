@@ -10,7 +10,7 @@ hr {
   opacity: 1 !important;
 }
 
-.noboot-btn {  
+.noboot-btn {
   font-family: initial !important;
 }
 
@@ -28,49 +28,49 @@ hr {
   align-items: center;
   text-align: center;
 }
-.answerBody{
+.answerBody {
   border-top: 1px solid #e4e4e4;
   background-color: white;
 }
-.answer{
-  color: #53AAFF;
+.answer {
+  color: #53aaff;
   font-size: 16px;
   font-weight: bold;
   margin-top: 20px;
 }
-.checkIcon{
+.checkIcon {
   width: 20px;
   height: 20px;
   margin-right: 10px;
   margin-bottom: 2px;
 }
-.questionContent{
+.questionContent {
   color: rgb(73, 73, 73);
   font-weight: regular;
 }
-.questionState{
+.questionState {
   font-size: 14px;
 }
 
-.titleGroup{
+.titleGroup {
   margin-left: 30px;
 }
 
-.qnaTitle{
-  color:rgb(73, 73, 73);
+.qnaTitle {
+  color: rgb(73, 73, 73);
   font-size: 16px;
   font-weight: bold;
 }
 
-.questionDate{
+.questionDate {
   padding-top: 8px;
   font-size: 12px;
-  color: #5F5F5F;
+  color: #5f5f5f;
 }
-.answerHr{
+.answerHr {
   margin: 0;
 }
-.answerFrame{
+.answerFrame {
   margin: 13px 16px;
   padding: 10px;
   max-width: 100%;
@@ -89,11 +89,11 @@ hr {
   display: none;
 }
 
-
 /* 문의하기 */
 .smalltitle {
   font-size: 21px;
   font-weight: bold;
+  margin-top: 10px;
 }
 .smallcontent {
   padding-top: 10px;
@@ -101,11 +101,10 @@ hr {
   color: #595959;
 }
 
-.inputemail,
 .inputQnaTitle {
   width: 100%;
-  height: 40px;
-  margin-top: 13px;
+  height: 45px;
+  margin-top: 18px;
   border: 1px solid #222222;
   box-sizing: border-box;
   border-radius: 10px;
@@ -126,12 +125,12 @@ hr {
   align-items: center;
   color: rgba(0, 0, 0, 0.54);
   width: 100%;
-  height: 190px;
+  height: 290px;
   border: 1px solid #000000;
   box-sizing: border-box;
   padding: 15px;
   border-radius: 10px;
-  margin-top: 15px;
+  margin-top: 18px;
 
   overflow: scroll;
   overflow-x: hidden;
@@ -141,18 +140,18 @@ hr {
   display: none;
 }
 
-.contactFrame{
+.contactFrame {
   padding-top: 12px;
   font-size: 0;
   height: 695px;
 }
 
-.questionFrame{
+.questionFrame {
   padding: 8px 20px;
 }
 
-
-.qnaBtn{  /* 탭 메뉴 기본 버튼 */
+.qnaBtn {
+  /* 탭 메뉴 기본 버튼 */
   color: black;
   border: 0;
   display: inline-block;
@@ -167,7 +166,8 @@ hr {
   font-weight: regular;
 }
 
-.clickBtn { /* 탭 메뉴 클릭시 버튼 */
+.clickBtn {
+  /* 탭 메뉴 클릭시 버튼 */
   color: #264574;
   border: 0;
   display: inline-block;
@@ -177,15 +177,15 @@ hr {
   text-align: center;
   font-size: 17px;
   cursor: pointer;
-  border-bottom: 3px groove #4075C3;
+  border-bottom: 3px groove #4075c3;
   margin-bottom: 8px;
   font-weight: bold;
 }
 
 .qnaType {
   width: 100%;
-  height: 40px;
-  margin-top: 13px !important;
+  height: 45px;
+  margin-top: 20px !important;
   border: 1px solid #000000;
   background: url("../img/notice/arrow.png") no-repeat 95% 50%;
   -webkit-appearance: none; /* 네이티브 외형 감추기 */
@@ -197,7 +197,6 @@ hr {
   font-size: 14px !important;
   padding-left: 15px;
   color: rgba(0, 0, 0, 0.54);
-  
 }
 .qnaType:-ms-expand {
   /* IE 10, 11의 네이티브 화살표 숨기기 */

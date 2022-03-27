@@ -1,21 +1,22 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './noticePost.css';
+import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "./noticePost.css";
 
-const noticePost = ({ history }) => {
+const answerPost = ({ history }) => {
   function answerInput() {
     var getContent = document.getElementById("content").value;
-    axios.post("http://127.0.0.1:8000/main/answer/", {
-      content: getContent,
-    })
+    axios
+      .post("http://127.0.0.1:8000/main/answer/", {
+        //question_id: ,
+        content: getContent,
+      })
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    <Link to="/notice"></Link>
   }
 
   return (
@@ -27,22 +28,30 @@ const noticePost = ({ history }) => {
             history.push("/contactus");
           }}
           className="noboot-btn"
-        >⬅</button>
+        >
+          ⬅
+        </button>
         <span>답변 작성</span>
       </nav>
-
-      <div className="Frame" >
+      <div className="Frame">
         <form>
-          <textarea id="content" className="inputContent" placeholder='내용을 입력해주세요.' />
+          <textarea
+            id="content"
+            className="inputContent"
+            placeholder="내용을 입력해주세요."
+          />
         </form>
 
-        <Link to="/contactus"> <button type="button" className="post" onClick={answerInput}>
-          답변 등록하기
-        </button> </Link>
-      </div>  {/* Frame */}
-
-    </div>  /* screenPost*/
+        <Link to="/contactus">
+          {" "}
+          <button type="button" className="post" onClick={answerInput}>
+            답변 등록하기
+          </button>{" "}
+        </Link>
+      </div>{" "}
+      {/* Frame */}
+    </div> /* screenPost*/
   );
 };
 
-export default noticePost;
+export default answerPost;
