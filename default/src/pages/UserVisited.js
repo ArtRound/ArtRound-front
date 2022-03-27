@@ -1,6 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./UserVisited.css";
+import { Link } from "react-router-dom";
+import { ADD_DATA } from "../context/actionTypes";
+import { Context } from "../context/index";
 
 const UserVisited = ({ history }) => {
   // const [ing, setIng] = useState(true);
@@ -11,6 +14,31 @@ const UserVisited = ({ history }) => {
 
   //   }
   // }
+
+  const { dispatch } = useContext(Context);
+
+  const setContext = (title) => {
+    dispatch({
+      type: ADD_DATA,
+      payload: {
+        // art_id: infoBoxData.id, -> 백에서 받아서 넣기
+        fcltyNm: title,
+        weekdayOperOpenHhmm: "",
+        weekdayOperColseHhmm: "",
+        holidayOperOpenHhmm: "",
+        holidayCloseOpenHhmm: "",
+        rstdeInfo: "",
+        adultChrge: "",
+        yngbgsChrge: "",
+        childChrge: "",
+        rdnmadr: "",
+        phoneNumber: "",
+        homepageUrl: "",
+        latitude: "",
+        longitude: "",
+      },
+    });
+  };
 
   const [text, setText] = useState([]);
   function GetVisited() {
@@ -48,9 +76,18 @@ const UserVisited = ({ history }) => {
         {/* user-visited */}
         <div className="list-visited">
           {text.map((f) => {
+            console.log("art_info_id 확인 ", f);
             return (
               <div key={f.id} className="fav">
-                <div className="visited-name">{f.title}</div>
+                <Link to="/review">
+                  {/* title이랑 art_info_id 보내기 */}
+                  <div
+                    className="visited-name"
+                    onClick={() => setContext(f.title)}
+                  >
+                    {f.title}
+                  </div>
+                </Link>
                 <div className="visited-detail">{f.address}</div>
                 <div className="visited-detail">
                   {f.start_time} {f.end_time}
