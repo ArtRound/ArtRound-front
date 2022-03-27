@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./UserVisited.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { ADD_DATA } from "../context/actionTypes";
+import { Context } from "../context/index";
 
 const UserFavorite = ({ history }) => {
   const [text, setText] = useState([]);
@@ -17,6 +20,31 @@ const UserFavorite = ({ history }) => {
         });
     }, []);
   }
+
+  const { dispatch } = useContext(Context);
+
+  const setContext = (title, art_info_id) => {
+    dispatch({
+      type: ADD_DATA,
+      payload: {
+        art_id: art_info_id,
+        fcltyNm: title,
+        weekdayOperOpenHhmm: "",
+        weekdayOperColseHhmm: "",
+        holidayOperOpenHhmm: "",
+        holidayCloseOpenHhmm: "",
+        rstdeInfo: "",
+        adultChrge: "",
+        yngbgsChrge: "",
+        childChrge: "",
+        rdnmadr: "",
+        phoneNumber: "",
+        homepageUrl: "",
+        latitude: "",
+        longitude: "",
+      },
+    });
+  };
 
   return (
     <div>
@@ -41,7 +69,14 @@ const UserFavorite = ({ history }) => {
           {text.map((f) => {
             return (
               <div key={f.id} className="fav">
-                <div className="visited-name">{f.title}</div>
+                <Link to="/review">
+                  <div
+                    className="visited-name"
+                    onClick={() => setContext(f.title, f.art_info_id)}
+                  >
+                    {f.title}
+                  </div>
+                </Link>
                 <div className="visited-detail">{f.content}</div>
                 <div className="visited-detail">
                   {f.start_time} {f.end_time}
