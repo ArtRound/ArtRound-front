@@ -140,11 +140,6 @@ const Detail = () => {
             <i className="fas fa-share-square fa-2x"></i>공유하기
           </button>
 
-          <Link to="/visited">
-            {" "}
-            <button type="button">방문하기 방문하기</button>{" "}
-          </Link>
-
           {/* 방문 버튼 누르기 전과 후 */}
           {!vHeartData && (
             <button className="btn-wish" onClick={() => visitedList()}>
