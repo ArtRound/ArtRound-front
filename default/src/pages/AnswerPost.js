@@ -3,12 +3,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./noticePost.css";
 
-const answerPost = ({ history }) => {
+const answerPost = ({ history, location }) => {
+  const question_id = location.state.question_id;
+
   function answerInput() {
     var getContent = document.getElementById("content").value;
     axios
       .post("http://127.0.0.1:8000/main/answer/", {
-        //question_id: ,
+        question_id: question_id,
         content: getContent,
       })
       .then(function (response) {

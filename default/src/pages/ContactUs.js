@@ -40,8 +40,8 @@ const ContactUs = ({ history }) => {
       .then((response) => {
         setText([...response.data]);
         console.log(response.data);
-        const question_id = response.data["id"];
-        console.log(question_id);
+        // const question_id = response.data["id"];
+        // console.log(question_id);
       })
       .catch(function (error) {
         console.log(error);
