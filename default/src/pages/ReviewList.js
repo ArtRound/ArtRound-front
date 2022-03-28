@@ -10,6 +10,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import { nanoid } from "nanoid";
 import { Context } from "../context";
+import { Modal } from "../components/Modal";
 
 function ReviewList() {
   const { state } = useContext(Context);
@@ -17,16 +18,15 @@ function ReviewList() {
   const [reviewLoading, setReviewLoading] = useState(false);
   const [reviewData, setReviewData] = useState([]);
 
-  const getReviewData = () => {
-    axios
-      .get(`http://localhost:8000/main/art_info/${state.art_id}/review/`)
-      .then((result) => {
-        setReviewData(result.data);
-        setReviewLoading(true);
-      })
-      .catch((error) => {
-        console.log("axios error", error.response);
-      });
+  const [modalShow, setModalShow] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState("");
+
+  const getReviewData = async () => {
+    const reviewResult = await axios.get(
+      `http://localhost:8000/main/art_info/${state.art_id}/review/`
+    );
+    setReviewData(reviewResult.data);
+    setReviewLoading(true);
   };
   const fixUpdated_at = (date) => date.match(/\d{4}-\d{2}-\d{2}/);
 
@@ -66,6 +66,11 @@ function ReviewList() {
     });
   };
 
+  const previewImage = (e) => {
+    setCurrentSrc(e.target.currentSrc);
+    setModalShow(true);
+  };
+
   useEffect(() => {
     getReviewData();
   }, []);
@@ -101,6 +106,27 @@ function ReviewList() {
                     {fixUpdated_at(item.updated_at)}
                   </span>
                   <p className="list-content">{item.content}</p>
+                  <div className="review-images-container">
+                    {item.image.map((src) => {
+                      let imageUrl = "http://localhost:8000" + src.image;
+                      return (
+                        <>
+                          <img
+                            src={imageUrl}
+                            alt="이미지"
+                            className="review-images"
+                            onClick={previewImage}
+                          />
+                          {modalShow && (
+                            <Modal
+                              setModalShow={setModalShow}
+                              imageUrl={currentSrc}
+                            />
+                          )}
+                        </>
+                      );
+                    })}
+                  </div>
                   <ThumnsUp />
                 </div>
                 <hr />

@@ -84,6 +84,39 @@ hr {
 .font-like {
   font-size: 20px;
 }
+.review-images-container {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  background-color: #eee;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.review-images-container::-webkit-scrollbar {
+  width: 20px;
+}
+
+.review-images-container::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.review-images-container::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+  background-color: dodgerblue;
+}
+.review-images {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  margin-right: 30px;
+}
 
 .btn-wrap {
   display: flex;
