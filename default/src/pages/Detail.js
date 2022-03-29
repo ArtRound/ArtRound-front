@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Detail.css";
 import title_img from "../img/exhibition_sample_img.png";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../context";
 import ReviewNav from "../components/ReviewNav";
 import axios from "axios";
@@ -15,8 +15,13 @@ const Detail = () => {
   const fHeartData = localStorage.getItem(artId);
   const vHeartData = localStorage.getItem(artId + "_visit");
 
+  const { detailId } = useParams();
+  let history = useHistory();
+
   useEffect(() => {
     setArtId(state["art_id"]);
+    
+    if (Number(detailId) !== state.art_id) history.push("/*");
   }, [state]);
 
   function wishList() {
