@@ -101,19 +101,19 @@ const MyPage = ({ history }) => {
           </button>
           <button
             onClick={() => {
-              history.push("/service");
-            }}
-            className="info-btn"
-          >
-            고객센터
-          </button>
-          <button
-            onClick={() => {
               history.push("/visited");
             }}
             className="visited-btn"
           >
             방문한 미술관/박물관
+          </button>
+          <button
+            onClick={() => {
+              history.push("/service");
+            }}
+            className="info-btn"
+          >
+            고객센터
           </button>
         </div>
         <div className="small-buttons">
