@@ -6,17 +6,32 @@ import { Link } from "react-router-dom";
 import AnswerAxios from "./AnswerAxios";
 
 const AnswerContainer = ({ text, setText }) => {
-  let question_id = 0;
-
+  let Kor = " ";
+  function type(Eng) {
+    if (Eng === "report") {
+      Kor = "장애신고";
+    } else if (Eng === "login") {
+      Kor = "로그인";
+    } else if (Eng === "use") {
+      Kor = "사이트 이용";
+    } else if (Eng === "proposal") {
+      Kor = "제안";
+    } else {
+      Kor = "기타";
+    }
+  }
   return (
     <div id="cont2" className="answer">
       <div className="answerFrame">
         {text.map((e) => (
-          <div>
+          <div key={e.id}>
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1">
                 <Accordion.Header className="title">
-                  <div className="questionState">답변대기</div>
+                  {/* <div className="questionState">답변대기</div> */}
+
+                  {type(e.type)}
+                  <div className="questionState">{Kor}</div>
                   <div className="titleGroup">
                     <div className="qnaTitle">{e.title} &nbsp; </div>
                     <div className="questionDate">{e.updated_at}</div>
@@ -37,13 +52,13 @@ const AnswerContainer = ({ text, setText }) => {
                   >
                     삭제
                   </button>
-                  {(question_id = e.id)}
+
                   <button className="btnDelete">
                     {" "}
                     <Link
                       to={{
                         pathname: "/answerpost",
-                        state: { question_id: question_id },
+                        state: { question_id: e.id }, // server_question
                       }}
                     >
                       답변하기{" "}

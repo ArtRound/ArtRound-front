@@ -5,7 +5,7 @@ import checkIcon from "../img/notice/check_icon.png";
 
 const AnswerAxios = (props) => {
   const [text, setText] = useState([]);
-  const questionId = props.questionId;
+  const questionId = props.questionId; // server_ question
 
   function GetQnaAnswer() {
     useEffect(() => {
@@ -25,8 +25,9 @@ const AnswerAxios = (props) => {
     <div>
       {GetQnaAnswer()}
       {text.map((e) => (
-        <div>
+        <div key={e.id}>
           {e.question_id === questionId && (
+            // e.question_id = server_answer / questionId = server_question
             <div className="realAnswerFrame">
               <hr />
 
@@ -38,7 +39,7 @@ const AnswerAxios = (props) => {
               <br />
 
               <div className="questionContent">{e.content}</div>
-              <br />
+
               <button
                 className="AnswerbtnDelete"
                 onClick={() => {

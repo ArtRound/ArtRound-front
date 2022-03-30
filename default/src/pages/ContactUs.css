@@ -49,7 +49,10 @@ hr {
   font-weight: regular;
 }
 .questionState {
-  font-size: 14px;
+  width: 68px;
+  font-size: 12.5px;
+  font-weight: bold;
+  color: rgba(30, 72, 114, 0.79);
 }
 
 .titleGroup {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./noticePost.css";
 
 const answerPost = ({ history, location }) => {
-  const question_id = location.state.question_id;
+  const question_id = location.state.question_id; // server_question
 
   function answerInput() {
     var getContent = document.getElementById("content").value;
