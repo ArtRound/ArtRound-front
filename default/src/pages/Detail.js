@@ -94,6 +94,7 @@ const Detail = () => {
             state.holidayOperOpenHhmm +
             " ~ " +
             state.holidayCloseOpenHhmm,
+          art_info_id: artId,
         })
         .then(function (response) {
           console.log(response.data["id"]);
