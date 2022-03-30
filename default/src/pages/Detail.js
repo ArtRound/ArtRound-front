@@ -5,6 +5,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../context";
 import ReviewNav from "../components/ReviewNav";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
   const { state } = useContext(Context); // 공공데이터
@@ -14,13 +15,15 @@ const Detail = () => {
   const [artId, setArtId] = useState(0); // 현재 전시회 id
   const fHeartData = localStorage.getItem(artId);
   const vHeartData = localStorage.getItem(artId + "_visit");
+  const user_id = useSelector((state) => state.infoReducer.id);
+  console.log(user_id);
 
   const { detailId } = useParams();
   let history = useHistory();
 
   useEffect(() => {
     setArtId(state["art_id"]);
-    
+
     if (Number(detailId) !== state.art_id) history.push("/*");
   }, [state]);
 
@@ -29,6 +32,7 @@ const Detail = () => {
       // 즐겨찾기 목록에 넣기
       axios
         .post("http://127.0.0.1:8000/main/favorites/", {
+          user_id: user_id,
           title: state.fcltyNm,
           content: state.rdnmadr,
           start_time:
@@ -75,6 +79,7 @@ const Detail = () => {
       // 방문 목록에 넣기
       axios
         .post("http://127.0.0.1:8000/main/visited/", {
+          user_id: user_id,
           title: state.fcltyNm,
           address: state.rdnmadr,
           start_time:
