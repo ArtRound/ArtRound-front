@@ -34,7 +34,10 @@ const QuestionContainer = (props) => {
         <button
           type="button"
           className="post"
-          onClick={() => props.textInput()}
+          onClick={() => {
+            props.textInput();
+            window.location.reload();
+          }}
         >
           문의하기
         </button>
