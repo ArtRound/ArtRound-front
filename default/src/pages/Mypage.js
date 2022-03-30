@@ -27,6 +27,10 @@ const MyPage = ({ history }) => {
     });
   };
 
+  const onGoBack = () => {
+    history.goBack();
+  };
+
   useEffect(() => {
     axios
       .get(`http://127.0.0.1:8000/main/get_info/${user_id}`)
@@ -52,7 +56,9 @@ const MyPage = ({ history }) => {
   return (
     <>
       <nav>
-        <button className="back-btn">⬅</button>
+        <button className="back-btn" onClick={onGoBack}>
+          ⬅
+        </button>
         <span>마이페이지</span>
       </nav>
 
@@ -78,12 +84,13 @@ const MyPage = ({ history }) => {
         <div className="buttons">
           <button
             onClick={() => {
-              history.push("/service");
+              history.push("/map");
             }}
-            className="info-btn"
+            className="artlist-btn"
           >
-            고객센터
+            미술관/박물관 목록
           </button>
+
           <button
             onClick={() => {
               history.push("/favorite");
@@ -91,6 +98,14 @@ const MyPage = ({ history }) => {
             className="fav-btn"
           >
             즐겨찾기 목록
+          </button>
+          <button
+            onClick={() => {
+              history.push("/service");
+            }}
+            className="info-btn"
+          >
+            고객센터
           </button>
           <button
             onClick={() => {
