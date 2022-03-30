@@ -52,7 +52,7 @@ export default function Auth() {
           },
         });
         result.existing_user === "true"
-          ? history.push("/mypage")
+          ? history.push("/map")
           : history.push("/information");
       })
       .catch((err) => {

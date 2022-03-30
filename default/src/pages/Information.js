@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Information.css";
@@ -26,7 +26,7 @@ const Information = ({ history }) => {
       profile_image
     );
 
-    res !== null ? history.push("/mypage") : alert("정보 입력 실패");
+    res !== null ? history.push("/map") : alert("정보 입력 실패");
   };
 
   function changeInput(e) {
