@@ -4,6 +4,7 @@ import "./UserVisited.css";
 import { Link } from "react-router-dom";
 import { ADD_DATA } from "../context/actionTypes";
 import { Context } from "../context/index";
+import { useSelector } from "react-redux";
 
 const UserVisited = ({ history }) => {
   // const [ing, setIng] = useState(true);
@@ -40,11 +41,13 @@ const UserVisited = ({ history }) => {
     });
   };
 
-  const [text, setText] = useState([]);
+  const [text, setText] = useState([]);  
+  const user_id = useSelector((state) => state.infoReducer.id);
+
   function GetVisited() {
     useEffect(() => {
       axios
-        .get("http://127.0.0.1:8000/main/visited/")
+        .get(`http://127.0.0.1:8000/main/visited/${user_id}`)
         .then((response) => {
           setText([...response.data]);
           console.log(response.data);
@@ -52,7 +55,7 @@ const UserVisited = ({ history }) => {
         .catch(function (error) {
           console.log(error);
         });
-    }, []);
+    }, [user_id]);
   }
 
   return (
