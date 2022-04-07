@@ -7,19 +7,14 @@ import { useDispatch } from "react-redux";
 export default function Auth() {
   let history = useHistory();
   const dispatch = useDispatch();
-  const REST_API_KEY = "4cabd9184b71cb231252329034193534";
-  const REDIRECT_URI = "http://localhost:3000/main/login/kakao";
-  const CLIENT_SECRET = "9dFVNap0AB2XWwrros7HHpzQ8Hr8Txl7";
 
   const getToken = async () => {
-    const code = new URL(window.location.href).searchParams.get("code");
-
     const payload = qs.stringify({
       grant_type: "authorization_code",
-      client_id: REST_API_KEY,
-      redirect_uri: REDIRECT_URI,
-      code: code,
-      client_secret: CLIENT_SECRET,
+      client_id: process.env.REACT_APP_REST_API_KEY,
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+      code: new URL(window.location.href).searchParams.get("code"),
+      client_secret: process.env.REACT_APP_CLIENT_SECRET,
     });
 
     // access token 가져오기

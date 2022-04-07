@@ -6,7 +6,7 @@ import kakaoButton from "../img/kakao_login_medium_narrow.png";
 import "./Login.css";
 import { KAKAO_AUTH_URL } from "../services/KakaoLogin";
 
-const Login = ({ history }) => {
+const Login = () => {
   return (
     <div className="cover-container">
       <div className="paragraph-wrapper">
