@@ -3,6 +3,7 @@ import axios from "axios";
 import qs from "qs";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { login } from "../reducers/modules/info";
 
 export default function Auth() {
   let history = useHistory();
@@ -38,14 +39,7 @@ export default function Auth() {
     })
       .then(async (response) => {
         const result = await response.json();
-
-        dispatch({
-          type: "login",
-          payload: {
-            id: result.id,
-            profile_image: result.profile_image,
-          },
-        });
+        dispatch(login(result["id"], result["profile_image"]));
         result.existing_user === "true"
           ? history.push("/map")
           : history.push("/information");

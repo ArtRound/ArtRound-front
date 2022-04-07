@@ -3,6 +3,7 @@ import "./Mypage.css";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../reducers/modules/info";
 const MyPage = ({ history }) => {
   let user_id = useSelector((state) => state.infoReducer.id);
   let profile_image = useSelector((state) => state.infoReducer.profile_image);
@@ -30,6 +31,11 @@ const MyPage = ({ history }) => {
   const onGoBack = () => {
     history.goBack();
   };
+  const onLogout = () => {
+    dispatch(logout());
+
+    history.push("/");
+  };
 
   useEffect(() => {
     axios
@@ -42,17 +48,6 @@ const MyPage = ({ history }) => {
       });
   }, [user_id]);
 
-  const logout = () => {
-    dispatch({
-      type: "logout",
-      payload: {
-        id: false,
-        profile_image: false,
-      },
-    });
-
-    history.push("/");
-  };
   return (
     <>
       <nav>
@@ -117,7 +112,7 @@ const MyPage = ({ history }) => {
           </button>
         </div>
         <div className="small-buttons">
-          <button className="logout" onClick={logout}>
+          <button className="logout" onClick={onLogout}>
             로그아웃
           </button>
           <span> / </span>
