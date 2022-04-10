@@ -59,6 +59,7 @@
 
 ### [후기 페이지]
 - 후기 페이지에서는 정렬 기능, 후기 리스트, 후기 작성 버튼이 있으며 작성 페이지에서는 하트 개수, 후기 작성, 사진 추가 기능이 있습니다.
+
 ![image](https://user-images.githubusercontent.com/66022264/162613751-ec430fe1-a631-42fa-9085-dac321e43190.png)
 ![image](https://user-images.githubusercontent.com/66022264/162613754-1ac6a33f-2c26-4771-a77e-6bd31a54962d.png)
 
